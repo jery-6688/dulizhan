@@ -1,0 +1,36 @@
+{
+  "hero": {
+    "eyebrow": "Solutions",
+    "title": "Shower Water Solutions",
+    "subtitle": "Healthy, chlorine-free shower water — engineered for every environment, from private homes to luxury hotels and high-traffic public facilities."
+  },
+  "scenarios": {
+    "eyebrow": "Use Cases",
+    "title": "Tailored solutions for every need",
+    "items": [
+      {"icon": "🏠", "title": "Residential Homes", "text": "Healthy, chlorine-free shower water for every family member — babies, sensitive skin, coloured hair, elderly."},
+      {"icon": "🏨", "title": "Hotels & Resorts", "text": "Consistent, long-life cartridges for high-guest environments. Private label branding available."},
+      {"icon": "🏢", "title": "Apartments & Rentals", "text": "Non-permanent, tool-free installation perfect for rental apartments and student housing."},
+      {"icon": "💆", "title": "Beauty Salons & Spas", "text": "Soft, chlorine-free water keeps salon hair colour results longer lasting and skin smoother."},
+      {"icon": "💪", "title": "Gyms & Fitness", "text": "High-flow, heavy-duty cartridges for high-traffic gyms and fitness clubs."},
+      {"icon": "🏫", "title": "Offices & Public Buildings", "text": "Bulk supply with scheduled cartridge replacement programs."}
+    ]
+  },
+  "packages": {
+    "eyebrow": "How it works",
+    "title": "Our recommended packages",
+    "items": [
+      {"badge": "A", "title": "Standard Pack", "desc": "Filtered shower head + 1 replacement cartridge.", "highlight": false},
+      {"badge": "B", "title": "Family Pack", "desc": "Inline universal filter + 6 cartridges (1 year supply).", "highlight": false},
+      {"badge": "C", "title": "Commercial Pack", "desc": "High-flow commercial-grade cartridge systems. Private label options.", "highlight": false}
+    ]
+  },
+  "cta": {
+    "eyebrow": "Consult",
+    "title": "Looking for a tailored solution?",
+    "subtitle": "Speak with our engineers to find the ideal solution for your space and usage.",
+    "formLabel": "Inquiry form",
+    "formSubtext": "Reply within 12 hours.",
+    "buttonText": "Request tailored solution"
+  }
+}

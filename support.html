@@ -1,0 +1,381 @@
+<!doctype html><html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Support — FAQ · Installation · Warranty</title>
+<meta name="description" content="FAQ, installation guide, cartridge replacement instructions, warranty and technical support.">
+<meta name="keywords" content="shower filter FAQ, shower filter installation, shower filter warranty, technical support">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: { DEFAULT: '#0a4d8c', dark: '#062d54', light: '#2f7bc2' },
+        accent: { DEFAULT: '#23b7d8', dark: '#1087a8' },
+        bgsoft: '#f6f9fc',
+        bggray: '#eef2f6',
+        textsoft: '#4e5d70',
+        textlight: '#7b8ba0'
+      },
+      fontFamily: { inter: ['Inter', 'sans-serif'] },
+      boxShadow: {
+        soft: '0 2px 8px rgba(10,77,140,.06)',
+        md: '0 8px 24px rgba(10,77,140,.08)',
+        lg: '0 20px 50px rgba(10,77,140,.12)'
+      },
+      animation: { 'float-pulse': 'floatPulse 2.4s infinite' },
+      keyframes: {
+        floatPulse: { '0%,100%': { boxShadow: '0 0 0 0 rgba(35,183,216,.45)' }, '50%': { boxShadow: '0 0 0 14px rgba(35,183,216,0)' } }
+      }
+    }
+  }
+}
+</script>
+<style type="text/tailwindcss">
+@layer utilities {
+  .text-gradient { background: linear-gradient(135deg, #0a4d8c, #23b7d8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .bg-gradient-primary { background: linear-gradient(135deg, #052447 0%, #0a4d8c 50%, #175a9e 100%); }
+  .bg-gradient-accent { background: linear-gradient(135deg, #0a4d8c, #062d54); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.22,0.61,0.36,1), transform 0.8s cubic-bezier(0.22,0.61,0.36,1); }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+}
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a4d8c'/><path d='M50 18c14 18 26 30 26 44a26 26 0 1 1-52 0c0-14 12-26 26-44z' fill='%2323b7d8'/></svg>">
+</head>
+<body class="font-inter antialiased text-[#1a2533] bg-white">
+
+
+<!-- Shared Header (rendered by main.js) -->
+<div id="site-header"></div>
+
+
+<section class="relative pt-28 pb-16 bg-gradient-primary overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-[#061d54]/82 via-[#0a4d8c]/40 to-transparent"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-2 text-sm text-[#86d7ea] mb-4">
+      <a href="index.html" class="hover:text-white transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-white">Support</span>
+    </div>
+    <h1 class="text-[clamp(32px,4.4vw,56px)] font-bold text-white leading-tight tracking-[-0.5px] mb-4">Support Center</h1>
+    <p class="text-lg text-[#cfddee] max-w-[620px]">FAQ, installation and cartridge replacement, warranty information, technical support.</p>
+  </div>
+</section>
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="w-7 h-0.5 bg-accent rounded"></div>
+        <span class="text-xs font-bold tracking-[0.25em] uppercase text-primary">FAQ</span>
+      </div>
+      <h2 class="text-[clamp(26px,3vw,40px)] font-bold tracking-[-0.3px] mb-4">Frequently Asked Questions</h2>
+    </div>
+    <div class="max-w-3xl mx-auto space-y-3">
+      <div class="faq-item is-open bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">How do I install my shower filter?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft">
+          Unscrew your existing shower head, wrap the Teflon tape clockwise around the shower arm threads, screw on the filter housing, then screw on your shower head. Open the water for 30 seconds to flush.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">How often should I replace the cartridge?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          For a standard 4-person household we recommend replacing the cartridge every 6 months or 10,000 gallons (38,000 L), whichever comes first. Replace sooner if you notice a change in water flow, pressure, or odor.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">Does it reduce hard water / limescale?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          Our hard-water cartridges use a food-grade polyphosphate media and mineral ceramic balls to prevent scale formation on shower walls, glass and heaters. Chlorine is also removed.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">Will it reduce water pressure?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          No. Our filter housing is engineered with high-flow design (up to 2.5 GPM / 9.5 L/min). Some customers report a pressure increase because old clogged shower head.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">Is it compatible with my shower?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          Yes. Standard G1/2 thread fitting. Compatible with most standard shower arms, handheld, and rainfall shower heads. Please see our installation manual for details.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">What is the warranty on the housing?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          Housing carries a 2-year warranty against manufacturing defects. Cartridges are consumables and guaranteed for life / gallon rated.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">Can I get technical data sheets?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          Yes. Full technical data sheets, test reports and manuals are available on our Downloads page. Simply leave your email and we'll send the documents.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">Do you ship worldwide?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          We ship globally via ocean, air and DDP to 60+ countries including EU, US, UK, AU, JP, and all Amazon FBA locations.
+        </div>
+      </div>
+      <div class="faq-item bg-white border border-[#e1e8ef] rounded-xl overflow-hidden transition-all hover:shadow-soft">
+        <div class="faq-q flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-bgsoft transition-colors">
+          <span class="font-semibold text-[#0b1b33]">How long for OEM orders?</span>
+          <i class="fa-solid fa-chevron-down text-textlight transition-transform"></i>
+        </div>
+        <div class="faq-a px-5 py-4 bg-bgsoft/30 text-sm text-textsoft hidden">
+          For stocked SKUs we typically reply within 12 business hours and deliver within 25-35 days.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-bgsoft">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="w-7 h-0.5 bg-accent rounded"></div>
+        <span class="text-xs font-bold tracking-[0.25em] uppercase text-primary">Installation</span>
+      </div>
+      <h2 class="text-[clamp(26px,3vw,40px)] font-bold tracking-[-0.3px] mb-4">Installation & cartridge replacement</h2>
+      <p class="text-base text-textsoft">Installing and replacing your filter is simple and tool-free.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="bg-white border border-[#e1e8ef] rounded-2xl p-6 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-bgsoft text-primary flex items-center justify-center text-2xl">🛠</div>
+          <h4 class="font-bold text-lg text-[#0b1b33]">Installation (5 minutes)</h4>
+        </div>
+        <ol class="space-y-2 text-sm text-textsoft">
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">1</span>Unscrew the existing shower head.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">2</span>Wrap Teflon tape clockwise.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">3</span>Screw on filter hand-tight.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">4</span>Screw shower head back on.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">5</span>Run water 30 seconds to flush.</li>
+        </ol>
+      </div>
+      <div class="bg-white border border-[#e1e8ef] rounded-2xl p-6 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-bgsoft text-primary flex items-center justify-center text-2xl">🔄</div>
+          <h4 class="font-bold text-lg text-[#0b1b33]">Cartridge replacement</h4>
+        </div>
+        <ol class="space-y-2 text-sm text-textsoft">
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">1</span>Twist the two halves counter-clockwise to separate.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">2</span>Remove the used cartridge and recycle.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">3</span>Insert new cartridge with text facing up.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">4</span>Screw the two halves back together and hand-tighten.</li>
+          <li class="flex items-start gap-2"><span class="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-xs font-bold shrink-0">5</span>Run water for 30 seconds before use.</li>
+        </ol>
+      </div>
+      <div class="bg-white border border-[#e1e8ef] rounded-2xl p-6 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-bgsoft text-primary flex items-center justify-center text-2xl">📖</div>
+          <h4 class="font-bold text-lg text-[#0b1b33]">Printed manual</h4>
+        </div>
+        <p class="text-sm text-textsoft mb-4">Full printed manuals are available in our Downloads page.</p>
+        <a href="downloads.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">Visit Downloads <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-bgsoft">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 lg:p-10 flex flex-col lg:flex-row gap-10 items-center">
+      <div class="flex-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-7 h-0.5 bg-accent rounded"></div>
+          <span class="text-xs font-bold tracking-[0.25em] uppercase text-[#86d7ea]">Contact</span>
+        </div>
+        <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Need technical support?</h2>
+        <p class="text-base text-[#c7d9ef]">Our technical team can help with technical questions, installation issues, bulk orders and replacement cartridges.</p>
+      </div>
+      <div class="flex-1 w-full">
+        <div class="bg-white rounded-2xl p-6 shadow-lg">
+          <h3 class="font-bold text-lg mb-1">Contact support</h3>
+          <p class="text-sm text-textlight mb-5">Typically within 24h.</p>
+          <form class="space-y-4" data-contact>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Name *</label>
+                <input type="text" required class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary focus:bg-white transition-colors">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Email *</label>
+                <input type="email" required class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary focus:bg-white transition-colors">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Your message *</label>
+              <textarea rows="4" required class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary focus:bg-white transition-colors resize-vertical"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-md transition-all">Send to support</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Shared Footer (rendered by main.js) -->
+<div id="site-footer"></div>
+
+
+<!-- Shared Floating Buttons (rendered by main.js) -->
+<div id="site-floating-buttons"></div>
+
+<div id="cookieBanner" class="fixed left-5 right-5 bottom-5 max-w-[560px] bg-white border border-[#e1e8ef] rounded-xl p-4 shadow-lg flex gap-4 z-[70] translate-y-5 opacity-0 invisible transition-all">
+  <div class="w-10 h-10 rounded-lg bg-bgsoft flex items-center justify-center text-primary"><i class="fa-solid fa-cookie-bite"></i></div>
+  <div>
+    <h4 class="font-bold text-sm mb-1">Cookies on this website</h4>
+    <p class="text-xs text-textsoft mb-3">We use cookies to improve your browsing experience, analyze site traffic, and for marketing. By continuing you agree to our use of cookies.</p>
+    <div class="flex gap-2">
+      <button class="px-4 py-1.5 bg-primary text-white text-xs font-semibold rounded-full hover:bg-primary-dark transition-colors cookie-accept">Accept</button>
+      <button class="px-4 py-1.5 border border-primary text-primary text-xs font-semibold rounded-full hover:bg-primary hover:text-white transition-colors" onclick="document.getElementById('cookieBanner').classList.remove('opacity-100', 'visible')">Decline</button>
+    </div>
+  </div>
+</div>
+
+<div id="aqModal" class="fixed inset-0 bg-[#061d54]/82 z-[300] hidden items-center justify-center p-4">
+  <div class="bg-white rounded-2xl max-w-[860px] w-full max-h-[90vh] overflow-auto relative p-5">
+    <button class="absolute right-4 top-4 w-9 h-9 rounded-lg bg-bgsoft flex items-center justify-center text-lg" onclick="document.getElementById('aqModal').classList.remove('flex')">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const burger = document.getElementById("burger");
+  const drawer = document.getElementById("drawer");
+  const drawerPanel = document.getElementById("drawerPanel");
+  const drawerClose = document.getElementById("drawerClose");
+
+  if(burger && drawer && drawerPanel && drawerClose){
+    burger.addEventListener("click", () => {
+      drawer.classList.remove("opacity-0", "invisible");
+      drawerPanel.classList.remove("translate-x-full");
+    });
+    drawerClose.addEventListener("click", () => {
+      drawer.classList.add("opacity-0", "invisible");
+      drawerPanel.classList.add("translate-x-full");
+    });
+    drawer.addEventListener("click", (e) => {
+      if(e.target === drawer){
+        drawer.classList.add("opacity-0", "invisible");
+        drawerPanel.classList.add("translate-x-full");
+      }
+    });
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  document.querySelectorAll(".faq-q").forEach(q => {
+    q.addEventListener("click", () => {
+      const item = q.parentElement;
+      const answer = q.nextElementSibling;
+      const icon = q.querySelector("i");
+      item.classList.toggle("is-open");
+      answer.classList.toggle("hidden");
+      if(icon) icon.classList.toggle("rotate-180");
+    });
+  });
+
+  document.querySelectorAll("form[data-contact]").forEach(f => {
+    f.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Thank you for contacting XINPUREAO! Our international sales team will reply within 24 business hours.");
+      f.reset();
+    });
+  });
+
+  const cookie = document.getElementById("cookieBanner");
+  if(cookie && !localStorage.getItem("aquaCookieOK")){
+    setTimeout(() => {
+      cookie.classList.add("opacity-100", "visible", "translate-y-0");
+    }, 1200);
+    cookie.querySelector(".cookie-accept").addEventListener("click", () => {
+      localStorage.setItem("aquaCookieOK", "1");
+      cookie.classList.remove("opacity-100", "visible", "translate-y-0");
+    });
+  }
+});
+
+function openModal(html){
+  let m = document.getElementById("aqModal");
+  if(!m){
+    m = document.createElement("div");
+    m.id = "aqModal";
+    m.className = "fixed inset-0 bg-[#061d54]/82 z-[300] flex items-center justify-center p-4";
+    m.innerHTML = `<div class="bg-white rounded-2xl max-w-[860px] w-full max-h-[90vh] overflow-auto relative p-5"><button class="absolute right-4 top-4 w-9 h-9 rounded-lg bg-bgsoft flex items-center justify-center text-lg" onclick="this.closest('#aqModal').classList.remove('flex')">✕</button><div class="modal-body"></div></div>`;
+    m.addEventListener("click", e => { if(e.target === m) m.classList.remove("flex"); });
+    document.body.appendChild(m);
+  }
+  m.querySelector(".modal-body").innerHTML = html;
+  m.classList.add("flex");
+}
+
+function openContactModal(sku){
+  openModal(`
+    <h3 class="font-bold text-lg mt-2">Request sample / Quote</h3>
+    <p class="text-sm text-textsoft mt-2">${sku ? `<strong>SKU: ${sku}</strong> · ` : ""}Our sales team will contact you within 12 hours.</p>
+    <form class="space-y-4 mt-5" onsubmit="event.preventDefault();document.getElementById('aqModal').classList.remove('flex');alert('Thank you! We received your request.');">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Name *</label><input type="text" required class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary"></div>
+        <div><label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Company *</label><input type="text" required class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary"></div>
+        <div><label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Email *</label><input type="email" required class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary"></div>
+        <div><label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">WhatsApp</label><input type="tel" placeholder="Optional" class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary"></div>
+      </div>
+      <div><label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Country & quantity *</label><input type="text" required placeholder="e.g. United States · 500 pcs" class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary"></div>
+      <div><label class="block text-xs font-semibold text-[#2d3d57] mb-1.5">Message</label><textarea rows="4" placeholder="Tell us about your project, target market, and requirements." class="w-full px-3 py-2.5 border border-[#e1e8ef] rounded-xl text-sm bg-[#fafbfd] focus:outline-none focus:border-primary resize-vertical"></textarea></div>
+      <button type="submit" class="w-full py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors">Send request</button>
+    </form>
+  `);
+}
+</script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

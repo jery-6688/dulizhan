@@ -1,0 +1,34 @@
+[
+  {
+    "id": "shower-filter",
+    "name": "Shower Filters",
+    "nameCn": "沐浴过滤器",
+    "desc": "Standalone inline filtration systems for showers",
+    "image": "Pictures/200.webp",
+    "count": 3
+  },
+  {
+    "id": "filtered-shower-head",
+    "name": "Filtered Shower Heads",
+    "nameCn": "沐浴过滤花洒",
+    "desc": "Premium shower heads with integrated filtration",
+    "image": "Pictures/2601.webp",
+    "count": 2
+  },
+  {
+    "id": "kitchen-faucet-filter",
+    "name": "Kitchen Faucet Filters",
+    "nameCn": "厨房龙头过滤器",
+    "desc": "Advanced tap water purification for kitchen use",
+    "image": "Pictures/cflt.webp",
+    "count": 1
+  },
+  {
+    "id": "replacement-cartridge",
+    "name": "Replacement Cartridges",
+    "nameCn": "过滤墨盒",
+    "desc": "Filter cartridges for all XINPUREAO products",
+    "image": "Pictures/glx.webp",
+    "count": 1
+  }
+]

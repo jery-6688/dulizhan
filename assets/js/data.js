@@ -1,0 +1,1762 @@
+/* XINPUREAO 站点数据 — 由后端 server.js 从 data/*.json 自动生成，请勿手动编辑 */
+window.AQUA = window.AQUA || {};
+window.AQUA.products = [
+  {
+    "id": "G2401",
+    "name": "G2401 Shower Filter",
+    "image": "Pictures/200.webp",
+    "short": "Universal inline shower filter with 20-stage purification and vitamin C infusion.",
+    "long": "G2401 通用型在线淋浴过滤器，专为加装于现有花洒与淋浴臂之间设计。20 级多介质滤芯提供全面的水质净化 — 去除余氯、氯胺、重金属、水垢及细菌，同时释放天然维生素 C 成分，改善皮肤和头发健康。",
+    "overview": "G2401 is a universal inline shower filter installed between the shower arm and any existing shower head. With a 20-stage multi-media cartridge and optional vitamin C aromatherapy, it delivers pure, nourishing shower water that leaves skin softer and hair shinier. Compatible with 99% of shower arms worldwide.",
+    "why": "Best universal fit — compatible with any shower head, hand shower, or high-pressure handheld shower. Most popular choice for Amazon and retail brands.",
+    "category": "shower-filter",
+    "tag": "NEW",
+    "sku": "G2401",
+    "price": "From $22.90 / unit",
+    "daily": "1,200 pcs/day",
+    "countries": "48+",
+    "leadt": "22 days",
+    "moq": "100",
+    "videoUrl": "https://helloklean.com/cdn/shop/videos/c/vp/e2b176157df04371bb4a74abe7dd52ca/e2b176157df04371bb4a74abe7dd52ca.HD-1080p-7.2Mbps-77827069.mp4?v=0",
+    "gallery": [
+      "Pictures/200.webp",
+      "Pictures/1785942435662-1.webp"
+    ],
+    "colorImages": {
+      "Chrome": [
+        "Pictures/200.webp",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Black": [
+        "Pictures/200-1.webp",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "Removes chlorine, chloramine & fluoride"
+      },
+      {
+        "icon": "fa-shield-halved",
+        "text": "Heavy metal (lead, mercury)"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Removes VOC, hydrogen sulfide odor"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "Universal G1/2 thread fitting"
+      }
+    ],
+    "features": [
+      "20-stage multi-media cartridge",
+      "Replaceable cartridge design",
+      "Food-grade vitamin C aromatherapy",
+      "Anti-scale mineral ceramic balls",
+      "BPA-free housing",
+      "Easy tool-free installation"
+    ],
+    "specs": {
+      "Model": "AP-SF-200",
+      "Housing Material": "ABS + Chrome plated / Matte white",
+      "Media Fill": "KDF 55, calcium sulfite, vitamin C, ceramic",
+      "Thread": "G1/2 universal",
+      "Max Pressure": "0.7 MPa",
+      "Life Cycle": "6-8 months / 12,000 L",
+      "Weight": "0.65 kg",
+      "Dimensions": "80 x 120 mm",
+      "Cartridge Diameter": "70 mm",
+      "Operating Temperature": "4 °C ~ 80 °C",
+      "Certifications": "CE, RoHS, SGS tested"
+    },
+    "media": [
+      {
+        "icon": "fa-filter-circle-dollar",
+        "title": "KDF 55 Media",
+        "desc": "High-purity copper-zinc granules reduce lead, mercury, iron and inhibit bacterial growth."
+      },
+      {
+        "icon": "fa-leaf",
+        "title": "Activated Carbon",
+        "desc": "High-grade coconut shell carbon removes chlorine, VOCs, and hydrogen sulfide odors."
+      },
+      {
+        "icon": "fa-cloud-sun",
+        "title": "Calcium Sulfite",
+        "desc": "Food-grade calcium sulfite removes residual chlorine, even at high shower temperatures."
+      },
+      {
+        "icon": "fa-rose",
+        "title": "Vitamin C Beads",
+        "desc": "Natural vitamin C neutralizes chloramine and releases a fresh scent."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Mineral Ceramic Balls",
+        "desc": "Natural mineral balls release trace minerals and help inhibit scale."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "PP Cotton Pre-filter",
+        "desc": "Polypropylene pre-filter removes hair, sediment, and micro-particles."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-hotel",
+        "title": "Hotels & Resorts",
+        "desc": "Upgraded shower experience for premium hotels."
+      },
+      {
+        "icon": "fa-spa",
+        "title": "SPA & Wellness",
+        "desc": "Skin-friendly and hair-nourishing water."
+      },
+      {
+        "icon": "fa-house",
+        "title": "Residential Homes",
+        "desc": "Easy DIY upgrade for every family."
+      },
+      {
+        "icon": "fa-city",
+        "title": "Apartments & Airbnb",
+        "desc": "Temporary, tool-free upgrade."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Remove old shower head",
+        "d": "Unscrew your existing shower head counter-clockwise from the shower arm."
+      },
+      {
+        "n": "02",
+        "t": "Install XINPUREAO filter",
+        "d": "Screw the XINPUREAO AP-SF-200 filter onto the shower arm until hand-tight. Re-attach your shower head to the other end of the filter."
+      },
+      {
+        "n": "03",
+        "t": "Flush and enjoy",
+        "d": "Let the water run for 30 seconds on hot to flush the new cartridge. You are ready to enjoy pure, healthy shower water."
+      }
+    ],
+    "faq": [
+      {
+        "q": "How often do I replace the cartridge?",
+        "a": "Under normal daily use, the cartridge lasts approximately 6-8 months or 12,000 liters. For hard water regions (above 300 ppm), we recommend replacing every 4 months."
+      },
+      {
+        "q": "Will this fit my shower?",
+        "a": "Yes. The AP-SF-200 uses a standard G1/2 universal thread fitting that fits 99% of shower arms in the US, UK, EU, AU and Asia."
+      },
+      {
+        "q": "Does the filter reduce pressure?",
+        "a": "No. Our optimized internal flow design keeps pressure loss under 5%."
+      },
+      {
+        "q": "Can I reuse the housing?",
+        "a": "Yes. The housing is designed for 5+ years of use. Only the inner cartridge is replaced."
+      },
+      {
+        "q": "Do you offer private label?",
+        "a": "Yes. Full private label program: custom logo, housing colors, retail box, user manuals in multiple languages."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "FDA Contact-Safe",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published",
+    "colorPrices": {},
+    "colorValues": {
+      "Black": "#000000"
+    },
+    "longGallery": []
+  },
+  {
+    "id": "G2401 Replacement Filter Cartridge",
+    "name": "G2401 Replacement Filter Cartridge",
+    "image": "Pictures/glx.webp",
+    "short": "G2401 Replacement Filter Cartridge.",
+    "long": "G2401 替滤芯为 15 级多介质滤芯，兼容大多数 2.5 英寸淋浴过滤外壳。独立锡纸密封包装，保质期可达 5 年。作为品牌客户的复购产品，可为品牌带来持续的订阅收入。",
+    "overview": "G2401 is a 15-stage replacement filter for AP-SF-200 and compatible shower filter housings. Each filter is individually foil-sealed for long shelf-life. As a recurring consumable product, replacement filters drive continued revenue for brand partners and private-label sellers.",
+    "why": "High-margin consumable with repeat purchase potential — most brand customers receive 2-4 filter orders per customer per year.",
+    "category": "replacement-cartridge",
+    "sku": "G2401 Replacement Filter Cartridge",
+    "price": "From $6.90 / unit",
+    "daily": "3,500 pcs/day",
+    "countries": "52+",
+    "leadt": "18 days",
+    "moq": 500,
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-replacing-a-shower-head-3010/1080p.mp4",
+    "gallery": [
+      "Pictures/glx.webp",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+    ],
+    "colorImages": {
+      "White": [
+        "Pictures/glx.webp",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "OEM private label available"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Foil sealed — 5 year shelf-life"
+      },
+      {
+        "icon": "fa-shield-halved",
+        "text": "Fits 2.5 inch universal housings"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "Low MOQ bulk supply"
+      }
+    ],
+    "features": [
+      "15-stage multi-media cartridge",
+      "KDF 55 + calcium sulfite + activated carbon",
+      "Compatible with 99% of 2.5 inch housings",
+      "Foil sealed for long shelf life",
+      "Custom retail packaging available"
+    ],
+    "specs": {
+      "Model": "AP-CART-15",
+      "Stages": "15-stage multi-layer",
+      "Media": "KDF 55, CaSO3, activated carbon",
+      "Life": "6-8 months / 12,000 L",
+      "Fits": "Most 2.5 inch universal housings",
+      "Diameter": "65 mm",
+      "Length": "78 mm",
+      "Weight": "0.28 kg",
+      "Operating Temperature": "4 °C ~ 80 °C",
+      "Certifications": "CE, RoHS, SGS tested"
+    },
+    "media": [
+      {
+        "icon": "fa-filter-circle-dollar",
+        "title": "KDF 55 Media",
+        "desc": "High-purity copper-zinc granules."
+      },
+      {
+        "icon": "fa-leaf",
+        "title": "Activated Carbon",
+        "desc": "Removes chlorine and odors."
+      },
+      {
+        "icon": "fa-cloud-sun",
+        "title": "Calcium Sulfite",
+        "desc": "Rapid chlorine removal at high temperature."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "PP Cotton",
+        "desc": "Removes sediment and hair."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Ceramic Balls",
+        "desc": "Anti-scale mineral ceramic balls."
+      },
+      {
+        "icon": "fa-rose",
+        "title": "Vitamin C (optional)",
+        "desc": "Aromatherapy scent bead option."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-house",
+        "title": "Residential Homes",
+        "desc": "Recurring consumable replacement."
+      },
+      {
+        "icon": "fa-city",
+        "title": "Hotels & Apartments",
+        "desc": "Bulk cartridge replacement program."
+      },
+      {
+        "icon": "fa-building",
+        "title": "Gym & Fitness",
+        "desc": "High-traffic locker room showers."
+      },
+      {
+        "icon": "fa-shield",
+        "title": "Public Facilities",
+        "desc": "Durable filter for public showers."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Remove old cartridge",
+        "d": "Unscrew the filter housing counter-clockwise. Empty the used cartridge into the trash."
+      },
+      {
+        "n": "02",
+        "t": "Insert new cartridge",
+        "d": "Remove the foil seal from the new AP-CART-15 cartridge. Insert into the housing with the open end facing up."
+      },
+      {
+        "n": "03",
+        "t": "Flush and reuse",
+        "d": "Re-tighten the housing by hand (do not over-tighten). Run hot water for 30 seconds to flush."
+      }
+    ],
+    "faq": [
+      {
+        "q": "How often should I replace the cartridge?",
+        "a": "Every 6 months or 12,000 liters. For hard water regions (above 300 ppm), replace every 4 months."
+      },
+      {
+        "q": "Will this cartridge fit my filter housing?",
+        "a": "Yes — it fits most standard 2.5 inch universal shower filter housings, including AP-SF-200 and many third-party brands."
+      },
+      {
+        "q": "Can I customize the formulation?",
+        "a": "Yes. We can customize the media formulation for vitamin C content, anti-hard water emphasis, or regional needs."
+      },
+      {
+        "q": "What is the MOQ?",
+        "a": "500 pcs for standard cartridges. 2,000 pcs for custom formulations."
+      },
+      {
+        "q": "What packaging options are available?",
+        "a": "Foil bag, retail blister pack, retail color box. Full private label option with custom logo, colors, and manuals."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "FDA Contact-Safe",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published"
+  },
+  {
+    "id": "Multi-stage filter",
+    "name": "Multi-stage filter",
+    "image": "Pictures/gl2.webp",
+    "short": "Releases natural vitamin C and plant essences for SPA-grade smooth skin and hair.",
+    "long": "Multi-stage filter，以天然食用级维生素 C 精华配方为核心，瞬间中和水中余氯与氯胺，同时释放植物精油芬芳，为肌肤与发丝提供 SPA 级呵护。可选香薰：薰衣草、玫瑰、柠檬、无香。",
+    "overview": "Multi-stage filter. Food-grade ascorbic acid neutralizes chlorine and chloramine instantly, while natural plant essences release a soothing scent during each shower. Perfect for spas, wellness brands, and premium hospitality — it turns a daily shower into a luxury ritual.",
+    "why": "Top choice for premium spas, wellness brands and hospitality. Turns any standard shower into a spa experience.",
+    "category": "shower-filter",
+    "tag": "SPA",
+    "sku": "Multi-stage filter",
+    "price": "From $24.50 / unit",
+    "daily": "650 pcs/day",
+    "countries": "28+",
+    "leadt": "30 days",
+    "moq": "200",
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-water-falling-down-1234/1080p.mp4",
+    "gallery": [
+      "Pictures/gl2.webp"
+    ],
+    "colorImages": {
+      "Chrome": [
+        "Pictures/gl2.webp"
+      ]
+    },
+    "colorPrices": {},
+    "colorValues": {
+      "Chrome": "#969696"
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "Food-grade vitamin C removes chlorine"
+      },
+      {
+        "icon": "fa-rose",
+        "text": "Aromatherapy with natural essential oils"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Leaves hair shinier & skin softer"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "Universal G1/2 thread fitting"
+      }
+    ],
+    "features": [
+      "Food-grade vitamin C aromatherapy",
+      "Scent options: Lavender / Rose / Lemon / Unscented",
+      "3-month cartridge life per unit",
+      "Custom housing colors and scent on request",
+      "Retail-ready private label packaging"
+    ],
+    "specs": {
+      "Model": "AP-VC-100",
+      "Vitamin C Content": "Food-grade ascorbic acid",
+      "Essence Options": "Lavender / Rose / Lemon / Unscented",
+      "Cartridge Life": "3 months per cartridge",
+      "Housing Color": "White / Chrome / Custom",
+      "Thread": "G1/2 universal",
+      "Weight": "0.45 kg",
+      "Dimensions": "80 x 105 mm",
+      "Operating Temperature": "4 °C ~ 80 °C",
+      "Certifications": "CE, RoHS, FDA contact-safe"
+    },
+    "media": [
+      {
+        "icon": "fa-rose",
+        "title": "Vitamin C Core",
+        "desc": "Food-grade ascorbic acid neutralizes chloramine instantly."
+      },
+      {
+        "icon": "fa-leaf",
+        "title": "Plant Essence Beads",
+        "desc": "Natural plant essences release a soft, soothing scent during shower."
+      },
+      {
+        "icon": "fa-cloud-sun",
+        "title": "Calcium Sulfite",
+        "desc": "Fast chlorine removal at high shower temperatures."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "PP Cotton Pre-filter",
+        "desc": "Polypropylene pre-filter removes hair and sediment."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Ceramic Balls",
+        "desc": "Mineral ceramic balls help inhibit scale buildup."
+      },
+      {
+        "icon": "fa-filter-circle-dollar",
+        "title": "KDF 55",
+        "desc": "Removes heavy metals including lead and mercury."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-spa",
+        "title": "Spa & Wellness Centers",
+        "desc": "Luxury aromatherapy shower experience."
+      },
+      {
+        "icon": "fa-hotel",
+        "title": "Boutique Hotels",
+        "desc": "Premium amenity upgrade for suites."
+      },
+      {
+        "icon": "fa-house",
+        "title": "Residential Retail",
+        "desc": "Retail SKU for premium home buyers."
+      },
+      {
+        "icon": "fa-heart",
+        "title": "Beauty & Hair Care",
+        "desc": "Perfect add-on with beauty and hair brands."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Replace shower head",
+        "d": "Unscrew your existing shower head counter-clockwise."
+      },
+      {
+        "n": "02",
+        "t": "Screw on filter",
+        "d": "Screw the AP-VC-100 onto the shower arm until hand-tight."
+      },
+      {
+        "n": "03",
+        "t": "Enjoy aromatherapy shower",
+        "d": "Turn on hot water for 30 seconds to flush. Your aromatherapy shower is ready."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Can I choose the scent?",
+        "a": "Yes — we offer Lavender, Rose, Lemon, and Unscented options. Custom scents available on request for OEM orders above 1,000 pcs."
+      },
+      {
+        "q": "What is the cartridge life?",
+        "a": "Each cartridge lasts approximately 3 months under normal daily use (2 people, 10 minutes per shower)."
+      },
+      {
+        "q": "Is the vitamin C safe?",
+        "a": "Yes. We use only food-grade ascorbic acid. Our vitamin C cartridges are certified CE and FDA contact-safe."
+      },
+      {
+        "q": "Are replacement cartridges available?",
+        "a": "Yes. AP-VC-CART replacement cartridges are available with the same low MOQ. Many brand partners sell them as 3-packs for subscription revenue."
+      },
+      {
+        "q": "Can I private-label this product?",
+        "a": "Yes. Full private label service: custom logo, custom housing color, custom retail box, multi-language user manuals."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "FDA Contact-Safe",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published",
+    "longGallery": []
+  },
+  {
+    "id": "G2402",
+    "name": "G2402 Shower Filter",
+    "image": "Pictures/2402.webp",
+    "short": "Polyphosphate + mineral ceramic filter specifically engineered for very hard water regions.",
+    "long": "G2402 硬水专用淋浴过滤器，专为高硬度水质地区（300 ppm 以上）设计。采用食用级聚磷酸盐 + 矿物陶瓷球双配方，有效抑制水垢生成，保护淋浴设备、热水器和管道。产品通过 SGS 欧盟市场测试，是欧洲、北美、中东硬水地区的热销型号。",
+    "overview": "XINPUREAO AP-HW-300 is an anti-limescale shower filter engineered specifically for hard water regions. Food-grade polyphosphate combines with mineral ceramic balls to inhibit limescale deposits on tiles, glass, pipes, and water heaters. SGS-tested for the European market.",
+    "why": "Best seller for EU and North America hard water regions — proven scale reduction, trusted by distributors and home goods brands.",
+    "category": "shower-filter",
+    "tag": "EU MARKET",
+    "sku": "G2402",
+    "price": "From $26.90 / unit",
+    "daily": "920 pcs/day",
+    "countries": "32+",
+    "leadt": "28 days",
+    "moq": 100,
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-water-droplets-2547/1080p.mp4",
+    "gallery": [
+      "Pictures/2402.webp",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+    ],
+    "colorPrices": {
+      "PP Cotton": "From $26.90 / unit",
+      "Rose": "From $36.90 / unit",
+      "Lavender": "From $36.90 / unit"
+    },
+    "colorImages": {
+      "PP Cotton": [
+        "Pictures/2402.webp",
+        "Pictures/2402.webp",
+        "Pictures/2402.webp",
+        "Pictures/2402.webp",
+        "Pictures/2402.webp"
+      ],
+      "Rose": [
+        "Pictures/2402-2.webp",
+        "Pictures/2402-2.webp",
+        "Pictures/2402-2.webp",
+        "Pictures/2402-2.webp",
+        "Pictures/2402-2.webp"
+      ],
+      "Lavender": [
+        "Pictures/2402-3.webp",
+        "Pictures/2402-3.webp",
+        "Pictures/2402-3.webp",
+        "Pictures/2402-3.webp",
+        "Pictures/2402-3.webp"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "Prevents limescale on tiles & glass"
+      },
+      {
+        "icon": "fa-shield-halved",
+        "text": "Protects heaters and pipes"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Silent operation, zero electricity"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "SGS tested for EU market"
+      }
+    ],
+    "features": [
+      "Engineered for very hard water (300+ ppm)",
+      "Food-grade polyphosphate anti-scale media",
+      "Mineral ceramic balls for pH balance",
+      "8-month cartridge life",
+      "SGS tested & EU compliant",
+      "Universal G1/2 thread fitting"
+    ],
+    "specs": {
+      "Model": "AP-HW-300",
+      "Media": "Food-grade polyphosphate + mineral ceramic",
+      "Hardness Reduction": "Up to 300 ppm",
+      "Thread": "G1/2 universal",
+      "Cartridge Life": "8 months",
+      "Working Pressure": "0.15 – 0.6 MPa",
+      "Operating Temperature": "4 °C ~ 80 °C",
+      "Weight": "0.72 kg",
+      "Dimensions": "85 x 130 mm",
+      "Certifications": "CE, RoHS, SGS tested"
+    },
+    "media": [
+      {
+        "icon": "fa-filter-circle-dollar",
+        "title": "Polyphosphate Media",
+        "desc": "Sequesters calcium and magnesium ions to prevent limescale deposits."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Mineral Ceramic Balls",
+        "desc": "Natural mineral ceramic balls release trace minerals and balance pH."
+      },
+      {
+        "icon": "fa-leaf",
+        "title": "Activated Carbon",
+        "desc": "Removes residual chlorine, VOCs, and hydrogen sulfide odors."
+      },
+      {
+        "icon": "fa-cloud-sun",
+        "title": "Calcium Sulfite",
+        "desc": "Fast-acting chlorine removal at high shower temperatures."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "PP Cotton Pre-filter",
+        "desc": "Removes hair, sediment and micro-particles."
+      },
+      {
+        "icon": "fa-shield-halved",
+        "title": "KDF 55",
+        "desc": "Removes heavy metals including lead and mercury."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-house",
+        "title": "Residential Homes",
+        "desc": "Protect shower, pipes and water heater."
+      },
+      {
+        "icon": "fa-city",
+        "title": "Apartments & Condos",
+        "desc": "Temporary, tool-free hard water solution."
+      },
+      {
+        "icon": "fa-hotel",
+        "title": "Hotels & Airbnb",
+        "desc": "Prevent limescale on bathroom tiles."
+      },
+      {
+        "icon": "fa-building",
+        "title": "Gym & Locker Rooms",
+        "desc": "Heavy duty for high-traffic showers."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Remove old shower head",
+        "d": "Unscrew your existing shower head counter-clockwise from the shower arm."
+      },
+      {
+        "n": "02",
+        "t": "Install AP-HW-300 filter",
+        "d": "Screw the filter onto the shower arm by hand until tight. Re-attach your shower head to the other end of the filter."
+      },
+      {
+        "n": "03",
+        "t": "Run water and enjoy",
+        "d": "Let hot water run for 30 seconds to flush the new cartridge. Your hard water solution is active."
+      }
+    ],
+    "faq": [
+      {
+        "q": "How does this filter work on hard water?",
+        "a": "The AP-HW-300 uses food-grade polyphosphate media to sequester calcium and magnesium ions — preventing them from forming hard limescale deposits on tiles, glass, pipes, and water heaters."
+      },
+      {
+        "q": "How long does the cartridge last?",
+        "a": "Approximately 8 months under normal daily use (2 people, 10 minutes per shower). For water hardness above 500 ppm, we recommend replacing every 6 months."
+      },
+      {
+        "q": "Is polyphosphate safe?",
+        "a": "Yes. We use only food-grade polyphosphate media certified by SGS. The concentration is well below all international safety limits including WHO and EU drinking water standards."
+      },
+      {
+        "q": "Can I use this with a high-pressure shower head?",
+        "a": "Yes. The filter is designed to work with any standard shower head without reducing pressure by more than 5%."
+      },
+      {
+        "q": "Is private label available?",
+        "a": "Yes. Full private label program with custom logo, housing colors, and retail packaging. MOQ starts at 100 pcs for standard model, 500 pcs for custom housing."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "SGS Tested (EU)",
+      "ISO 9001"
+    ],
+    "status": "published"
+  },
+  {
+    "id": "G2301",
+    "name": "G2301 Shower Filter",
+    "image": "Pictures/200.webp",
+    "short": "Compact 15-stage inline shower filter with efficient chlorine and sediment removal.",
+    "long": "G2301 紧凑型在线淋浴过滤器，采用 15 级多介质过滤配方，高效去除余氯、泥沙、铁锈和异味。小巧机身设计，安装便捷，适合预算友好型客户和入门级市场。通用 G1/2 螺纹，兼容 99% 以上的淋浴臂和花洒。",
+    "overview": "G2301 is a compact 15-stage inline shower filter designed for efficient chlorine and sediment removal. Its space-saving body makes installation quick and easy — ideal for entry-level markets and cost-conscious buyers. Universal G1/2 threading fits 99% of shower arms and shower heads worldwide.",
+    "why": "Best value entry-level model — perfect for distributors, home goods stores, and first-time filter buyers.",
+    "category": "shower-filter",
+    "tag": "VALUE",
+    "sku": "G2301",
+    "price": "From $18.90 / unit",
+    "daily": "1,800 pcs/day",
+    "countries": "35+",
+    "leadt": "18 days",
+    "moq": 100,
+    "gallery": [
+      "Pictures/200.webp",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+    ],
+    "colorImages": {
+      "Chrome": [
+        "Pictures/200.webp",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "White": [
+        "Pictures/200-1.webp",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "Removes chlorine & sediment"
+      },
+      {
+        "icon": "fa-shield-halved",
+        "text": "15-stage multi-media filtration"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Compact & space-saving design"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "Universal G1/2 thread fitting"
+      }
+    ],
+    "features": [
+      "15-stage multi-media cartridge",
+      "Replaceable cartridge design",
+      "Compact body for tight spaces",
+      "BPA-free housing",
+      "Easy tool-free installation",
+      "Budget-friendly pricing"
+    ],
+    "specs": {
+      "Model": "AP-SF-150",
+      "Housing Material": "ABS + Chrome plated / White",
+      "Media Fill": "KDF 55, calcium sulfite, activated carbon, ceramic",
+      "Thread": "G1/2 universal",
+      "Max Pressure": "0.7 MPa",
+      "Life Cycle": "5-6 months / 10,000 L",
+      "Weight": "0.5 kg",
+      "Dimensions": "75 x 100 mm",
+      "Cartridge Diameter": "65 mm",
+      "Operating Temperature": "4 °C ~ 80 °C",
+      "Certifications": "CE, RoHS"
+    },
+    "media": [
+      {
+        "icon": "fa-filter-circle-dollar",
+        "title": "KDF 55 Media",
+        "desc": "High-purity copper-zinc granules reduce lead, mercury and inhibit bacterial growth."
+      },
+      {
+        "icon": "fa-leaf",
+        "title": "Activated Carbon",
+        "desc": "High-grade coconut shell carbon removes chlorine, VOCs, and odors."
+      },
+      {
+        "icon": "fa-cloud-sun",
+        "title": "Calcium Sulfite",
+        "desc": "Food-grade calcium sulfite removes residual chlorine at high temperatures."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "PP Cotton Pre-filter",
+        "desc": "Polypropylene pre-filter removes hair, sediment, and micro-particles."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Mineral Ceramic Balls",
+        "desc": "Natural mineral balls release trace minerals."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-house",
+        "title": "Residential Homes",
+        "desc": "Affordable upgrade for every bathroom."
+      },
+      {
+        "icon": "fa-hotel",
+        "title": "Budget Hotels",
+        "desc": "Cost-effective guest room upgrade."
+      },
+      {
+        "icon": "fa-city",
+        "title": "Apartments & Airbnb",
+        "desc": "Temporary, tool-free improvement."
+      },
+      {
+        "icon": "fa-store",
+        "title": "Retail & Distributors",
+        "desc": "Top seller in home goods stores."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Remove old shower head",
+        "d": "Unscrew your existing shower head counter-clockwise from the shower arm."
+      },
+      {
+        "n": "02",
+        "t": "Install G2301 filter",
+        "d": "Screw the G2301 filter onto the shower arm until hand-tight. Re-attach your shower head."
+      },
+      {
+        "n": "03",
+        "t": "Flush and enjoy",
+        "d": "Let the water run for 30 seconds on hot to flush the new cartridge. Enjoy cleaner shower water."
+      }
+    ],
+    "faq": [
+      {
+        "q": "How often do I replace the cartridge?",
+        "a": "Under normal daily use, the cartridge lasts approximately 5-6 months or 10,000 liters. For very hard water regions, we recommend replacing every 4 months."
+      },
+      {
+        "q": "Will this fit my shower?",
+        "a": "Yes. The G2301 uses a standard G1/2 universal thread fitting that fits 99% of shower arms worldwide."
+      },
+      {
+        "q": "Does it reduce water pressure?",
+        "a": "Minimal pressure loss — our optimized flow design keeps pressure reduction under 5%."
+      },
+      {
+        "q": "Can I reuse the housing?",
+        "a": "Yes. The housing is designed for 5+ years of use. Only the inner cartridge is replaced."
+      },
+      {
+        "q": "Is private labeling available?",
+        "a": "Yes. Full private label program: custom logo, housing colors, retail box, multi-language user manuals."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published"
+  },
+  {
+    "id": "HP113",
+    "name": "XINPUREAO HP-113 High Pressure Shower Head",
+    "image": "pictures/HP113.webp",
+    "short": "Jet-engine design boosts low water pressure up to 200% with 5 spray modes.",
+    "long": "HP-113 增压花洒采用喷气式引擎导水结构，在低水压环境下可将出水压力提升高达 200%。配备 5 种喷淋模式：雨淋、强力、按摩、混合、节水。食品级硅胶自清洁喷嘴，镀铬 / 哑光黑 / 拉丝镍三种外观可选。是酒店、地产、家庭装修渠道的高性价比选择。",
+    "overview": "XINPUREAO AP-HP-5X is a high-pressure shower head designed for low-pressure households. With a jet-engine inspired water guidance design, it boosts pressure up to 200% while maintaining flow efficiency. Five spray modes, silicon self-clean nozzles, and luxury hotel-grade finish make it a best seller in hospitality and retail channels.",
+    "why": "Top choice for hotels, residential developments and retail. Delivers premium shower experience even in low-water-pressure buildings.",
+    "category": "filtered-shower-head",
+    "sku": "HP113",
+    "price": "From $19.90 / unit",
+    "daily": "1,500 pcs/day",
+    "countries": "45+",
+    "leadt": "20 days",
+    "moq": 200,
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-shower-head-5831/1080p.mp4",
+    "gallery": [
+      "pictures/HP113.webp",
+      "https://images15951595514535215-9a5e5e03ae01=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+    ],
+    "colorImages": {
+      "Chrome": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Black": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Gold": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Bronze": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "+200% pressure boost for low-pressure homes"
+      },
+      {
+        "icon": "fa-shower",
+        "text": "5 luxury spray modes"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Silicon self-clean nozzles"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "Luxury hotel grade finish"
+      }
+    ],
+    "features": [
+      "Jet-engine inspired water guidance design",
+      "5 spray modes: Rain / Power / Massage / Mix / Eco",
+      "Silicon self-clean nozzles — easy to wipe",
+      "Chrome / matte black / brushed nickel finishes",
+      "Standard G1/2 universal thread",
+      "Optional 1.5 m stainless steel hose"
+    ],
+    "specs": {
+      "Model": "AP-HP-5X",
+      "Material": "ABS + chrome / matte black / brushed nickel",
+      "Spray Modes": "Rain / Power / Massage / Mix / Eco",
+      "Nozzles": "Silicon self-clean",
+      "Thread": "G1/2 universal",
+      "Hose Included": "1.5 m stainless steel (optional)",
+      "Working Pressure": "0.10 – 0.6 MPa",
+      "Weight": "0.38 kg",
+      "Dimensions": "125 x 100 x 75 mm",
+      "Certifications": "CE, RoHS, SGS tested"
+    },
+    "media": [
+      {
+        "icon": "fa-shower",
+        "title": "Turbo Spray Engine",
+        "desc": "Jet-engine inspired water guidance boosts pressure up to 200% in low-pressure environments."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Silicon Self-clean Nozzles",
+        "desc": "Food-grade silicon nozzles resist mineral buildup. Wipe clean in seconds."
+      },
+      {
+        "icon": "fa-droplet",
+        "title": "Eco Flow Limiter",
+        "desc": "Built-in flow limiter option — saves up to 30% water while maintaining shower comfort."
+      },
+      {
+        "icon": "fa-shield-halved",
+        "title": "ABS Chrome Plated",
+        "desc": "High-grade ABS body with luxury chrome plating — hotel-grade finish."
+      },
+      {
+        "icon": "fa-rotate",
+        "title": "360° Adjustable Angle",
+        "desc": "Swivel ball joint allows full angle adjustment."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "Premium Mesh Filter",
+        "desc": "Stainless steel mesh filter prevents debris from entering the spray chamber."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-hotel",
+        "title": "Hotels & Resorts",
+        "desc": "Premium shower experience in every guest room."
+      },
+      {
+        "icon": "fa-city",
+        "title": "Residential Developments",
+        "desc": "Ideal for apartments with low-pressure plumbing."
+      },
+      {
+        "icon": "fa-house",
+        "title": "Family Homes",
+        "desc": "Luxury shower upgrade with multiple modes."
+      },
+      {
+        "icon": "fa-building",
+        "title": "Gym & Locker Rooms",
+        "desc": "Durable high-flow shower head for high-traffic."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Remove old shower head",
+        "d": "Unscrew your existing shower head counter-clockwise from the shower arm."
+      },
+      {
+        "n": "02",
+        "t": "Install AP-HP-5X",
+        "d": "Wrap Teflon tape (included) clockwise around the shower arm threads. Screw the AP-HP-5X shower head onto the shower arm by hand."
+      },
+      {
+        "n": "03",
+        "t": "Select your mode",
+        "d": "Turn the spray mode dial on the side of the shower head to select Rain, Power, Massage, Mix, or Eco. Your premium shower is ready."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Does it really boost pressure by 200%?",
+        "a": "In low-pressure households (0.10 – 0.20 MPa), our jet-engine inspired water guidance design can increase perceived water pressure by up to 200% compared to a standard shower head."
+      },
+      {
+        "q": "Can I use this with a shower filter?",
+        "a": "Yes. The AP-HP-5X works perfectly with any of our inline shower filter models — AP-SF-200, AP-HW-300, or AP-VC-100. Simply install the filter between the shower arm and the shower head."
+      },
+      {
+        "q": "How do I clean the nozzles?",
+        "a": "The food-grade silicon nozzles are self-cleaning. Simply rub each nozzle with your finger under running water to remove any mineral deposits. For heavy buildup, soak in vinegar for 30 minutes."
+      },
+      {
+        "q": "What finish options are available?",
+        "a": "Chrome, matte black, and brushed nickel. Custom colors available for OEM orders above 500 pcs."
+      },
+      {
+        "q": "Is there a warranty?",
+        "a": "Yes — 2-year warranty against manufacturing defects. 60-day satisfaction guarantee for retail orders."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published"
+  },
+  {
+    "id": "2603",
+    "name": "2603 Kitchen Faucet Filter",
+    "image": "Pictures/cflt.webp",
+    "short": "High-output kitchen tap water filter with 5-stage purification, easy DIY installation.",
+    "long": "2603 厨房龙头过滤器专为家庭厨房用水净化设计，采用 5 级复合过滤技术，有效去除余氯、重金属、铁锈、泥沙及异味，同时保留水中有益矿物质。快拆式滤芯设计，无需工具即可自行更换。360° 旋转出水口，适配绝大多数标准厨房龙头。",
+    "overview": "2603 is a high-output kitchen faucet filter designed for everyday cooking and drinking water purification. Its 5-stage composite filtration removes chlorine, heavy metals, rust, sediment, and odors while preserving beneficial minerals. Tool-free cartridge replacement and 360° swivel spout make it easy to install and use on most standard kitchen faucets.",
+    "why": "Fast-growing category — kitchen water filters are the #2 requested product line from our distribution partners.",
+    "category": "kitchen-faucet-filter",
+    "tag": "NEW",
+    "sku": "2603",
+    "price": "From $20 / unit",
+    "daily": "600 pcs/day",
+    "countries": "28+",
+    "leadt": "28 days",
+    "moq": 100,
+    "gallery": [
+      "Pictures/cflt.webp",
+      "Pictures/2603-1-1.webp",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70"
+    ],
+    "colorImages": {
+      "Chrome": [
+        "Pictures/cflt.webp",
+        "Pictures/2603-1-1.webp",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70"
+      ],
+      "White": [
+        "Pictures/2603-1.webp",
+        "Pictures/2603-1-1.webp",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Frosted": [
+        "Pictures/2603-2.webp",
+        "Pictures/2603-1-1.webp",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "Removes 99% chlorine & lead"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "Reduces odor & VOCs"
+      },
+      {
+        "icon": "fa-kitchen-set",
+        "text": "For cooking & drinking water"
+      },
+      {
+        "icon": "fa-rotate",
+        "text": "Tool-free cartridge replace"
+      }
+    ],
+    "features": [
+      "5-stage composite filtration",
+      "360° swivel water outlet",
+      "2 flow modes: filtered / raw",
+      "Quick-connect cartridge design",
+      "Food-grade ABS housing",
+      "Fits most standard faucets"
+    ],
+    "specs": {
+      "Model": "AP-KF-500",
+      "Housing Material": "Food-grade ABS",
+      "Filtration Stages": "5-stage composite",
+      "Cartridge Life": "3-4 months / 1,500 L",
+      "Flow Rate": "2.0 L/min",
+      "Filter Media": "Activated carbon + KDF + PP + ceramic",
+      "Connection": "Universal faucet adapter",
+      "Outlet Rotation": "360° swivel",
+      "Operating Temperature": "5 °C ~ 45 °C",
+      "Certifications": "CE, RoHS, FDA contact-safe",
+      "Packaging": "Retail color box / Custom"
+    },
+    "media": [
+      {
+        "icon": "fa-filter-circle-dollar",
+        "title": "KDF 55 Media",
+        "desc": "High-purity copper-zinc granules reduce lead, mercury, and inhibit bacterial growth."
+      },
+      {
+        "icon": "fa-leaf",
+        "title": "Coconut Activated Carbon",
+        "desc": "Premium activated carbon removes chlorine, VOCs, and unpleasant tastes & odors."
+      },
+      {
+        "icon": "fa-gem",
+        "title": "PP Cotton Pre-filter",
+        "desc": "Removes sediment, rust, hair, and large particles to protect downstream media."
+      },
+      {
+        "icon": "fa-circle-nodes",
+        "title": "Ceramic Filter Layer",
+        "desc": "Ultra-fine ceramic membrane filters out micro-particles and suspended solids."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-house",
+        "title": "Home Kitchen",
+        "desc": "Clean water for drinking, cooking, and washing produce."
+      },
+      {
+        "icon": "fa-mug-hot",
+        "title": "Office Pantry",
+        "desc": "Better-tasting coffee, tea, and drinking water."
+      },
+      {
+        "icon": "fa-shop",
+        "title": "Retail & Showroom",
+        "desc": "Fast-moving SKU for home improvement retailers."
+      },
+      {
+        "icon": "fa-city",
+        "title": "Apartments & Rentals",
+        "desc": "No-plumbing installation — perfect for tenants."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Remove old aerator",
+        "d": "Unscrew the existing aerator from your faucet. Clean the faucet threads if needed."
+      },
+      {
+        "n": "02",
+        "t": "Install adapter",
+        "d": "Select the correct adapter size and screw it onto the faucet by hand. Do not over-tighten."
+      },
+      {
+        "n": "03",
+        "t": "Attach filter unit",
+        "d": "Screw the filter body onto the adapter until snug. Turn on water and check for leaks."
+      }
+    ],
+    "faq": [
+      {
+        "q": "How long does the cartridge last?",
+        "a": "Under typical household use (cooking + drinking), the cartridge lasts 3-4 months or approximately 1,500 liters. In areas with very high sediment, replace every 2 months."
+      },
+      {
+        "q": "Does it fit my faucet?",
+        "a": "We include 3 adapter sizes (16mm, 18mm, 20mm) that fit 95% of standard kitchen faucets with removable aerators. Not compatible with pull-out / pull-down sprayer faucets."
+      },
+      {
+        "q": "Can I switch between filtered and unfiltered water?",
+        "a": "Yes — simply twist the diverter knob to switch between filtered mode (for drinking/cooking) and raw water mode (for washing dishes)."
+      },
+      {
+        "q": "Is it easy to replace the cartridge?",
+        "a": "Very easy — just unscrew the bottom housing, remove the old cartridge, drop in the new one, and screw back on. No tools needed, takes less than a minute."
+      },
+      {
+        "q": "Are replacement cartridges available?",
+        "a": "Yes. We sell matching replacement cartridges with MOQ starting at 200 pcs. Most brand partners bundle a 3-pack or 6-pack as a value add-on."
+      },
+      {
+        "q": "Can I use it for hot water?",
+        "a": "We recommend using cold or warm water only (max 45°C). Hot water above 45°C may reduce filter effectiveness and shorten cartridge life."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "FDA Contact-Safe",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published"
+  },
+  {
+    "id": "ap-oem-studio",
+    "name": "OEM / ODM Custom Shower Water Solution",
+    "image": "assets/images/products/ap-oem-studio.jpg",
+    "short": "Full custom design, tooling, formulation, and bulk manufacturing for brands and distributors.",
+    "long": "XINPUREAO OEM / ODM 服务为全球品牌商、经销商、电商卖家提供从产品设计、开模、配方研发到批量生产的一站式服务。我们拥有 25,000 平方米的现代化工厂、自有模具车间、专业研发团队，以及完整的 CE / RoHS / FDA / SGS 认证体系。每个 OEM 客户都将获得专属项目经理、定制配方、定制包装、A+ 内容设计及全方位市场支持。",
+    "overview": "XINPUREAO OEM / ODM Studio offers a complete end-to-end service for brands, distributors, and e-commerce sellers worldwide. Our 25,000 m² modern factory, in-house tooling shop, R&D team, and full compliance certification program deliver custom shower filter products from concept to container. Every OEM client receives a dedicated project manager, custom formulation, custom packaging, A+ content support, and comprehensive market launch assistance.",
+    "why": "Trusted by 200+ global brands. From Amazon private label to hotel chains — we handle the engineering so you can focus on marketing.",
+    "category": "oem-odm",
+    "tag": "CUSTOM",
+    "sku": "AP-OEM-STUDIO",
+    "price": "Quote on request",
+    "daily": "20,000+ pcs/day",
+    "countries": "60+",
+    "leadt": "25-60 days",
+    "moq": 500,
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-factory-workers-7923/1080p.mp4",
+    "gallery": [
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+      "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+    ],
+    "colorImages": {
+      "Chrome": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Black": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Gold": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ],
+      "Bronze": [
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=1200&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70",
+        "https://images.unsplash.com/photo-1595514535215-9a5e5e03ae01?auto=format&fit=crop&w=900&q=70"
+      ]
+    },
+    "highlights": [
+      {
+        "icon": "fa-droplet",
+        "text": "In-house R&D, design & tooling"
+      },
+      {
+        "icon": "fa-shield-halved",
+        "text": "ISO 9001 quality management"
+      },
+      {
+        "icon": "fa-wind",
+        "text": "CE / RoHS / SGS / FDA compliant"
+      },
+      {
+        "icon": "fa-house-chimney",
+        "text": "Amazon / retail ready packaging"
+      }
+    ],
+    "features": [
+      "Complete OEM / ODM & private label program",
+      "In-house tooling, design, and formulation",
+      "Custom housing shapes, colors, and logo",
+      "Retail-ready packaging and A+ content support",
+      "Multi-language manuals and regulatory support",
+      "Dedicated project manager for every client"
+    ],
+    "specs": {
+      "Model": "AP-OEM-STUDIO",
+      "Design": "Industrial + structural + packaging",
+      "Tooling": "Injection mold / extrusion / CNC",
+      "Private Label": "Full white-label program",
+      "Lead Time": "25-60 days",
+      "MOQ": "From 500 pcs per SKU",
+      "Factory Size": "25,000 m²",
+      "Daily Capacity": "20,000+ pcs",
+      "Countries Served": "60+",
+      "Certifications": "CE, RoHS, FDA, ISO 9001"
+    },
+    "media": [
+      {
+        "icon": "fa-microchip",
+        "title": "R&D & Formulation",
+        "desc": "Custom media formulation — vitamin C, polyphosphate, KDF 55, activated carbon — tailored to your market needs."
+      },
+      {
+        "icon": "fa-toolbox",
+        "title": "In-house Tooling",
+        "desc": "Complete injection mold, CNC, and extrusion tooling shop. Fast tooling turnaround — 2-3 weeks for standard molds."
+      },
+      {
+        "icon": "fa-layer-group",
+        "title": "Manufacturing",
+        "desc": "25,000 m² modern factory. Daily capacity 20,000+ units. ISO 9001 certified quality management."
+      },
+      {
+        "icon": "fa-box",
+        "title": "Packaging Design",
+        "desc": "Retail-ready color box, blister pack, or custom packaging. Multi-language printed manuals on request."
+      },
+      {
+        "icon": "fa-globe",
+        "title": "Global Logistics",
+        "desc": "FOB / CIF / DDP shipping to 60+ countries. Amazon FBA prep and labeling available."
+      },
+      {
+        "icon": "fa-people-group",
+        "title": "Brand Support",
+        "desc": "Dedicated project manager, A+ content assistance, compliance documentation, sample program."
+      }
+    ],
+    "apps": [
+      {
+        "icon": "fa-store",
+        "title": "Amazon / E-commerce Brands",
+        "desc": "Retail-ready private label with A+ content assistance."
+      },
+      {
+        "icon": "fa-building",
+        "title": "Distributors & Wholesalers",
+        "desc": "Bulk supply with custom branding for your region."
+      },
+      {
+        "icon": "fa-hotel",
+        "title": "Hotel Chains & Hospitality",
+        "desc": "Custom-branded amenity filter programs for hotel groups."
+      },
+      {
+        "icon": "fa-bath",
+        "title": "Beauty & Hair Care Brands",
+        "desc": "Co-branded shower filter add-on for hair and beauty brands."
+      }
+    ],
+    "install": [
+      {
+        "n": "01",
+        "t": "Consultation",
+        "d": "Send us your product idea, target market, and quantity. Our project manager responds within 12 business hours."
+      },
+      {
+        "n": "02",
+        "t": "Design & Sample",
+        "d": "We develop CAD drawings, 3D samples, and custom formulation. Typical sample lead time: 15-20 days."
+      },
+      {
+        "n": "03",
+        "t": "Tooling & Production",
+        "d": "After sample approval: tooling (2 weeks) then full production (25-35 days). Dedicated PM keeps you updated daily."
+      },
+      {
+        "n": "04",
+        "t": "Shipping & Launch",
+        "d": "FOB / CIF / DDP shipping. Compliance documents, marketing materials, and A+ content included."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the minimum order quantity?",
+        "a": "For standard models with custom logo and packaging: 100 pcs. For fully custom tooling (new housing design): 500 pcs per SKU. We offer friendly MOQ for first-time clients — ask for details."
+      },
+      {
+        "q": "What is the typical lead time?",
+        "a": "Standard production: 25-35 days after sample approval and deposit. Full custom tooling adds 2-3 weeks. Express production for repeat clients available within 15 days."
+      },
+      {
+        "q": "Can you handle Amazon FBA shipping?",
+        "a": "Yes. We regularly ship to Amazon FBA warehouses in the US, UK, Germany, France, Italy, Spain, Canada, Mexico, Australia, and Japan. We provide FBA prep, labeling, and DDP shipping."
+      },
+      {
+        "q": "What certifications do you provide?",
+        "a": "All products comply with CE, RoHS, and FDA contact-safety standards. We provide third-party SGS test reports on request. Our factory is ISO 9001 certified."
+      },
+      {
+        "q": "Do you offer packaging and manual design?",
+        "a": "Yes. Our in-house design team provides retail-ready color box design, blister packaging, and multi-language user manuals. We also provide A+ content assistance for Amazon sellers."
+      },
+      {
+        "q": "How can I get a sample?",
+        "a": "We offer free samples — you only pay shipping. Contact our sales team with your company details and we will ship samples within 3-5 business days by DHL / FedEx."
+      }
+    ],
+    "certs": [
+      "CE",
+      "RoHS",
+      "FDA Contact-Safe",
+      "SGS Tested",
+      "ISO 9001"
+    ],
+    "status": "published"
+  },
+  {
+    "name": "1231231",
+    "sku": "G24011",
+    "category": "shower-filter",
+    "tag": "",
+    "price": "",
+    "daily": "",
+    "countries": "",
+    "leadt": "",
+    "moq": "",
+    "videoUrl": "",
+    "status": "published",
+    "short": "",
+    "long": "",
+    "overview": "",
+    "why": "",
+    "image": "",
+    "gallery": [],
+    "features": [],
+    "certs": [],
+    "highlights": [],
+    "media": [],
+    "apps": [],
+    "install": [],
+    "faq": [],
+    "specs": {},
+    "id": "P1785942581669"
+  }
+];
+window.AQUA.posts = [
+  {
+    "id": "post-1",
+    "title": "Does Shower Water Chlorine Really Affect Your Hair & Skin?",
+    "slug": "does-shower-water-chlorine-really-affect-your-hair-skin",
+    "cat": "Water Knowledge",
+    "category": "Water Knowledge",
+    "date": "2025-06-10",
+    "excerpt": "A deep dive into how residual chlorine in tap water interacts with skin oils, hair keratin, and the microbiome — and what a good shower filter can do about it.",
+    "cover": "Pictures/1785953226425-7e33c5bad086e742.webp",
+    "author": "XINPUREAO Team",
+    "tags": [
+      "Water Knowledge"
+    ],
+    "content": "<p>A deep dive into how residual chlorine in tap water interacts with skin oils, hair keratin, and the microbiome — and what a good shower filter can do about it.</p><p>Full article content coming soon.</p>",
+    "status": "published"
+  },
+  {
+    "id": "post-2",
+    "title": "Hard Water vs Soft Water: Which Is Better for Your Shower?",
+    "slug": "hard-water-vs-soft-water-which-is-better-for-your-shower",
+    "cat": "Hard Water",
+    "category": "Hard Water",
+    "date": "2025-05-24",
+    "excerpt": "Limescale, dry hair, itchy skin — the classic signs of hard water. Learn how shower filters can mitigate mineral buildup without salt or electricity.",
+    "cover": "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70",
+    "author": "XINPUREAO Team",
+    "tags": [
+      "Hard Water"
+    ],
+    "content": "<p>Limescale, dry hair, itchy skin — the classic signs of hard water. Learn how shower filters can mitigate mineral buildup without salt or electricity.</p><p>Full article content coming soon.</p>",
+    "status": "published"
+  },
+  {
+    "id": "post-3",
+    "title": "How to Install a Shower Filter in 5 Minutes (No Tools)",
+    "slug": "how-to-install-a-shower-filter-in-5-minutes-no-tools",
+    "cat": "Product Guide",
+    "category": "Product Guide",
+    "date": "2025-05-10",
+    "excerpt": "A step-by-step illustrated guide for installing a standard universal shower filter, plus troubleshooting common leaks and pressure issues.",
+    "cover": "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70",
+    "author": "XINPUREAO Team",
+    "tags": [
+      "Product Guide"
+    ],
+    "content": "<p>A step-by-step illustrated guide for installing a standard universal shower filter, plus troubleshooting common leaks and pressure issues.</p><p>Full article content coming soon.</p>",
+    "status": "published"
+  },
+  {
+    "id": "post-4",
+    "title": "KDF 55 vs Calcium Sulfite: Which Media Wins?",
+    "slug": "kdf-55-vs-calcium-sulfite-which-media-wins",
+    "cat": "Water Knowledge",
+    "category": "Water Knowledge",
+    "date": "2025-04-20",
+    "excerpt": "Both are popular shower filter media — but they target very different contaminants. Here's how to choose the right formulation for your market.",
+    "cover": "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70",
+    "author": "XINPUREAO Team",
+    "tags": [
+      "Water Knowledge"
+    ],
+    "content": "<p>Both are popular shower filter media — but they target very different contaminants. Here's how to choose the right formulation for your market.</p><p>Full article content coming soon.</p>",
+    "status": "published"
+  },
+  {
+    "id": "post-5",
+    "title": "Selling Shower Filters on Amazon: A Private Label Playbook",
+    "slug": "selling-shower-filters-on-amazon-a-private-label-playbook",
+    "cat": "Industry",
+    "category": "Industry",
+    "date": "2025-04-02",
+    "excerpt": "From listing optimization, A+ content, to compliance testing and packaging — how Chinese manufacturers help Amazon brands scale shower filter SKUs.",
+    "cover": "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70",
+    "author": "XINPUREAO Team",
+    "tags": [
+      "Industry"
+    ],
+    "content": "<p>From listing optimization, A+ content, to compliance testing and packaging — how Chinese manufacturers help Amazon brands scale shower filter SKUs.</p><p>Full article content coming soon.</p>",
+    "status": "published"
+  },
+  {
+    "id": "post-6",
+    "title": "Vitamin C Shower Filters: Science or Marketing?",
+    "slug": "vitamin-c-shower-filters-science-or-marketing",
+    "cat": "Water Knowledge",
+    "category": "Water Knowledge",
+    "date": "2025-03-18",
+    "excerpt": "An evidence-based look at vitamin C as a de-chlorination agent, and how to select a genuinely effective product for your customers.",
+    "cover": "https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=900&q=70",
+    "author": "XINPUREAO Team",
+    "tags": [
+      "Water Knowledge"
+    ],
+    "content": "<p>An evidence-based look at vitamin C as a de-chlorination agent, and how to select a genuinely effective product for your customers.</p><p>Full article content coming soon.</p>",
+    "status": "published"
+  }
+];
+window.AQUA.downloads = [
+  {
+    "id": "dl-1",
+    "title": "Full Product Catalog 2025",
+    "size": "PDF · 12.4 MB",
+    "icon": "📑"
+  },
+  {
+    "id": "dl-2",
+    "title": "AP-SH-800 Datasheet",
+    "size": "PDF · 1.8 MB",
+    "icon": "📄"
+  },
+  {
+    "id": "dl-3",
+    "title": "AP-SF-200 Datasheet",
+    "size": "PDF · 1.6 MB",
+    "icon": "📄"
+  },
+  {
+    "id": "dl-4",
+    "title": "Replacement Cartridge Compatibility Chart",
+    "size": "PDF · 0.8 MB",
+    "icon": "📄"
+  },
+  {
+    "id": "dl-5",
+    "title": "Installation & User Manual (EN)",
+    "size": "PDF · 3.2 MB",
+    "icon": "🛠"
+  },
+  {
+    "id": "dl-6",
+    "title": "SGS Test Report — Chlorine Reduction",
+    "size": "PDF · 2.1 MB",
+    "icon": "🧪"
+  },
+  {
+    "id": "dl-7",
+    "title": "CE / RoHS Declaration",
+    "size": "PDF · 1.4 MB",
+    "icon": "🛡"
+  },
+  {
+    "id": "dl-8",
+    "title": "OEM Private Label Brochure",
+    "size": "PDF · 4.5 MB",
+    "icon": "📦"
+  },
+  {
+    "id": "dl-9",
+    "title": "Pricing & MOQ Guide (Request)",
+    "size": "PDF · on request",
+    "icon": "💼"
+  }
+];
+window.AQUA.categories = [
+  {
+    "id": "shower-filter",
+    "name": "Shower Filters",
+    "nameCn": "沐浴过滤器",
+    "desc": "Standalone inline filtration systems for showers",
+    "image": "Pictures/200.webp",
+    "count": 3
+  },
+  {
+    "id": "filtered-shower-head",
+    "name": "Filtered Shower Heads",
+    "nameCn": "沐浴过滤花洒",
+    "desc": "Premium shower heads with integrated filtration",
+    "image": "Pictures/2601.webp",
+    "count": 2
+  },
+  {
+    "id": "kitchen-faucet-filter",
+    "name": "Kitchen Faucet Filters",
+    "nameCn": "厨房龙头过滤器",
+    "desc": "Advanced tap water purification for kitchen use",
+    "image": "Pictures/cflt.webp",
+    "count": 1
+  },
+  {
+    "id": "replacement-cartridge",
+    "name": "Replacement Cartridges",
+    "nameCn": "过滤墨盒",
+    "desc": "Filter cartridges for all XINPUREAO products",
+    "image": "Pictures/glx.webp",
+    "count": 1
+  }
+];
+window.AQUA.settings = {
+  "company": {
+    "name": "XINPUREAO Water Purification Equipment Co., Ltd.",
+    "phone": "+86 18452930159",
+    "email": "848835870@qq.com",
+    "address": "江苏省徐州市铜山区安全谷B5-101室内",
+    "whatsapp": "8618452930159"
+  },
+  "social": {
+    "tiktok": "https://www.tiktok.com/@jjjie977?is_from_webapp=1&sender_device=pc",
+    "facebook": "https://www.facebook.com/share/1SxjmyvB1M/",
+    "instagram": "https://www.instagram.com/jj848835870/"
+  },
+  "homeIntro": "Premium shower water filtration manufacturer. OEM / private label partner for brands and distributors in 60+ countries.",
+  "aboutText": "<p>XINPUREAO is a premium shower water filtration manufacturer based in Xuzhou, China.</p>",
+  "headerLogo": "/Pictures/xinpureao.svg",
+  "footer": {
+    "companyIntro": "Premium shower water filtration manufacturer. OEM / private label partner for brands and distributors in 60+ countries.",
+    "productLinks": [
+      {
+        "label": "Filtered Shower Heads",
+        "href": "products.html?cat=filtered-shower-head"
+      },
+      {
+        "label": "Shower Filters",
+        "href": "products.html?cat=shower-filter"
+      },
+      {
+        "label": "Kitchen Faucet Filters",
+        "href": "products.html?cat=kitchen-faucet-filter"
+      },
+      {
+        "label": "Replacement Cartridges",
+        "href": "products.html?cat=replacement-cartridge"
+      }
+    ],
+    "companyLinks": [
+      {
+        "label": "About",
+        "href": "about.html"
+      },
+      {
+        "label": "Contact",
+        "href": "contact.html"
+      }
+    ],
+    "contactItems": [
+      {
+        "icon": "📍",
+        "text": "江苏省徐州市铜山区安全谷B5-101室内"
+      },
+      {
+        "icon": "🏢",
+        "text": "XINPUREAO Water Purification Equipment Co., Ltd."
+      },
+      {
+        "icon": "✉",
+        "text": "848835870@qq.com",
+        "href": "mailto:848835870@qq.com"
+      },
+      {
+        "icon": "📞",
+        "text": "+86 18452930159",
+        "href": "tel:+8618452930159"
+      },
+      {
+        "icon": "💬",
+        "text": "WhatsApp Support",
+        "href": "https://wa.me/8618452930159"
+      }
+    ],
+    "bottomText": "© 2025 XINPUREAO Water Purification Equipment Co., Ltd. · 徐州欣派斯净水 All rights reserved.",
+    "bottomLinksText": "Privacy · Terms · Cookies · Sitemap",
+    "alibabaLink": "https://xinpaisi.en.alibaba.com/",
+    "alibabaText": "1688 National Station"
+  }
+};

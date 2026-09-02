@@ -1,0 +1,98 @@
+<!doctype html><html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Article — XINPUREAO Blog</title>
+<meta name="description" content="XINPUREAO blog article — shower filter knowledge, OEM/ODM insights, and water purification tips.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: { DEFAULT: '#0a4d8c', dark: '#062d54', light: '#2f7bc2' },
+        accent: { DEFAULT: '#23b7d8', dark: '#1087a8' },
+        bgsoft: '#f6f9fc', bggray: '#eef2f6',
+        textsoft: '#4e5d70', textlight: '#7b8ba0'
+      },
+      fontFamily: { inter: ['Inter','sans-serif'] },
+      boxShadow: { soft: '0 2px 8px rgba(10,77,140,.06)', md: '0 8px 24px rgba(10,77,140,.08)', lg: '0 20px 50px rgba(10,77,140,.12)' },
+      animation: { 'float-pulse': 'floatPulse 2.4s infinite' },
+      keyframes: { floatPulse: { '0%,100%': { boxShadow: '0 0 0 0 rgba(35,183,216,.45)' }, '50%': { boxShadow: '0 0 0 14px rgba(35,183,216,0)' } } }
+    }
+  }
+}
+</script>
+<style type="text/tailwindcss">
+@layer utilities {
+  .text-gradient { background: linear-gradient(135deg, #0a4d8c, #23b7d8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .bg-gradient-primary { background: linear-gradient(135deg, #052447 0%, #0a4d8c 50%, #175a9e 100%); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+  .thumb-active { border-color: #0a4d8c; box-shadow: 0 0 0 2px #0a4d8c inset; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+}
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a4d8c'/><path d='M50 18c14 18 26 30 26 44a26 26 0 1 1-52 0c0-14 12-26 26-44z' fill='%2323b7d8'/></svg>">
+</head>
+<body class="font-inter antialiased text-[#1a2533] bg-white">
+
+<!-- Shared Header (rendered by main.js) -->
+<div id="site-header"></div>
+
+<main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24">
+  <article id="postArticle"></article>
+</main>
+
+<section id="relatedPosts" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20"></section>
+
+<!-- Shared Footer (rendered by main.js) -->
+<div id="site-footer"></div>
+
+<!-- Shared Floating Buttons (rendered by main.js) -->
+<div id="site-floating-buttons"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var params = new URLSearchParams(location.search);
+    var id = params.get('id');
+    var post = (window.AQUA.posts||[]).find(function(p){return p.id===id;});
+    var art = document.getElementById('postArticle');
+    var rel = document.getElementById('relatedPosts');
+    if(!post){
+      art.innerHTML = '<div class="text-center py-20"><h1 class="text-2xl font-bold text-primary mb-4">文章未找到</h1><p class="text-textsoft mb-6">该文章可能已被删除或下架。</p><a href="news.html" class="inline-block px-5 py-2.5 bg-primary text-white rounded-full hover:bg-primary-dark">返回博客列表</a></div>';
+      rel.style.display='none';
+      return;
+    }
+    document.title = post.title + ' — XINPUREAO Blog';
+    art.innerHTML = `
+      <a href="news.html" class="text-sm text-primary hover:underline mb-4 inline-block"><i class="fa-solid fa-arrow-left mr-1"></i>返回博客</a>
+      <div class="flex items-center gap-2 text-xs text-textlight mb-3">
+        <span class="px-2.5 py-1 bg-bgsoft text-primary rounded-full font-medium">${post.cat||'Blog'}</span>
+        <span>${post.date||''}</span>${post.author?`<span>· ${post.author}</span>`:''}
+      </div>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-[#0b1b33] leading-tight mb-6">${post.title}</h1>
+      ${post.cover?`<img src="${post.cover}" alt="${post.title}" class="w-full aspect-[16/9] object-cover rounded-2xl mb-8 shadow-md">`:''}
+      <div class="prose max-w-none text-[#30415c] leading-relaxed space-y-4 post-content">${post.content||post.excerpt||''}</div>
+      ${(post.tags&&post.tags.length)?`<div class="mt-10 flex flex-wrap gap-2">${post.tags.map(function(t){return '<span class="px-3 py-1 bg-bgsoft text-textsoft text-xs rounded-full">#'+t+'</span>';}).join('')}</div>`:''}
+    `;
+    // 相关文章（同分类取 3 篇，排除当前）
+    var related = (window.AQUA.posts||[]).filter(function(p){return p.cat===post.cat && p.id!==post.id;}).slice(0,3);
+    if(related.length){
+      rel.innerHTML = `<h2 class="text-xl font-bold text-[#0b1b33] mb-6">相关文章</h2><div class="grid grid-cols-1 md:grid-cols-3 gap-5">`+related.map(function(p){
+        return `<a href="post.html?id=${p.id}" class="group bg-white rounded-2xl border border-[#eef2f6] overflow-hidden hover:shadow-md transition-shadow">
+          <div class="aspect-[16/9] overflow-hidden bg-bgsoft"><img src="${p.cover||'https://images.unsplash.com/photo-1582735686119-1399-48f10a88?auto=format&fit=crop&w=600&q=70'}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform"></div>
+          <div class="p-4"><div class="text-xs text-textlight mb-1">${p.date||''}</div><h3 class="font-semibold text-[#0b1b33] leading-snug line-clamp-2 group-hover:text-primary transition-colors">${p.title}</h3></div></a>`;
+      }).join('')+`</div>`;
+    } else { rel.style.display='none'; }
+  });
+</script>
+</body>
+</html>

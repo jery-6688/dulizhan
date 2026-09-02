@@ -1,0 +1,63 @@
+{
+  "hero": {
+    "eyebrow": "OEM / ODM",
+    "title": "OEM / ODM · Private Label Manufacturing",
+    "subtitle": "Launch your own branded shower filter product line in under 60 days. Industrial design, tooling, formulation, compliance, and retail-ready packaging — all under one roof."
+  },
+  "intro": {
+    "image": "Pictures/oem.webp",
+    "imageAlt": "OEM",
+    "eyebrow": "Capabilities",
+    "title": "Design · Tooling · Production",
+    "text": "We provide one-stop private label manufacturing for importers, e-commerce brands, Amazon sellers, and hospitality groups. From a simple logo engraving all the way to fully custom engineered products.",
+    "bullets": [
+      "Industrial & mechanical design team",
+      "CNC prototype & injection mold tooling",
+      "Carbon / KDF / vitamin C media R&D",
+      "Cartridge formulation customisation",
+      "Retail color box / blister / retail-ready packaging",
+      "CE, RoHS, SGS, FDA compliance support"
+    ],
+    "primaryButtonText": "Start your project",
+    "primaryButtonLink": "contact.html",
+    "secondaryButtonText": "Request sample kit"
+  },
+  "steps": {
+    "eyebrow": "Process",
+    "title": "Your project in 5 steps",
+    "subtitle": "A smooth, English-managed process — with a dedicated project manager from day one.",
+    "items": [
+      {"num": "1", "title": "Requirement Brief", "text": "Share your market, target quantity, product type, and branding requirements."},
+      {"num": "2", "title": "Design & Prototype", "text": "CAD drawings, 3D samples, material selection, retail mockups — within 15 days."},
+      {"num": "3", "title": "Mold Tooling", "text": "Steel molds produced in-house. Sample approval before mass production."},
+      {"num": "4", "title": "Mass Production", "text": "25-35 day lead time with on-line inspection & QC batch reporting."},
+      {"num": "5", "title": "Packaging & Shipping", "text": "Retail-ready boxes, manual translation, Amazon FBA palletized direct shipping."}
+    ]
+  },
+  "services": {
+    "eyebrow": "Why partner with us",
+    "title": "What private label brands get",
+    "items": [
+      {"icon": "🏭", "title": "4000 m² Factory building", "text": "We operate in-house production facilities with three assembly shifts and an internal QC lab, partnered with multiple external injection molding manufacturers."},
+      {"icon": "🧪", "title": "Certified & Tested", "text": "ISO 9001, CE, RoHS, SGS tested materials. Third-party test reports on request."},
+      {"icon": "📦", "title": "Retail Packaging", "text": "Custom color boxes, blister packs, hang-tags, and printed manuals in 15+ languages."},
+      {"icon": "🚚", "title": "Global Logistics", "text": "Sea, air, rail, and DDP shipping to Amazon FBA warehouses worldwide."},
+      {"icon": "💡", "title": "Low MOQ", "text": "From 500 pcs for custom models. Starter-friendly."},
+      {"icon": "🧾", "title": "Transparent Pricing", "text": "Clear EXW / FOB / CIF quotations with no hidden costs."}
+    ]
+  },
+  "cta": {
+    "eyebrow": "Launch your brand",
+    "title": "Tell us about your project",
+    "subtitle": "Share your target market and quantity. Our sales team will reply within 12 hours with a clear proposal.",
+    "bullets": [
+      "Design flexibility · Tooling · MOQ from 500",
+      "Retail-ready packaging & manuals",
+      "Private label & NDA protected",
+      "DDP FBA shipping"
+    ],
+    "formLabel": "OEM inquiry",
+    "formSubtext": "We typically reply within 12 business hours.",
+    "buttonText": "Send OEM inquiry"
+  }
+}

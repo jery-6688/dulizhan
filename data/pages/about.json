@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "eyebrow": "About",
+    "title": "About XINPUREAO",
+    "subtitle": "A shower filter manufacturer dedicated to healthy shower water. 15 years, 60+ countries, and a 25,000 m² factory of in-house production."
+  },
+  "story": {
+    "eyebrow": "Our Story",
+    "title": "Engineering healthy shower water since 2010",
+    "paragraphs": [
+      "XINPUREAO was founded by a team of water-treatment engineers with a simple belief: the quality of shower water matters as much as the quality of drinking water. Today we design, manufacture, and export to more than 500 brand and distributor partners in 60+ countries.",
+      "Our 25,000 m² production facility runs 18 injection machines, 3 assembly shifts, and an in-house R&D and QC lab — so we control quality, cost, and lead time under one roof."
+    ],
+    "image": "https://images.unsplash.com/photo-1567001142585-ec8bd3d0f01?auto=format&fit=crop&w=1200&q=70",
+    "imageAlt": "Company",
+    "buttonText": "Contact sales",
+    "buttonLink": "contact.html"
+  },
+  "timeline": {
+    "eyebrow": "Milestones",
+    "title": "15 Years of Growth",
+    "items": [
+      {"year": "2010", "title": "Company founded", "text": "Founded as an inline shower filter manufacturer in Xuzhou, China."},
+      {"year": "2014", "title": "First ISO 9001 certification", "text": "Production system certified. First bulk export to EU customers."},
+      {"year": "2017", "title": "Launched vitamin C filter", "text": "Developed SPA-grade vitamin C cartridge formulations."},
+      {"year": "2020", "title": "Expanded factory 2x", "text": "Doubled injection and assembly capacity. New R&D lab."},
+      {"year": "2023", "title": "Private label OEM program", "text": "Formal private label program serving Amazon and retail brands."},
+      {"year": "2025", "title": "1.2M+ units / year", "text": "Today producing 1.2 million+ units yearly and growing."}
+    ]
+  },
+  "values": {
+    "eyebrow": "Values",
+    "title": "What we believe in",
+    "items": [
+      {"icon": "🎯", "title": "Quality First", "text": "Every batch is tested for flow, pressure, chlorine reduction, and material safety before release."},
+      {"icon": "🤝", "title": "Long-term Partnerships", "text": "85% of our customers repeat year after year. We focus on your long-term growth."},
+      {"icon": "♻", "title": "Sustainability", "text": "Refill cartridge design, recycled carton packaging, and carbon-neutral logistics options."},
+      {"icon": "📞", "title": "Fast Response", "text": "12-hour response time. English-speaking sales, technical, and project managers."},
+      {"icon": "💡", "title": "Innovation", "text": "38+ patents and utility models. New product release every quarter."},
+      {"icon": "🌍", "title": "Global Reach", "text": "Ship to 60+ countries with localized manuals and packaging."}
+    ]
+  },
+  "team": {
+    "eyebrow": "Team",
+    "title": "Meet the people behind XINPUREAO",
+    "subtitle": "A 120-person team across R&D, production, quality, and international sales.",
+    "items": [
+      {"image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=70", "imageAlt": "R&D", "name": "R&D Engineers", "role": "25+ mechanical & chemical engineers"},
+      {"image": "https://images.unsplash.com/photo-1522071820081-9f7190bb6654?auto=format&fit=crop&w=900&q=70", "imageAlt": "Sales", "name": "International Sales", "role": "English, Spanish, German speakers"},
+      {"image": "https://images.unsplash.com/photo-1581091012184-5c8c6c1c1c1c?auto=format&fit=crop&w=900&q=70", "imageAlt": "QC", "name": "Quality Assurance", "role": "10 inspectors · in-house lab"}
+    ]
+  }
+}

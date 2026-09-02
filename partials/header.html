@@ -1,0 +1,58 @@
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#eef2f6]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between min-h-[60px]">
+      <a href="index.html" class="flex items-center mx-auto lg:mx-0 pr-4"><!-- HEADER-LOGO-PLACEHOLDER --></a>
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="index.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">Home</a>
+        <div class="relative group">
+          <a href="products.html" class="flex items-center gap-1 px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3 h-3 inline-block text-textlight"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white border border-[#e1e8ef] rounded-xl shadow-md min-w-[220px] p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+            <a href="products.html?cat=filtered-shower-head" class="block px-3 py-2 text-base text-[#223451] rounded-lg hover:bg-bgsoft hover:text-primary">Filtered Shower Heads</a>
+            <a href="products.html?cat=shower-filter" class="block px-3 py-2 text-base text-[#223451] rounded-lg hover:bg-bgsoft hover:text-primary">Shower Filters</a>
+            <a href="products.html?cat=kitchen-faucet-filter" class="block px-3 py-2 text-base text-[#223451] rounded-lg hover:bg-bgsoft hover:text-primary">Kitchen Faucet Filters</a>
+            <a href="products.html?cat=replacement-cartridge" class="block px-3 py-2 text-base text-[#223451] rounded-lg hover:bg-bgsoft hover:text-primary">Replacement Cartridges</a>
+          </div>
+        </div>
+        <a href="solutions.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">Solutions</a>
+        <a href="news.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">Blog</a>
+        <a href="oem-odm.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">OEM/ODM</a>
+        <a href="about.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">About</a>
+        <a href="support.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">Support</a>
+        <a href="contact.html" class="px-3 py-2 text-base font-medium text-[#30415c] rounded-lg hover:text-primary hover:bg-bgsoft transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="contact.html" class="hidden sm:flex items-center px-5 py-2 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-md transition-all whitespace-nowrap">Get a Quote</a>
+      </div>
+    </div>
+    <div class="lg:hidden overflow-x-auto scrollbar-hide py-2 border-t border-[#eef2f6]">
+      <div class="flex gap-2 px-1">
+        <a href="index.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">Home</a>
+        <a href="products.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">Products</a>
+        <a href="solutions.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">Solutions</a>
+        <a href="news.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">Blog</a>
+        <a href="oem-odm.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">OEM/ODM</a>
+        <a href="about.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">About</a>
+        <a href="support.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">Support</a>
+        <a href="contact.html" class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium text-[#4e5d70] bg-bgsoft hover:text-primary hover:bg-primary/10 transition-colors">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="fixed inset-0 z-[60] bg-[#061a33]/50 opacity-0 invisible transition-all" id="drawer">
+  <div class="absolute top-0 right-0 bottom-0 w-[min(340px,88vw)] bg-white p-5 overflow-auto translate-x-full transition-transform" id="drawerPanel">
+    <button class="absolute right-4 top-4 w-9 h-9 rounded-lg bg-bgsoft flex items-center justify-center text-lg" id="drawerClose">✕</button>
+    <nav class="mt-14 flex flex-col gap-1">
+      <a href="index.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">Home</a>
+      <a href="products.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">Products</a>
+      <a href="solutions.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">Solutions</a>
+      <a href="news.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">Blog</a>
+      <a href="oem-odm.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">OEM/ODM</a>
+      <a href="about.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">About</a>
+      <a href="support.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">Support</a>
+      <a href="contact.html" class="px-3 py-3 rounded-lg text-base text-[#223451] hover:bg-bgsoft hover:text-primary">Contact</a>
+    </nav>
+  </div>
+</div>

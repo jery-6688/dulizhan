@@ -1,0 +1,110 @@
+{
+  "byPage": {
+    "oem-odm.html": 9,
+    "about.html": 35,
+    "support.html": 46,
+    "contact.html": 17,
+    "news.html": 18,
+    "index.html": 104,
+    "solutions.html": 13,
+    "products.html": 33,
+    "product-detail.html": 42,
+    "post.html": 1
+  },
+  "daily": {
+    "2026-08-05": 38,
+    "2026-08-06": 2,
+    "2026-08-08": 34,
+    "2026-08-10": 63,
+    "2026-08-11": 22,
+    "2026-08-14": 159
+  },
+  "dailyDetail": {
+    "2026-08-10": {
+      "byPage": {
+        "product-detail.html": 4,
+        "index.html": 50,
+        "products.html": 6,
+        "news.html": 1
+      },
+      "byProduct": {
+        "G2601": 1,
+        "Multi-stage filter": 2,
+        "G2401": 1
+      },
+      "byIP": {
+        "127.0.0.1": {
+          "count": 61,
+          "lastPage": "index.html"
+        }
+      }
+    },
+    "2026-08-11": {
+      "byPage": {
+        "index.html": 22
+      },
+      "byProduct": {},
+      "byIP": {
+        "127.0.0.1": {
+          "count": 22,
+          "lastPage": "index.html"
+        }
+      }
+    },
+    "2026-08-14": {
+      "byPage": {
+        "index.html": 4,
+        "products.html": 20,
+        "product-detail.html": 32,
+        "contact.html": 12,
+        "solutions.html": 9,
+        "about.html": 31,
+        "support.html": 39,
+        "news.html": 6,
+        "oem-odm.html": 6
+      },
+      "byProduct": {
+        "G2401": 5,
+        "Multi-stage filter": 22,
+        "G2401 Replacement Filter Cartridge": 3,
+        "G2402": 2
+      },
+      "byIP": {
+        "127.0.0.1": {
+          "count": 159,
+          "lastPage": "support.html"
+        }
+      }
+    }
+  },
+  "byIP": {
+    "127.0.0.1": {
+      "count": 242,
+      "firstVisit": "2026-08-10T03:49:30.146Z",
+      "lastVisit": "2026-08-14T08:34:53.535Z",
+      "lastPage": "support.html"
+    }
+  },
+  "byProduct": {
+    "G2601": {
+      "count": 1,
+      "name": "多级过滤机"
+    },
+    "Multi-stage filter": {
+      "count": 24,
+      "name": "Multi-stage filter"
+    },
+    "G2401": {
+      "count": 6,
+      "name": "G2401 Shower Filter"
+    },
+    "G2401 Replacement Filter Cartridge": {
+      "count": 3,
+      "name": "G2401 Replacement Filter Cartridge"
+    },
+    "G2402": {
+      "count": 2,
+      "name": "G2402 Shower Filter"
+    }
+  }
+}

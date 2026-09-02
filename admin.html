@@ -1,0 +1,2454 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CMS - 后端管理系统</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: { DEFAULT: '#0a4d8c', dark: '#062d54', light: '#2f7bc2' },
+        accent: { DEFAULT: '#23b7d8', dark: '#1087a8' },
+        bgsoft: '#f1f5f9',
+        sidebar: '#0a2a4d'
+      },
+      fontFamily: { inter: ['Inter', 'system-ui', 'sans-serif'] }
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .rich-editor { min-height: 320px; }
+  .rich-editor img { max-width: 100%; height: auto; border-radius: 8px; margin: 8px 0; }
+  .rich-editor:focus { outline: none; }
+  .rich-editor:empty::before { content: attr(data-placeholder); color: #94a3b8; pointer-events: none; }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  .nav-item-active { background: rgba(255,255,255,0.10); font-weight: 600; position: relative; }
+  .nav-item-active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #23b7d8; border-radius: 0 2px 2px 0; }
+</style>
+</head>
+<body class="bg-bgsoft text-slate-800 antialiased">
+
+<!-- ============ 登录视图 ============ -->
+<div id="loginView" class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-sidebar via-primary to-primary-dark">
+  <div class="w-full max-w-md">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-8">
+      <div class="text-center mb-7">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-dark text-white mb-4 shadow-lg font-extrabold text-3xl">C</div>
+        <h1 class="text-2xl font-bold text-primary">网站管理后台</h1>
+        <p class="text-sm text-slate-500 mt-1">请登录以管理站点内容</p>
+      </div>
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">用户名</label>
+          <input type="text" id="loginUser" name="username" required autocomplete="username"
+            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" placeholder="admin" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">密码</label>
+          <input type="password" id="loginPass" name="password" required autocomplete="current-password"
+            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" placeholder="••••••••" />
+        </div>
+        <div id="loginError" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></div>
+        <button type="submit" id="loginBtn" class="w-full py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 shadow-sm">
+        </button>
+      </form>
+      <div class="mt-5 pt-5 border-t border-slate-200 text-center">
+        <button type="button" id="showChgPwdLoginBtn" class="text-sm text-primary hover:text-primary-dark hover:underline font-medium">修改密码</button>
+      </div>
+      <form id="chgPwdForm" class="hidden space-y-4 mt-5 pt-5 border-t border-slate-200">
+        <h3 class="text-lg font-semibold text-primary text-center">修改管理员密码</h3>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">用户名</label>
+          <input type="text" name="cp_username" required class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" placeholder="admin" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">旧密码</label>
+          <input type="password" name="cp_old" required class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" placeholder="••••••••" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">新密码（≥8位）</label>
+          <input type="password" name="cp_new" required minlength="8" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" placeholder="••••••••" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">确认新密码</label>
+          <input type="password" name="cp_new2" required minlength="8" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" placeholder="••••••••" />
+        </div>
+        <div id="chgPwdError" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></div>
+        <div class="flex gap-2">
+          <button type="button" id="cancelChgPwdBtn" class="flex-1 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">取消</button>
+          <button type="submit" id="chgPwdBtn" class="flex-1 py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 shadow-sm">
+            确认修改
+          </button>
+        </div>
+      </form>
+    </div>
+    <p class="text-center text-xs text-white/70 mt-4">© CMS · 独立后台系统</p>
+  </div>
+</div>
+
+<!-- ============ 应用视图 ============ -->
+<div id="appView" class="hidden min-h-screen flex">
+  <!-- 侧边栏 -->
+  <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-64 bg-sidebar text-white transform -translate-x-full md:translate-x-0 transition-transform duration-200 flex flex-col">
+    <div class="px-5 py-5 border-b border-white/10">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-extrabold text-lg shadow-md">C</div>
+        <div>
+          <div class="font-extrabold text-lg leading-tight tracking-wide text-white">CMS</div>
+          <div class="text-xs text-white/70 leading-tight">后端管理系统</div>
+        </div>
+      </div>
+    </div>
+    <nav class="flex-1 py-4 space-y-0.5 overflow-y-auto scrollbar-thin" id="sideNav">
+    </nav>
+    <div class="px-3 py-4 border-t border-white/10 space-y-1">
+      <a href="index.html" target="_blank" class="flex items-center gap-2.5 px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors" id="backSite"></a>
+      <button id="logoutBtn" class="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"></button>
+    </div>
+  </aside>
+  <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/40 z-30 md:hidden backdrop-blur-sm"></div>
+
+  <!-- 主内容 -->
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="bg-white border-b border-slate-200 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-20">
+      <div class="flex items-center gap-3">
+        <button id="menuToggle" class="md:hidden text-slate-600 hover:text-slate-900 p-1.5 -ml-1.5 rounded-lg hover:bg-slate-100 transition-colors"></button>
+        <div>
+          <h2 id="pageTitle" class="font-semibold text-slate-800 text-base">仪表盘</h2>
+          <p class="text-[11px] text-slate-400 leading-none mt-0.5" id="pageSub"></p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="userBadge" class="hidden sm:inline-flex items-center gap-2 text-sm">
+          <span class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-xs font-semibold" id="userAvatar"></span>
+          <span class="text-slate-600 font-medium" id="userName"></span>
+        </span>
+      </div>
+    </header>
+    <main id="content" class="flex-1 p-4 sm:p-6 overflow-x-hidden"></main>
+  </div>
+</div>
+
+<!-- 全局提示 -->
+<div id="toast" class="hidden fixed bottom-6 right-6 z-50 px-4 py-3 rounded-lg shadow-lg text-sm text-white"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============ 内联 SVG 图标系统 ============
+  const ICONS = {
+    dashboard: '<path d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>',
+    box: '<path d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 20.25v-2.25m0 2.25l-2.25-1.313m0-3.375L12 12.75m9-5.25v9.75l-9 5.25-9-5.25V7.5l9-5.25 9 5.25z"/>',
+    newspaper: '<path d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3m-3 3h3m-3 3h3m-3 3h3M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/>',
+    'layer-group': '<path d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"/>',
+    download: '<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>',
+    gear: '<path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>',
+    eye: '<path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>',
+    plus: '<path d="M12 4.5v15m7.5-7.5h-15"/>',
+    pen: '<path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z"/>',
+    trash: '<path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>',
+    power: '<path d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"/>',
+    logout: '<path d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/>',
+    house: '<path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.5a.75.75 0 00.75.75h4.5a.75.75 0 00.75-.75V15a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v5.25a.75.75 0 00.75.75h4.5a.75.75 0 00.75-.75V9.75M8.25 21h8.25"/>',
+    menu: '<path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>',
+    shield: '<path d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>',
+    droplet: '<path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>',
+    user: '<path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>',
+    fire: '<path d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 6.306z"/><path d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"/>',
+    'chart-column': '<path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>',
+    'arrow-left': '<path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>',
+    'arrow-up': '<path d="M4.5 10.5L12 3l7.5 7.5M12 3v18"/>',
+    save: '<path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>',
+    upload: '<path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M9 6.75L12 3m0 0l3 3.75M12 3v13.5"/>',
+    close: '<path d="M6 18L18 6M6 6l12 12"/>',
+    link: '<path d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>',
+    image: '<path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>',
+    calendar: '<path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0V11.25a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 11.25v7.5"/>',
+    list: '<path d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>',
+    spinner: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-dasharray="42" stroke-linecap="round"/>',
+    'empty-box': '<path d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>',
+    template: '<path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>',
+    'document-duplicate': '<path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/>',
+    sparkles: '<path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>',
+    info: '<path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>',
+    star: '<path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>',
+    factory: '<path d="M3.75 21h16.5M4.5 21V6.75L11.25 9.75V6.75L18 9.75V21M9.75 21v-4.5h4.5V21M9 11.25h.008v.008H9V11.25zm0 3h.008v.008H9V14.25z"/>',
+    mail: '<path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>',
+    inbox: '<path d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 9.75a2.25 2.25 0 00-2.15-1.5H6.91a2.25 2.25 0 00-2.15 1.5L2.35 12.84a2.25 2.25 0 00-.1.661z"/>',
+    'file-text': '<path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/><path d="M14.25 6H8.25v6h6V6zM8.25 13.5h6M8.25 16.5h6"/>',
+    users: '<path d="M15 19.128a9.39 9.39 0 002.625.372 9.337 9.337 0 004.637-.958A6.003 6.003 0 0015 12a6.003 6.003 0 00-7.262 6.542 9.337 9.337 0 004.637.958c.946 0 1.854-.17 2.625-.472z"/><path d="M15 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM3.75 19.5a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>',
+    zap: '<path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>',
+    'chevron-left': '<path d="M15.75 19.5L8.25 12l7.5-7.5"/>',
+    'chevron-right': '<path d="M8.25 4.5l7.5 7.5-7.5 7.5"/>',
+    'arrow-down': '<path d="M12 4.5v15m0 0l-7.5-7.5m7.5 7.5l7.5-7.5"/>',
+    'refresh-cw': '<path d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0l4.993 4.993m-4.993-4.993l4.993-4.993m14.034 0L16.022 4.35m.001 4.998l-4.993-4.998M4.34 4.35l4.993 4.993"/>',
+    x: '<path d="M6 18L18 6M6 6l12 12"/>'
+  };
+  function ic(name, cls) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="' + (cls || 'w-5 h-5') + '">' + (ICONS[name] || '') + '</svg>';
+  }
+  function spinner(cls) {
+    return '<svg class="animate-spin ' + (cls || 'w-5 h-5') + '" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" class="opacity-25"></circle><path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>';
+  }
+
+  // ============ 工具 ============
+  const $ = (s, el) => (el || document).querySelector(s);
+  const $$ = (s, el) => Array.prototype.slice.call((el || document).querySelectorAll(s));
+  const escapeHtml = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const esc = escapeHtml;
+
+  function toast(msg, type) {
+    const t = $('#toast');
+    t.textContent = msg;
+    t.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-lg shadow-lg text-sm text-white ' + (type === 'error' ? 'bg-red-600' : type === 'warn' ? 'bg-amber-600' : 'bg-primary');
+    t.classList.remove('hidden');
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.classList.add('hidden'), 2600);
+  }
+
+  // ============ api / upload ============
+  async function api(path, opts) {
+    opts = opts || {};
+    const headers = Object.assign({}, opts.headers || {});
+    if (!(opts.body instanceof FormData) && opts.body !== undefined) {
+      headers['Content-Type'] = headers['Content-Type'] || 'application/json';
+    }
+    if (localStorage.token) headers['Authorization'] = 'Bearer ' + localStorage.token;
+    let res;
+    try {
+      res = await fetch(path, Object.assign({}, opts, { headers: headers }));
+    } catch (e) {
+      toast('网络错误：' + e.message, 'error');
+      throw e;
+    }
+    if (res.status === 401) {
+      localStorage.removeItem('token');
+      showLogin();
+      throw new Error('未授权');
+    }
+    let data = null;
+    const ct = res.headers.get('content-type') || '';
+    if (ct.indexOf('json') !== -1) data = await res.json();
+    else data = { success: res.ok, raw: await res.text() };
+    if (!res.ok && data && data.message) toast(data.message, 'error');
+    return data;
+  }
+
+  async function uploadFiles(input) {
+    if (!input || !input.files || !input.files.length) return [];
+    const fd = new FormData();
+    for (let i = 0; i < input.files.length; i++) fd.append('files', input.files[i]);
+    let res;
+    try {
+      res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + (localStorage.token || '') },
+        body: fd
+      });
+    } catch (e) {
+      toast('上传失败：' + e.message, 'error');
+      throw e;
+    }
+    if (res.status === 401) {
+      localStorage.removeItem('token');
+      showLogin();
+      throw new Error('未授权');
+    }
+    const data = await res.json();
+    if (!data.success) toast('上传失败', 'error');
+    return data.paths || [];
+  }
+
+  // ============ 状态 ============
+  const state = {
+    view: 'dashboard',
+    products: [],
+    posts: [],
+    categories: [],
+    downloads: [],
+    settings: null,
+    editing: null,        // 当前编辑对象
+    editingType: null     // product|post|category|download
+  };
+
+  // ============ 静态 UI 初始化 ============
+  function initStaticUI() {
+    $('#loginBtn').innerHTML = ic('logout', 'w-4 h-4') + '<span>登录</span>';
+    $('#backSite').innerHTML = ic('house', 'w-4 h-4') + '<span>返回网站</span>';
+    // 退出按钮
+    $('#logoutBtn').innerHTML = ic('logout', 'w-4 h-4') + '<span>退出登录</span>';
+    // 汉堡
+    $('#menuToggle').innerHTML = ic('menu', 'w-5 h-5');
+
+    // 侧边栏导航项
+    const navItems = [
+      { view: 'dashboard', icon: 'dashboard', label: '仪表盘' },
+      { view: 'products', icon: 'box', label: '产品管理' },
+      { view: 'posts', icon: 'newspaper', label: '博客管理' },
+      { view: 'categories', icon: 'layer-group', label: '分类管理' },
+      { view: 'downloads', icon: 'download', label: '下载管理' },
+      { view: 'settings', icon: 'gear', label: '站点设置' },
+      { view: 'homeContent', icon: 'fire', label: '首页内容' },
+      { view: 'seo', icon: 'chart-column', label: 'SEO 管理' }
+    ];
+    $('#sideNav').innerHTML = navItems.map(n =>
+      '<a class="nav-item flex items-center gap-3 px-5 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white cursor-pointer transition-colors" data-view="' + n.view + '">' +
+      ic(n.icon, 'w-5 h-5') + '<span>' + n.label + '</span></a>'
+    ).join('');
+  }
+
+  // ============ 视图切换 ============
+  function showLogin() {
+    $('#loginView').classList.remove('hidden');
+    $('#appView').classList.add('hidden');
+  }
+  function showApp() {
+    $('#loginView').classList.add('hidden');
+    $('#appView').classList.remove('hidden');
+    const un = state.user && state.user.username ? state.user.username : 'admin';
+    $('#userName').textContent = un;
+    $('#userAvatar').textContent = un.charAt(0).toUpperCase();
+    nav('dashboard');
+  }
+
+  function nav(view) {
+    state.view = view;
+    state.editing = null;
+    state.editingType = null;
+    $$('.nav-item').forEach(n => {
+      const active = n.dataset.view === view.replace(/-edit$/, '');
+      n.classList.toggle('nav-item-active', active);
+    });
+    render();
+    // 移动端关闭侧栏
+    $('#sidebar').classList.add('-translate-x-full');
+    $('#sidebarOverlay').classList.add('hidden');
+  }
+
+  function navEdit(type, item) {
+    state.editingType = type;
+    state.editing = item;
+    state.view = type + '-edit';
+    $$('.nav-item').forEach(n => {
+      const active = n.dataset.view === type;
+      n.classList.toggle('nav-item-active', active);
+    });
+    render();
+  }
+
+  const titles = {
+    dashboard: ['仪表盘', '站点数据概览'], products: ['产品管理', '管理所有产品'], 'product-edit': ['编辑产品', '编辑产品详情'],
+    posts: ['博客管理', '管理文章内容'], 'post-edit': ['编辑文章', '编辑文章详情'], categories: ['分类管理', '管理产品分类'], 'category-edit': ['编辑分类', '编辑分类详情'],
+    downloads: ['下载管理', '管理下载资源'], 'download-edit': ['编辑下载项', '编辑下载资源'], settings: ['站点设置', '管理公司信息、Logo 与页脚文案'],
+    homeContent: ['首页内容', '编辑首页 Hero/About/Testimonials/OEM/Factory/Inquiry 分区'],
+    seo: ['SEO 管理', '搜索引擎优化：Meta/Sitemap/Robots/结构化数据']
+  };
+
+  function render() {
+    const tt = titles[state.view] || ['', ''];
+    $('#pageTitle').textContent = tt[0];
+    $('#pageSub').textContent = tt[1];
+    const c = $('#content');
+    switch (state.view) {
+      case 'dashboard': renderDashboard(c); break;
+      case 'products': renderProducts(c); break;
+      case 'product-edit': renderProductEdit(c); break;
+      case 'posts': renderPosts(c); break;
+      case 'post-edit': renderPostEdit(c); break;
+      case 'categories': renderCategories(c); break;
+      case 'category-edit': renderCategoryEdit(c); break;
+      case 'downloads': renderDownloads(c); break;
+      case 'download-edit': renderDownloadEdit(c); break;
+      case 'settings': renderSettings(c); break;
+      case 'homeContent': renderHomeContent(c); break;
+      case 'seo': renderSEO(c); break;
+    }
+    c.scrollTop = 0;
+  }
+
+  // ============ 登录门控 ============
+  async function boot() {
+    if (localStorage.token) {
+      try {
+        const d = await api('/api/admin/auth');
+        if (d && d.success && d.user) { state.user = d.user; showApp(); return; }
+      } catch (e) { /* 401 已处理 */ }
+    }
+    showLogin();
+  }
+
+  // ============ 登录 ============
+  $('#loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('#loginBtn');
+    btn.disabled = true; btn.innerHTML = spinner('w-4 h-4') + '<span>登录中...</span>';
+    const err = $('#loginError'); err.classList.add('hidden');
+    const u = $('#loginUser').value.trim();
+    const p = $('#loginPass').value;
+    if (!u || !p) { err.textContent = '请输入用户名和密码'; err.classList.remove('hidden'); btn.disabled = false; btn.innerHTML = ic('logout', 'w-4 h-4') + '<span>登录</span>'; return; }
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: u, password: p })
+      });
+      const d = await res.json().catch(() => ({}));
+      if (res.ok && d && d.success && d.token) {
+        localStorage.token = d.token;
+        state.user = { username: u };
+        showApp();
+      } else {
+        err.textContent = (d && d.message) || '登录失败'; err.classList.remove('hidden');
+      }
+    } catch (e) {
+      err.textContent = '登录失败，请重试'; err.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.innerHTML = ic('logout', 'w-4 h-4') + '<span>登录</span>';
+    }
+  });
+
+  $('#logoutBtn').addEventListener('click', async () => {
+    try { await api('/api/admin/logout', { method: 'POST' }); } catch (e) {}
+    localStorage.removeItem('token');
+    state.user = null;
+    showLogin();
+  });
+
+  // 移动端菜单
+  $('#menuToggle').addEventListener('click', () => {
+    $('#sidebar').classList.toggle('-translate-x-full');
+    $('#sidebarOverlay').classList.toggle('hidden');
+  });
+  $('#sidebarOverlay').addEventListener('click', () => {
+    $('#sidebar').classList.add('-translate-x-full');
+    $('#sidebarOverlay').classList.add('hidden');
+  });
+
+  // ============ 通用 UI 片段 ============
+  function card(html, extra) {
+    return '<div class="bg-white rounded-xl border border-slate-200 shadow-sm ' + (extra || 'p-5') + '">' + html + '</div>';
+  }
+  function pageHeader(title, subtitle, actions) {
+    return '<div class="flex flex-wrap items-center justify-between gap-3 mb-5">' +
+      '<div><h3 class="text-lg font-bold text-slate-900">' + esc(title) + '</h3>' +
+      (subtitle ? '<p class="text-sm text-slate-500 mt-0.5">' + esc(subtitle) + '</p>' : '') + '</div>' +
+      '<div class="flex items-center gap-2">' + (actions || '') + '</div></div>';
+  }
+  function btn(label, icon, cls, attrs) {
+    return '<button ' + (attrs || '') + ' class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ' + (cls || 'bg-primary text-white hover:bg-primary-dark') + '">' + (icon ? ic(icon, 'w-4 h-4') : '') + '<span>' + label + '</span></button>';
+  }
+  function iconBtn(icon, cls, attrs, title) {
+    return '<button ' + (attrs || '') + ' title="' + esc(title || '') + '" class="inline-flex items-center justify-center w-8 h-8 rounded-lg transition-colors ' + (cls || 'text-slate-500 hover:bg-slate-100') + '">' + ic(icon, 'w-4 h-4') + '</button>';
+  }
+  function input(label, name, value, placeholder, type) {
+    return '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">' + esc(label) + '</label>' +
+      '<input type="' + (type || 'text') + '" name="' + name + '" value="' + esc(value || '') + '" placeholder="' + esc(placeholder || '') + '" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm transition-shadow" /></div>';
+  }
+  function textarea(label, name, value, rows) {
+    return '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">' + esc(label) + '</label>' +
+      '<textarea name="' + name + '" rows="' + (rows || 3) + '" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm transition-shadow">' + esc(value || '') + '</textarea></div>';
+  }
+  function selectInput(label, name, options, value) {
+    return '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">' + esc(label) + '</label><select name="' + name + '" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm bg-white transition-shadow">' +
+      options.map(o => '<option value="' + esc(o.value) + '"' + (o.value === value ? ' selected' : '') + '>' + esc(o.label) + '</option>').join('') +
+      '</select></div>';
+  }
+  function sectionCard(title, body, headerExtra) {
+    return '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 space-y-4">' +
+      '<div class="flex items-center justify-between border-b border-slate-100 pb-3">' +
+        '<h4 class="font-semibold text-slate-800 flex items-center gap-2">' + title + '</h4>' +
+        (headerExtra || '') +
+      '</div>' + body + '</div>';
+  }
+  function emptyState(text) {
+    return '<div class="flex flex-col items-center justify-center py-12 text-slate-400">' + ic('empty-box', 'w-10 h-10 mb-2') + '<p class="text-sm">' + esc(text) + '</p></div>';
+  }
+
+  // 图片字段：预览 + URL 输入 + 上传
+  function imageField(label, name, value) {
+    return '<div data-imgfield="' + name + '">' +
+      '<label class="block text-sm font-medium text-slate-700 mb-1.5">' + esc(label) + '</label>' +
+      '<div class="flex flex-wrap items-center gap-3">' +
+        '<div class="w-20 h-20 rounded-lg border border-slate-200 bg-slate-50 overflow-hidden flex items-center justify-center">' +
+          '<img src="' + esc(value || '') + '" onerror="this.style.display=\'none\'" class="w-full h-full object-cover" data-prev />' +
+        '</div>' +
+        '<div class="flex-1 min-w-[180px] space-y-2">' +
+          '<input type="text" name="' + name + '" value="' + esc(value || '') + '" placeholder="图片 URL 或上传" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm transition-shadow" data-url />' +
+          '<div class="flex items-center gap-2">' +
+            '<label class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs cursor-pointer transition-colors">' + ic('upload', 'w-3.5 h-3.5') + '<span>上传</span>' +
+              '<input type="file" accept="image/*" class="hidden" data-upload /></label>' +
+          '</div>' +
+        '</div>' +
+      '</div></div>';
+  }
+  function bindImageField(root, name) {
+    const box = root.querySelector('[data-imgfield="' + name + '"]');
+    if (!box) return;
+    const url = box.querySelector('[data-url]');
+    const prev = box.querySelector('[data-prev]');
+    const up = box.querySelector('[data-upload]');
+    url.addEventListener('input', () => { prev.src = url.value; prev.style.display = url.value ? '' : 'none'; });
+    up.addEventListener('change', async () => {
+      try { const paths = await uploadFiles(up); if (paths[0]) { url.value = paths[0]; prev.src = paths[0]; prev.style.display = ''; } }
+      catch (e) {} finally { up.value = ''; }
+    });
+  }
+
+  // ============ 动态列表（对象数组）============
+  function makeObjList(box, items, fields, addLabel) {
+    function row(item, i) {
+      return '<div class="dyn-row flex flex-wrap items-start gap-2 bg-slate-50 border border-slate-200 p-2.5 rounded-lg" data-idx="' + i + '">' +
+        fields.map(f => {
+          if (f.type === 'textarea') return '<textarea data-field="' + f.key + '" placeholder="' + esc(f.label) + '" class="flex-1 min-w-[120px] px-2 py-1.5 border border-slate-300 rounded text-sm">' + esc(item[f.key] || '') + '</textarea>';
+          return '<input data-field="' + f.key + '" placeholder="' + esc(f.label) + '" value="' + esc(item[f.key] || '') + '" class="flex-1 min-w-[100px] px-2 py-1.5 border border-slate-300 rounded text-sm" />';
+        }).join('') +
+        '<button type="button" class="dyn-del w-7 h-7 flex items-center justify-center text-red-500 hover:bg-red-100 rounded transition-colors" data-idx="' + i + '" title="删除">' + ic('trash', 'w-4 h-4') + '</button>' +
+      '</div>';
+    }
+    function renderList() { box.innerHTML = items.length ? items.map(row).join('') : '<p class="text-xs text-slate-400 px-1">暂无条目，点击右上角新增</p>'; }
+    renderList();
+    box.addEventListener('input', (e) => {
+      const r = e.target.closest('.dyn-row'); if (!r) return;
+      const i = +r.dataset.idx, k = e.target.dataset.field;
+      if (k !== undefined && items[i]) items[i][k] = e.target.value;
+    });
+    box.addEventListener('click', (e) => {
+      const d = e.target.closest('.dyn-del'); if (!d) return;
+      items.splice(+d.dataset.idx, 1); renderList();
+    });
+    return { add: () => { const o = {}; fields.forEach(f => o[f.key] = ''); items.push(o); renderList(); } };
+  }
+
+  // 动态列表（字符串数组）
+  function makeStrList(box, items, placeholder, addLabel) {
+    function renderList() {
+      box.innerHTML = items.length ? items.map((v, i) =>
+        '<div class="dyn-row flex items-center gap-2 bg-slate-50 border border-slate-200 p-2 rounded-lg" data-idx="' + i + '">' +
+        '<input data-field="_str" value="' + esc(v || '') + '" placeholder="' + esc(placeholder) + '" class="flex-1 px-2 py-1.5 border border-slate-300 rounded text-sm" />' +
+        '<button type="button" class="dyn-del w-7 h-7 flex items-center justify-center text-red-500 hover:bg-red-100 rounded transition-colors" data-idx="' + i + '">' + ic('trash', 'w-4 h-4') + '</button>' +
+        '</div>').join('') : '<p class="text-xs text-slate-400 px-1">暂无条目，点击右上角新增</p>';
+    }
+    renderList();
+    box.addEventListener('input', (e) => {
+      const r = e.target.closest('.dyn-row'); if (!r) return;
+      if (e.target.dataset.field === '_str') items[+r.dataset.idx] = e.target.value;
+    });
+    box.addEventListener('click', (e) => {
+      const d = e.target.closest('.dyn-del'); if (!d) return;
+      items.splice(+d.dataset.idx, 1); renderList();
+    });
+    return {
+      add: () => { items.push(''); renderList(); },
+      addValue: (v) => { if (v) items.push(v); renderList(); }
+    };
+  }
+
+  // 多图列表（上传多张 + URL 添加 + 删除）
+  function makeGalleryList(box, items) {
+    function renderList() {
+      box.innerHTML = items.length ? '<div class="flex flex-wrap gap-3">' + items.map((src, i) =>
+        '<div class="relative group" data-idx="' + i + '">' +
+          '<img src="' + esc(src) + '" onerror="this.src=\'\';this.alt=\'加载失败\'" class="w-20 h-20 object-cover rounded-lg border border-slate-200 bg-slate-50" />' +
+          '<button type="button" class="gdel absolute -top-2 -right-2 w-6 h-6 bg-red-600 text-white rounded-full hidden group-hover:flex items-center justify-center" data-idx="' + i + '">' + ic('close', 'w-3.5 h-3.5') + '</button>' +
+        '</div>').join('') + '</div>' : '<p class="text-xs text-slate-400">暂无图片</p>';
+    }
+    renderList();
+    box.addEventListener('click', (e) => {
+      const d = e.target.closest('.gdel'); if (!d) return;
+      items.splice(+d.dataset.idx, 1); renderList();
+    });
+    return {
+      addUpload: async (input) => { try { const paths = await uploadFiles(input); paths.forEach(p => items.push(p)); renderList(); } catch (e) {} },
+      addUrl: (u) => { if (u) { items.push(u); renderList(); } }
+    };
+  }
+
+  // ============ 通用数组操作 helper ============
+  function arrItemMove(arr, idx, dir) {
+    const newIdx = idx + dir;
+    if (newIdx < 0 || newIdx >= arr.length) return arr.slice();
+    const result = arr.slice();
+    const tmp = result[idx];
+    result[idx] = result[newIdx];
+    result[newIdx] = tmp;
+    return result;
+  }
+
+  function upDownDeleteButtons(idx, arrLength, onUp, onDown, onDel) {
+    const disUp = idx === 0 ? ' opacity-40 cursor-not-allowed" disabled' : '"';
+    const disDown = idx === arrLength - 1 ? ' opacity-40 cursor-not-allowed" disabled' : '"';
+    return '<div class="flex items-center gap-1">' +
+      '<button type="button" class="arr-up inline-flex items-center justify-center w-7 h-7 rounded text-slate-500 hover:bg-slate-100 transition-colors' + disUp + ' data-idx="' + idx + '" title="上移">' + ic('arrow-up', 'w-3.5 h-3.5') + '</button>' +
+      '<button type="button" class="arr-down inline-flex items-center justify-center w-7 h-7 rounded text-slate-500 hover:bg-slate-100 transition-colors' + disDown + ' data-idx="' + idx + '" title="下移">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-3.5 h-3.5"><path d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>' +
+      '</button>' +
+      '<button type="button" class="arr-del inline-flex items-center justify-center w-7 h-7 rounded text-red-500 hover:bg-red-50 transition-colors" data-idx="' + idx + '" title="删除">' + ic('trash', 'w-3.5 h-3.5') + '</button>' +
+    '</div>';
+  }
+
+  function bindArrButtons(box, arrRef, onReRender) {
+    box.querySelectorAll('.arr-up').forEach(b => b.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const i = +b.dataset.idx; if (i === 0) return;
+      arrRef.value = arrItemMove(arrRef.value, i, -1);
+      onReRender && onReRender();
+    }));
+    box.querySelectorAll('.arr-down').forEach(b => b.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const i = +b.dataset.idx; if (i === arrRef.value.length - 1) return;
+      arrRef.value = arrItemMove(arrRef.value, i, 1);
+      onReRender && onReRender();
+    }));
+    box.querySelectorAll('.arr-del').forEach(b => b.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const i = +b.dataset.idx;
+      arrRef.value.splice(i, 1);
+      onReRender && onReRender();
+    }));
+  }
+
+  function uploadInputBtn(id, onUploaded) {
+    return '<label class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs cursor-pointer transition-colors">' +
+      ic('upload', 'w-3.5 h-3.5') + '<span>上传图片</span>' +
+      '<input type="file" accept="image/*" class="hidden" id="' + id + '" /></label>';
+  }
+
+  function bindUploadInput(id, urlInput, prevImg, onDone) {
+    const inp = document.getElementById(id);
+    if (!inp) return;
+    inp.addEventListener('change', async () => {
+      try {
+        const paths = await uploadFiles(inp);
+        if (paths && paths[0]) {
+          if (urlInput) urlInput.value = paths[0];
+          if (prevImg) { prevImg.src = paths[0]; prevImg.style.display = ''; }
+          onDone && onDone(paths[0]);
+        }
+      } catch (e) {} finally { inp.value = ''; }
+    });
+  }
+
+  function simpleImageField(label, inputId, uploadId, value, height) {
+    return '<div class="space-y-2">' +
+      '<label class="block text-sm font-medium text-slate-700">' + esc(label) + '</label>' +
+      '<div class="flex flex-wrap items-center gap-3">' +
+        '<div class="w-20 h-20 rounded-lg border border-slate-200 bg-slate-50 overflow-hidden flex items-center justify-center">' +
+          '<img src="' + esc(value || '') + '" onerror="this.style.display=\'none\'" class="w-full h-full object-cover" id="' + inputId + '_prev" />' +
+        '</div>' +
+        '<div class="flex-1 min-w-[180px] space-y-2">' +
+          '<input type="text" id="' + inputId + '" value="' + esc(value || '') + '" placeholder="图片路径" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm transition-shadow" />' +
+          uploadInputBtn(uploadId) +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // ============ 富文本编辑器 ============
+  function makeRichEditor(box, initialHTML, placeholder) {
+    const tools = [
+      { cmd: 'bold', label: 'B', title: '加粗', isText: true, cls: 'font-bold' },
+      { cmd: 'italic', label: 'I', title: '斜体', isText: true, cls: 'italic' },
+      { block: 'h2', label: 'H2', title: '标题2', isText: true },
+      { block: 'h3', label: 'H3', title: '标题3', isText: true },
+      { block: 'p', icon: 'list', title: '段落' },
+      { cmd: 'insertUnorderedList', icon: 'list', title: '无序列表' },
+      { act: 'link', icon: 'link', title: '链接' },
+      { act: 'img-url', icon: 'image', title: '插入图片URL' },
+      { act: 'img-up', icon: 'upload', title: '上传图片' }
+    ];
+    box.innerHTML =
+      '<div class="border border-slate-300 rounded-lg overflow-hidden bg-white">' +
+        '<div class="flex flex-wrap items-center gap-0.5 px-2 py-1.5 border-b border-slate-200 bg-slate-50">' +
+          tools.map(t => {
+            const inner = t.isText ? '<span class="text-sm ' + (t.cls || '') + '">' + t.label + '</span>' : ic(t.icon, 'w-4 h-4');
+            const dataAttr = t.cmd ? 'data-cmd="' + t.cmd + '"' : t.block ? 'data-block="' + t.block + '"' : 'data-act="' + t.act + '"';
+            return '<button type="button" ' + dataAttr + ' title="' + esc(t.title) + '" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors">' + inner + '</button>';
+          }).join('') +
+        '</div>' +
+        '<div class="rich-editor px-3 py-2 text-sm" contenteditable="true" data-placeholder="' + esc(placeholder || '') + '">' + (initialHTML || '') + '</div>' +
+        '<input type="file" accept="image/*" class="hidden" data-imgup />' +
+      '</div>';
+    const ed = box.querySelector('.rich-editor');
+    ed.addEventListener('focus', () => ed.classList.add('ring-2', 'ring-primary'));
+    ed.addEventListener('blur', () => ed.classList.remove('ring-2', 'ring-primary'));
+    box.querySelectorAll('button[data-cmd], button[data-block], button[data-act]').forEach(b => {
+      b.addEventListener('click', async (e) => {
+        e.preventDefault();
+        ed.focus();
+        if (b.dataset.cmd) { document.execCommand(b.dataset.cmd, false, null); }
+        else if (b.dataset.block) {
+          if (b.dataset.block === 'p') document.execCommand('formatBlock', false, 'p');
+          else document.execCommand('formatBlock', false, b.dataset.block);
+        } else if (b.dataset.act === 'link') {
+          const u = prompt('输入链接 URL：');
+          if (u) document.execCommand('createLink', false, u);
+        } else if (b.dataset.act === 'img-url') {
+          const u = prompt('输入图片 URL：');
+          if (u) document.execCommand('insertImage', false, u);
+        } else if (b.dataset.act === 'img-up') {
+          const inp = box.querySelector('[data-imgup]');
+          inp.onchange = async () => {
+            try { const paths = await uploadFiles(inp); if (paths[0]) { document.execCommand('insertImage', false, paths[0]); } }
+            catch (e) {} finally { inp.value = ''; }
+          };
+          inp.click();
+        }
+      });
+    });
+    return { getHTML: () => ed.innerHTML };
+  }
+
+  // ============ Dashboard ============
+  let dashState = { calYear: 0, calMonth: 0, selectedDate: null, dateDetail: null };
+
+  function growthBadge(g) {
+    if (g > 0) return '<span class="text-emerald-600 text-xs font-medium flex items-center gap-0.5">' + ic('arrow-up', 'w-3 h-3') + g + '%</span>';
+    if (g < 0) return '<span class="text-red-500 text-xs font-medium flex items-center gap-0.5">' + ic('arrow-down', 'w-3 h-3') + Math.abs(g) + '%</span>';
+    return '<span class="text-slate-400 text-xs">0%</span>';
+  }
+
+  function renderCalendar(year, month, dailyData, selectedDate) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date().toISOString().slice(0, 10);
+    const m = String(month + 1).padStart(2, '0');
+    const maxCount = Math.max(...Object.values(dailyData || {}), 1);
+    let html = '<div class="grid grid-cols-7 gap-1 text-center text-[11px] text-slate-400 mb-1"><div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div></div>';
+    html += '<div class="grid grid-cols-7 gap-1">';
+    for (let i = 0; i < firstDay; i++) html += '<div></div>';
+    for (let d = 1; d <= daysInMonth; d++) {
+      const ds = year + '-' + m + '-' + String(d).padStart(2, '0');
+      const count = dailyData && dailyData[ds] ? dailyData[ds] : 0;
+      const intensity = count > 0 ? Math.min(4, Math.ceil(count / maxCount * 4)) : 0;
+      const bg = count === 0 ? 'bg-slate-50' :
+        intensity === 1 ? 'bg-primary/10' :
+        intensity === 2 ? 'bg-primary/25' :
+        intensity === 3 ? 'bg-primary/50' : 'bg-primary';
+      const txtColor = count > 0 && intensity >= 3 ? 'text-white' : 'text-slate-700';
+      const isToday = ds === today;
+      const isSel = ds === selectedDate;
+      html += '<div class="cal-day cursor-pointer rounded-md aspect-square flex flex-col items-center justify-center text-xs ' + bg + ' ' + txtColor + ' ' + (isToday ? 'ring-2 ring-accent' : '') + ' ' + (isSel ? 'outline outline-2 outline-accent ring-0' : '') + '" data-date="' + ds + '" title="' + ds + ': ' + count + ' 次访问">' +
+        '<span class="font-medium">' + d + '</span>' +
+        (count > 0 ? '<span class="text-[9px] opacity-70">' + count + '</span>' : '') +
+      '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  async function loadDateDetail(date) {
+    try {
+      const r = await api('/api/admin/analytics/date?date=' + date);
+      return r;
+    } catch (e) { return null; }
+  }
+
+  function renderDateDetailPanel(detail, date) {
+    if (!detail) return '';
+    const dayNames = ['周日','周一','周二','周三','周四','周五','周六'];
+    const d = new Date(date);
+    const dayName = dayNames[d.getDay()];
+    let html = '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mt-4">' +
+      '<div class="flex items-center justify-between mb-4">' +
+        '<h3 class="font-semibold text-slate-800 flex items-center gap-2">' + ic('calendar', 'w-4 h-4 text-primary') + '<span>' + date + '（' + dayName + '）数据</span></h3>' +
+        '<button id="closeDateDetail" class="text-slate-400 hover:text-slate-600">' + ic('x', 'w-4 h-4') + '</button>' +
+      '</div>' +
+      '<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">' +
+        '<div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">页面浏览</div><div class="text-xl font-bold text-slate-900">' + (detail.pageViews || 0) + '</div></div>' +
+        '<div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">独立访客</div><div class="text-xl font-bold text-slate-900">' + (detail.uniqueVisitors || 0) + '</div></div>' +
+        '<div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">询盘数</div><div class="text-xl font-bold text-slate-900">' + (detail.inquiries || 0) + '</div></div>' +
+        '<div class="bg-slate-50 rounded-lg p-3"><div class="text-xs text-slate-500">下载数</div><div class="text-xl font-bold text-slate-900">' + (detail.downloads || 0) + '</div></div>' +
+      '</div>' +
+      '<div class="grid grid-cols-1 md:grid-cols-3 gap-4">';
+
+    if (detail.byPage && detail.byPage.length) {
+      html += '<div><h4 class="text-sm font-medium text-slate-700 mb-2 flex items-center gap-1">' + ic('file-text', 'w-3 h-3') + '页面访问</h4><div class="space-y-2 max-h-48 overflow-y-auto">';
+      detail.byPage.forEach(p => {
+        html += '<div class="flex justify-between items-center text-xs"><span class="text-slate-600">' + esc(p.label || p.path) + '</span><span class="font-medium text-slate-900">' + p.count + '</span></div>';
+      });
+      html += '</div></div>';
+    }
+
+    if (detail.byProduct && detail.byProduct.length) {
+      html += '<div><h4 class="text-sm font-medium text-slate-700 mb-2 flex items-center gap-1">' + ic('box', 'w-3 h-3') + '产品点击</h4><div class="space-y-2 max-h-48 overflow-y-auto">';
+      detail.byProduct.forEach(p => {
+        html += '<div class="flex justify-between items-center text-xs"><span class="text-slate-600">' + esc(p.id) + '</span><span class="font-medium text-slate-900">' + p.count + '</span></div>';
+      });
+      html += '</div></div>';
+    }
+
+    if (detail.byIP && detail.byIP.length) {
+      html += '<div><h4 class="text-sm font-medium text-slate-700 mb-2 flex items-center gap-1">' + ic('users', 'w-3 h-3') + '访客IP</h4><div class="space-y-2 max-h-48 overflow-y-auto">';
+      detail.byIP.slice(0, 15).forEach(ip => {
+        html += '<div class="flex justify-between items-center text-xs"><span class="text-slate-600 font-mono">' + esc(ip.ip) + '</span><span class="text-slate-500">' + ip.count + '次</span></div>';
+      });
+      html += '</div></div>';
+    }
+
+    html += '</div></div>';
+    return html;
+  }
+
+  async function renderDashboard(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    try {
+      const [an, pr, po] = await Promise.all([
+        api('/api/admin/analytics'), api('/api/admin/products'), api('/api/admin/posts')
+      ]);
+      state.products = (pr && pr.products) || [];
+      state.posts = (po && po.posts) || [];
+      if (!an || !an.success) throw new Error((an && an.message) || '数据加载失败');
+
+      const topPages = (an.byPage || []).slice(0, 10);
+      const maxPage = topPages.reduce((m, x) => Math.max(m, x.count), 0) || 1;
+      const maxDaily = Math.max(...(an.daily || []).map(d => d.count), 1);
+      const topProducts = (an.byProduct || []).slice(0, 10);
+      const maxProd = topProducts.reduce((m, x) => Math.max(m, x.count), 0) || 1;
+      const topIPs = (an.byIP || []).slice(0, 15);
+
+      if (!dashState.calYear) {
+        const now = new Date();
+        dashState.calYear = now.getFullYear();
+        dashState.calMonth = now.getMonth();
+      }
+
+      const statCard = (icon, label, value, color, growth) =>
+        '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex items-center gap-4">' +
+        '<div class="w-12 h-12 rounded-xl flex items-center justify-center text-white ' + color + '">' + ic(icon, 'w-6 h-6') + '</div>' +
+        '<div class="flex-1">' +
+          '<div class="flex items-baseline gap-2"><div class="text-2xl font-bold text-slate-900">' + value + '</div>' + (growth != null ? growthBadge(growth) : '') + '</div>' +
+          '<div class="text-sm text-slate-500">' + label + '</div>' +
+        '</div></div>';
+
+      c.innerHTML =
+        '<div class="grid grid-cols-2 lg:grid-cols-6 gap-4 mb-6">' +
+          statCard('eye', '今日浏览', (an.todayPV || 0), 'bg-gradient-to-br from-primary to-primary-dark', an.pvGrowth) +
+          statCard('user', '今日访客', (an.todayUV || 0), 'bg-gradient-to-br from-cyan-500 to-accent', an.uvGrowth) +
+          statCard('calendar', '30天访客', an.totalUV30 || 0, 'bg-gradient-to-br from-indigo-500 to-indigo-600') +
+          statCard('inbox', '询盘总数', an.inquiries || 0, 'bg-gradient-to-br from-emerald-500 to-emerald-600', an.inquiriesGrowth) +
+          statCard('download', '下载总数', an.downloads || 0, 'bg-gradient-to-br from-amber-500 to-orange-500', an.downloadsGrowth) +
+          statCard('box', '产品数', state.products.length, 'bg-gradient-to-br from-violet-500 to-violet-600') +
+        '</div>' +
+        '<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">' +
+          '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">' +
+            '<div class="flex items-center justify-between mb-3">' +
+              '<h3 class="font-semibold text-slate-800 flex items-center gap-2">' + ic('calendar', 'w-4 h-4 text-primary') + '<span>访问日历</span></h3>' +
+              '<div class="flex items-center gap-2">' +
+                '<button id="calPrev" class="p-1 hover:bg-slate-100 rounded">' + ic('chevron-left', 'w-4 h-4') + '</button>' +
+                '<span class="text-sm font-medium text-slate-700 min-w-[90px] text-center" id="calTitle"></span>' +
+                '<button id="calNext" class="p-1 hover:bg-slate-100 rounded">' + ic('chevron-right', 'w-4 h-4') + '</button>' +
+              '</div>' +
+            '</div>' +
+            '<div id="calGrid"></div>' +
+            '<div class="flex items-center gap-3 mt-3 text-[10px] text-slate-400">' +
+              '<span>少</span><div class="w-3 h-3 rounded bg-slate-50 border border-slate-200"></div>' +
+              '<div class="w-3 h-3 rounded bg-primary/10"></div>' +
+              '<div class="w-3 h-3 rounded bg-primary/25"></div>' +
+              '<div class="w-3 h-3 rounded bg-primary/50"></div>' +
+              '<div class="w-3 h-3 rounded bg-primary"></div><span>多</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">' +
+            '<div class="flex items-center justify-between mb-4">' +
+              '<h3 class="font-semibold text-slate-800 flex items-center gap-2">' + ic('chart-column', 'w-4 h-4 text-primary') + '<span>近 30 天趋势</span></h3>' +
+              '<span class="text-xs text-slate-400">点击日期查看详情</span>' +
+            '</div>' +
+            '<div class="flex items-end gap-1 h-44">' + (an.daily || []).map((d) => {
+              const h = Math.max(2, d.count / maxDaily * 100);
+              return '<div class="flex-1 group relative flex items-end h-full cursor-pointer bar-day" data-date="' + d.date + '">' +
+                '<div class="w-full rounded-t bg-gradient-to-t from-primary to-accent hover:from-primary-dark hover:to-accent-dark transition-colors" style="height:' + h + '%"></div>' +
+                '<div class="hidden group-hover:block absolute bottom-full mb-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] bg-slate-900 text-white px-2 py-1 rounded z-10">' + esc(d.date) + ' · ' + d.count + '</div>' +
+              '</div>';
+            }).join('') + '</div>' +
+            (an.daily && an.daily.length ? '<div class="flex justify-between text-[10px] text-slate-400 mt-2"><span>' + esc(an.daily[0].date) + '</span><span>' + esc(an.daily[an.daily.length - 1].date) + '</span></div>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div id="dateDetailContainer"></div>' +
+        '<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">' +
+          '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">' +
+            '<h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">' + ic('fire', 'w-4 h-4 text-orange-500') + '<span>产品热度 Top ' + topProducts.length + '</span></h3>' +
+            (topProducts.length ? '<div class="space-y-3">' + topProducts.map(p =>
+              '<div>' +
+                '<div class="flex justify-between text-sm mb-1"><span class="text-slate-700 font-medium">' + esc(p.name || p.id) + '</span><span class="text-slate-500 font-medium">' + p.count + '</span></div>' +
+                '<div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-orange-400 to-red-500 rounded-full" style="width:' + (p.count / maxProd * 100) + '%"></div></div>' +
+              '</div>').join('') + '</div>'
+              : emptyState('暂无产品点击数据')) +
+          '</div>' +
+          '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">' +
+            '<h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">' + ic('fire', 'w-4 h-4 text-primary') + '<span>热门页面 Top ' + topPages.length + '</span></h3>' +
+            (topPages.length ? '<div class="space-y-3">' + topPages.map(p =>
+              '<div>' +
+                '<div class="flex justify-between text-sm mb-1"><span class="text-slate-700">' + esc(p.label || p.path) + '</span><span class="text-slate-500 font-medium">' + p.count + '</span></div>' +
+                '<div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-cyan-400 to-primary rounded-full" style="width:' + (p.count / maxPage * 100) + '%"></div></div>' +
+              '</div>').join('') + '</div>'
+              : emptyState('暂无数据')) +
+          '</div>' +
+        '</div>' +
+        '<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">' +
+          '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 lg:col-span-2">' +
+            '<div class="flex items-center justify-between mb-4">' +
+              '<h3 class="font-semibold text-slate-800 flex items-center gap-2">' + ic('users', 'w-4 h-4 text-primary') + '<span>最近访客</span></h3>' +
+              '<span class="text-xs text-slate-400">共 ' + (an.byIP ? an.byIP.length : 0) + ' 个独立IP</span>' +
+            '</div>' +
+            (topIPs.length ? '<div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-xs text-slate-400 border-b border-slate-200"><th class="pb-2 font-medium">IP地址</th><th class="pb-2 font-medium">访问次数</th><th class="pb-2 font-medium">最近页面</th><th class="pb-2 font-medium">最后访问</th></tr></thead><tbody>' +
+              topIPs.map(ip => {
+                const t = new Date(ip.lastVisit);
+                const timeStr = t.toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+                return '<tr class="border-b border-slate-100"><td class="py-2 font-mono text-xs text-slate-700">' + esc(ip.ip) + '</td><td class="py-2 text-slate-700">' + ip.count + '</td><td class="py-2 text-slate-600 text-xs">' + esc(ip.lastPage) + '</td><td class="py-2 text-slate-500 text-xs">' + timeStr + '</td></tr>';
+              }).join('') + '</tbody></table></div>'
+              : emptyState('暂无访客数据')) +
+          '</div>' +
+          '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">' +
+            '<h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">' + ic('zap', 'w-4 h-4 text-amber-500') + '<span>数据操作</span></h3>' +
+            '<div class="space-y-2">' +
+              '<button id="exportCsvBtn" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium">' + ic('download', 'w-4 h-4') + '<span>导出 CSV 报表</span></button>' +
+              '<button id="refreshDashBtn" class="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm">' + ic('refresh-cw', 'w-4 h-4') + '<span>刷新数据</span></button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      const calTitle = c.querySelector('#calTitle');
+      function updateCalendar() {
+        calTitle.textContent = dashState.calYear + '年' + (dashState.calMonth + 1) + '月';
+        const grid = c.querySelector('#calGrid');
+        grid.innerHTML = renderCalendar(dashState.calYear, dashState.calMonth, an.daily.reduce((o, d) => { o[d.date] = d.count; return o; }, {}), dashState.selectedDate);
+        grid.querySelectorAll('.cal-day').forEach(el => {
+          el.addEventListener('click', () => {
+            dashState.selectedDate = el.dataset.date;
+            updateCalendar();
+            showDateDetail(dashState.selectedDate);
+          });
+        });
+      }
+      updateCalendar();
+
+      c.querySelector('#calPrev').onclick = () => {
+        dashState.calMonth--;
+        if (dashState.calMonth < 0) { dashState.calMonth = 11; dashState.calYear--; }
+        updateCalendar();
+      };
+      c.querySelector('#calNext').onclick = () => {
+        dashState.calMonth++;
+        if (dashState.calMonth > 11) { dashState.calMonth = 0; dashState.calYear++; }
+        updateCalendar();
+      };
+
+      c.querySelectorAll('.bar-day').forEach(el => {
+        el.addEventListener('click', () => {
+          dashState.selectedDate = el.dataset.date;
+          updateCalendar();
+          showDateDetail(dashState.selectedDate);
+        });
+      });
+
+      c.querySelector('#refreshDashBtn').onclick = () => nav('dashboard');
+      c.querySelector('#exportCsvBtn').onclick = async () => {
+        try {
+          const token = localStorage.token;
+          const res = await fetch('/api/admin/analytics/export', {
+            headers: { 'Authorization': 'Bearer ' + token }
+          });
+          if (!res.ok) throw new Error('导出失败（' + res.status + '）');
+          const blob = await res.blob();
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'analytics-export-' + new Date().toISOString().slice(0, 10) + '.csv';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          toast('导出成功！', 'success');
+        } catch (e) {
+          toast('导出失败：' + e.message, 'error');
+        }
+      };
+
+      async function showDateDetail(date) {
+        const container = c.querySelector('#dateDetailContainer');
+        container.innerHTML = '<div class="text-center py-4 text-sm text-slate-400">' + spinner('w-4 h-4') + ' 加载中...</div>';
+        const detail = await loadDateDetail(date);
+        if (detail && detail.success) {
+          container.innerHTML = renderDateDetailPanel(detail, date);
+          container.querySelector('#closeDateDetail').onclick = () => {
+            dashState.selectedDate = null;
+            container.innerHTML = '';
+            updateCalendar();
+          };
+        } else {
+          container.innerHTML = '<div class="bg-white rounded-xl border border-slate-200 p-5 text-center text-sm text-slate-400">该日暂无数据</div>';
+        }
+      }
+
+    } catch (e) {
+      c.innerHTML = '<div class="bg-white rounded-xl border border-slate-200 p-6 text-sm text-red-600">加载失败：' + esc(e.message) + '</div>';
+    }
+  }
+
+  // ============ 产品管理 ============
+  async function renderProducts(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    try {
+      const d = await api('/api/admin/products');
+      state.products = (d && d.products) || [];
+    } catch (e) { return; }
+    await ensureCategories();
+    const rows = state.products.map(p => {
+      const catName = ((state.categories.find(x => x.id === p.category) || {}).name) || p.category || '—';
+      return '<tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">' +
+        '<td class="px-4 py-3"><div class="w-11 h-11 rounded-lg border border-slate-200 bg-slate-50 overflow-hidden"><img src="' + esc(p.image) + '" onerror="this.style.display=\'none\'" class="w-full h-full object-cover" /></div></td>' +
+        '<td class="px-4 py-3"><div class="font-medium text-slate-900">' + esc(p.name) + '</div><div class="text-xs text-slate-400">' + esc(p.id) + '</div></td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(p.sku || '—') + '</td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(catName) + '</td>' +
+        '<td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium ' + (p.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600') + '">' + (p.status === 'published' ? '上架' : '下架') + '</span></td>' +
+        '<td class="px-4 py-3 text-right whitespace-nowrap">' +
+          '<button class="pedit inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-primary/10 hover:text-primary transition-colors mr-0.5" data-id="' + esc(p.id) + '" title="编辑">' + ic('pen', 'w-4 h-4') + '</button>' +
+          '<button class="ptoggle inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-amber-100 hover:text-amber-600 transition-colors mr-0.5" data-id="' + esc(p.id) + '" title="切换上下架">' + ic('power', 'w-4 h-4') + '</button>' +
+          '<button class="pdel inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-red-100 hover:text-red-600 transition-colors" data-id="' + esc(p.id) + '" title="删除">' + ic('trash', 'w-4 h-4') + '</button>' +
+        '</td></tr>';
+    }).join('');
+    c.innerHTML = pageHeader('产品管理', '共 ' + state.products.length + ' 个产品',
+      btn('新增产品', 'plus', 'bg-primary text-white hover:bg-primary-dark', 'id="pNew"')) +
+      '<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">' +
+      '<div class="overflow-x-auto"><table class="w-full text-left text-sm">' +
+      '<thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider"><tr>' +
+      '<th class="px-4 py-3 font-medium">图片</th><th class="px-4 py-3 font-medium">名称</th><th class="px-4 py-3 font-medium">SKU</th><th class="px-4 py-3 font-medium">分类</th><th class="px-4 py-3 font-medium">状态</th><th class="px-4 py-3 font-medium text-right">操作</th></tr></thead>' +
+      '<tbody>' + (rows || '<tr><td colspan="6" class="px-4 py-4">' + emptyState('暂无产品') + '</td></tr>') + '</tbody></table></div></div>';
+
+    $('#pNew').addEventListener('click', () => navEdit('product', null));
+    c.querySelectorAll('.pedit').forEach(b => b.addEventListener('click', async () => {
+      try { const d = await api('/api/admin/products/' + encodeURIComponent(b.dataset.id)); if (d && d.product) navEdit('product', d.product); }
+      catch (e) {}
+    }));
+    c.querySelectorAll('.ptoggle').forEach(b => b.addEventListener('click', async () => {
+      const p = state.products.find(x => x.id === b.dataset.id); if (!p) return;
+      try {
+        const newStatus = p.status === 'published' ? 'draft' : 'published';
+        const d = await api('/api/admin/products/' + encodeURIComponent(p.id), { method: 'PUT', body: JSON.stringify({ product: Object.assign({}, p, { status: newStatus }) }) });
+        if (d && d.success) { toast('已切换为' + (newStatus === 'published' ? '上架' : '下架')); renderProducts(c); }
+      } catch (e) {}
+    }));
+    c.querySelectorAll('.pdel').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('确认删除该产品？此操作不可恢复。')) return;
+      try { const d = await api('/api/admin/products/' + encodeURIComponent(b.dataset.id), { method: 'DELETE' }); if (d && d.success) { toast('已删除'); renderProducts(c); } }
+      catch (e) {}
+    }));
+  }
+
+  async function ensureCategories() {
+    if (!state.categories.length) {
+      try { const d = await api('/api/admin/categories'); state.categories = (d && d.categories) || []; } catch (e) {}
+    }
+    return state.categories;
+  }
+
+  async function renderProductEdit(c) {
+    await ensureCategories();
+    const p = state.editing || {};
+    const isNew = !p.id;
+    const cats = state.categories || [];
+    const catOpts = [{ value: '', label: '— 选择分类 —' }].concat(cats.map(x => ({ value: x.id, label: (x.name || x.id) })));
+    // 工作副本
+    const f = {
+      gallery: (p.gallery ? p.gallery.slice() : []),
+      features: (p.features ? p.features.slice() : []),
+      certs: (p.certs ? p.certs.slice() : []),
+      highlights: (p.highlights ? p.highlights.map(o => Object.assign({}, o)) : []),
+      media: (p.media ? p.media.map(o => Object.assign({}, o)) : []),
+      apps: (p.apps ? p.apps.map(o => Object.assign({}, o)) : []),
+      install: (p.install ? p.install.map(o => Object.assign({}, o)) : []),
+      faq: (p.faq ? p.faq.map(o => Object.assign({}, o)) : []),
+      specs: p.specs ? Object.keys(p.specs).map(k => ({ key: k, value: p.specs[k] })) : [],
+      colorImages: {},
+      colorPrices: {},
+      colorValues: {},
+      longGallery: (p.longGallery ? p.longGallery.map(o => Object.assign({}, o)) : [])
+    };
+    // 初始化 colorImages / colorPrices / colorValues
+    if (p.colorImages) {
+      Object.keys(p.colorImages).forEach(c => {
+        f.colorImages[c] = p.colorImages[c].slice();
+      });
+    }
+    if (p.colorPrices) {
+      Object.keys(p.colorPrices).forEach(c => {
+        f.colorPrices[c] = p.colorPrices[c];
+      });
+    }
+    if (p.colorValues) {
+      Object.keys(p.colorValues).forEach(c => {
+        f.colorValues[c] = p.colorValues[c];
+      });
+    }
+
+    c.innerHTML =
+      '<div class="max-w-4xl mx-auto">' +
+      pageHeader(isNew ? '新增产品' : '编辑产品', p.id ? 'ID: ' + p.id : '保存后自动生成 ID',
+        btn('返回列表', 'arrow-left', 'border border-slate-300 text-slate-700 hover:bg-slate-50', 'id="pBack"') +
+        btn('保存', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="pSave"')) +
+      '<form id="pForm" class="space-y-6">' +
+        sectionCard('<span>基本信息</span>',
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('产品名称', 'name', p.name, '例：G2601 Filtered Shower Head') +
+            input('SKU', 'sku', p.sku, '例：G2601') +
+            selectInput('分类', 'category', catOpts, p.category) +
+            input('标签', 'tag', p.tag, '例：BEST SELLER') +
+            input('价格', 'price', p.price, 'From $29.90 / unit') +
+            input('日产能', 'daily', p.daily, '850 pcs/day') +
+            input('出口国家', 'countries', p.countries, '35+') +
+            input('交货期', 'leadt', p.leadt, '25 days') +
+            input('MOQ', 'moq', p.moq, '100', 'number') +
+            input('视频 URL', 'videoUrl', p.videoUrl, 'https://...') +
+            selectInput('状态', 'status', [{ value: 'published', label: '上架 (published)' }, { value: 'draft', label: '下架 (draft)' }], p.status || 'published') +
+          '</div>' +
+          textarea('简短描述 (short)', 'short', p.short, 2) +
+          textarea('长描述 (long)', 'long', p.long, 3) +
+          textarea('概述 (overview)', 'overview', p.overview, 3) +
+          textarea('卖点 (why)', 'why', p.why, 2)
+        ) +
+        sectionCard('<span>主图</span>', imageField('产品主图', 'image', p.image)) +
+        sectionCard('<span>图集 (gallery)</span>', '<div id="gBox"></div>',
+          '<div class="flex items-center gap-2">' +
+            '<label class="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs cursor-pointer transition-colors">' + ic('upload', 'w-3.5 h-3.5') + '<span>上传多张</span><input type="file" accept="image/*" multiple class="hidden" id="gUpload" /></label>' +
+            '<div class="flex items-center gap-1"><input type="text" id="gUrl" placeholder="粘贴图片URL" class="px-2 py-1.5 border border-slate-300 rounded text-xs w-40" /><button type="button" id="gUrlAdd" class="px-2 py-1.5 bg-primary text-white rounded text-xs">添加</button></div>' +
+          '</div>'
+        ) +
+        sectionCard('<span>颜色 SKU (colorImages + colorPrices + colorValues)</span>',
+          '<div id="colorSkuBox" class="space-y-3"></div>',
+          '<div class="flex items-center gap-2">' +
+            '<input type="color" id="colorValueInput" value="#cccccc" class="w-10 h-10 rounded border border-slate-300 cursor-pointer" title="选择颜色" />' +
+            '<input type="text" id="colorNameInput" placeholder="颜色名称，如：Chrome / White / Gold" class="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm" />' +
+            '<input type="text" id="colorPriceInput" placeholder="价格，如：From $29.90 / unit" class="w-52 px-3 py-2 border border-slate-300 rounded-lg text-sm" />' +
+            '<button type="button" id="colorAddBtn" class="inline-flex items-center gap-1 px-3 py-2 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>添加颜色</span></button>' +
+          '</div>'
+        ) +
+        sectionCard('<span>长图相册 (longGallery)</span>', '<div id="longGalBox" class="space-y-2"></div>',
+          '<button type="button" id="longGalAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增长图</span></button>'
+        ) +
+        sectionCard('<span>规格 (specs)</span>', '<div id="specBox" class="space-y-2"></div>',
+          '<button type="button" id="specAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增规格</span></button>'
+        ) +
+        '<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">' +
+          sectionCard('<span>特性 (features)</span>', '<div id="featBox" class="space-y-2"></div>',
+            '<button type="button" id="featAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+          sectionCard('<span>认证 (certs)</span>', '<div id="certBox" class="space-y-2"></div>',
+            '<button type="button" id="certAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+        '</div>' +
+        sectionCard('<span>亮点 (highlights · icon+text)</span>', '<div id="hlBox" class="space-y-2"></div>',
+          '<button type="button" id="hlAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+        '<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">' +
+          sectionCard('<span>介质 (media · icon+title+desc)</span>', '<div id="mediaBox" class="space-y-2"></div>',
+            '<button type="button" id="mediaAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+          sectionCard('<span>应用 (apps · icon+title+desc)</span>', '<div id="appsBox" class="space-y-2"></div>',
+            '<button type="button" id="appsAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+        '</div>' +
+        sectionCard('<span>安装步骤 (install · n+t+d)</span>', '<div id="instBox" class="space-y-2"></div>',
+          '<button type="button" id="instAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+        sectionCard('<span>常见问题 (faq · q+a)</span>', '<div id="faqBox" class="space-y-2"></div>',
+          '<button type="button" id="faqAdd" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark">' + ic('plus', 'w-4 h-4') + '<span>新增</span></button>') +
+      '</form></div>';
+
+    bindImageField(c, 'image');
+
+    // 列表绑定
+    const gMgr = makeGalleryList($('#gBox'), f.gallery);
+    $('#gUpload').addEventListener('change', async (e) => { await gMgr.addUpload(e.target); e.target.value = ''; });
+    $('#gUrlAdd').addEventListener('click', () => { const u = $('#gUrl').value.trim(); if (u) { gMgr.addUrl(u); $('#gUrl').value = ''; } });
+
+    const specMgr = makeObjList($('#specBox'), f.specs, [{ key: 'key', label: '规格名' }, { key: 'value', label: '规格值' }]);
+    $('#specAdd').addEventListener('click', specMgr.add);
+    const featMgr = makeStrList($('#featBox'), f.features, '特性条目');
+    $('#featAdd').addEventListener('click', featMgr.add);
+    const certMgr = makeStrList($('#certBox'), f.certs, '认证名称');
+    $('#certAdd').addEventListener('click', certMgr.add);
+    const hlMgr = makeObjList($('#hlBox'), f.highlights, [{ key: 'icon', label: '图标 (fa-droplet)' }, { key: 'text', label: '文字' }]);
+    $('#hlAdd').addEventListener('click', hlMgr.add);
+    const mediaMgr = makeObjList($('#mediaBox'), f.media, [{ key: 'icon', label: '图标' }, { key: 'title', label: '标题' }, { key: 'desc', label: '描述', type: 'textarea' }]);
+    $('#mediaAdd').addEventListener('click', mediaMgr.add);
+    const appsMgr = makeObjList($('#appsBox'), f.apps, [{ key: 'icon', label: '图标' }, { key: 'title', label: '标题' }, { key: 'desc', label: '描述', type: 'textarea' }]);
+    $('#appsAdd').addEventListener('click', appsMgr.add);
+    const instMgr = makeObjList($('#instBox'), f.install, [{ key: 'n', label: '序号 01' }, { key: 't', label: '标题' }, { key: 'd', label: '描述', type: 'textarea' }]);
+    $('#instAdd').addEventListener('click', instMgr.add);
+    const faqMgr = makeObjList($('#faqBox'), f.faq, [{ key: 'q', label: '问题' }, { key: 'a', label: '回答', type: 'textarea' }]);
+    $('#faqAdd').addEventListener('click', faqMgr.add);
+
+    // --- 颜色 SKU 管理 ---
+    const colorSkuBox = $('#colorSkuBox');
+    function renderColorSkus() {
+      const colors = Object.keys(f.colorImages);
+      if (!colors.length) {
+        colorSkuBox.innerHTML = '<p class="text-xs text-slate-400">暂无颜色 SKU，选择颜色、输入名称和价格后点击"添加颜色"</p>';
+        return;
+      }
+      colorSkuBox.innerHTML = colors.map((color, ci) => {
+        const images = f.colorImages[color] || [];
+        const price = f.colorPrices[color] || '';
+        const colorVal = f.colorValues[color] || '#cccccc';
+        return '<div class="color-sku-item border border-slate-200 rounded-lg p-3 bg-slate-50" data-color="' + esc(color) + '">' +
+          '<div class="flex items-center gap-2 mb-2">' +
+            '<input type="color" class="color-value w-10 h-10 rounded border border-slate-300 cursor-pointer flex-shrink-0" value="' + esc(colorVal) + '" title="选择颜色" />' +
+            '<div class="color-preview w-10 h-10 rounded-full border-2 border-white shadow flex-shrink-0" style="background-color:' + esc(colorVal) + '"></div>' +
+            '<input type="text" class="color-name flex-1 px-2 py-1.5 border border-slate-300 rounded text-sm font-medium" value="' + esc(color) + '" placeholder="颜色名称" />' +
+            '<input type="text" class="color-price w-52 px-2 py-1.5 border border-slate-300 rounded text-sm" value="' + esc(price) + '" placeholder="价格，如：From $29.90 / unit" />' +
+            '<button type="button" class="color-del w-7 h-7 flex items-center justify-center text-red-500 hover:bg-red-100 rounded transition-colors flex-shrink-0" title="删除颜色">' + ic('trash', 'w-4 h-4') + '</button>' +
+          '</div>' +
+          '<div class="color-images-box flex flex-wrap gap-2 mb-2">' +
+            images.map((src, ii) =>
+              '<div class="color-img-item relative group" data-idx="' + ii + '">' +
+                '<img src="' + esc(src) + '" onerror="this.src=\'\';this.alt=\'加载失败\'" class="w-16 h-16 object-cover rounded border border-slate-200 bg-white" />' +
+                '<button type="button" class="color-img-del absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-600 text-white rounded-full hidden group-hover:flex items-center justify-center" data-idx="' + ii + '">' + ic('close', 'w-3 h-3') + '</button>' +
+              '</div>'
+            ).join('') +
+          '</div>' +
+          '<div class="flex items-center gap-2">' +
+            '<label class="inline-flex items-center gap-1 px-2 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-600 rounded text-xs cursor-pointer transition-colors">' + ic('upload', 'w-3 h-3') + '<span>上传</span><input type="file" accept="image/*" multiple class="hidden color-img-upload" /></label>' +
+            '<input type="text" class="color-img-url flex-1 px-2 py-1 border border-slate-300 rounded text-xs" placeholder="粘贴图片URL后点击添加" />' +
+            '<button type="button" class="color-img-add px-2 py-1 bg-primary text-white rounded text-xs">添加</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      // 绑定删除颜色
+      colorSkuBox.querySelectorAll('.color-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const c = btn.closest('.color-sku-item').dataset.color;
+          delete f.colorImages[c];
+          delete f.colorPrices[c];
+          delete f.colorValues[c];
+          renderColorSkus();
+        });
+      });
+      // 绑定颜色名/价格/色值修改
+      colorSkuBox.querySelectorAll('.color-sku-item').forEach(item => {
+        const oldColor = item.dataset.color;
+        const nameInput = item.querySelector('.color-name');
+        const priceInput = item.querySelector('.color-price');
+        const colorInput = item.querySelector('.color-value');
+        const previewDiv = item.querySelector('.color-preview');
+        nameInput.addEventListener('change', () => {
+          const newName = nameInput.value.trim();
+          if (!newName || newName === oldColor) return;
+          if (f.colorImages[oldColor]) {
+            f.colorImages[newName] = f.colorImages[oldColor];
+            delete f.colorImages[oldColor];
+          }
+          if (f.colorPrices[oldColor] !== undefined) {
+            f.colorPrices[newName] = f.colorPrices[oldColor];
+            delete f.colorPrices[oldColor];
+          }
+          if (f.colorValues[oldColor] !== undefined) {
+            f.colorValues[newName] = f.colorValues[oldColor];
+            delete f.colorValues[oldColor];
+          }
+          renderColorSkus();
+        });
+        priceInput.addEventListener('input', () => {
+          f.colorPrices[oldColor] = priceInput.value;
+        });
+        colorInput.addEventListener('input', () => {
+          f.colorValues[oldColor] = colorInput.value;
+          previewDiv.style.backgroundColor = colorInput.value;
+        });
+      });
+      // 绑定图片删除
+      colorSkuBox.querySelectorAll('.color-img-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.color-sku-item');
+          const color = item.dataset.color;
+          const idx = +btn.dataset.idx;
+          if (f.colorImages[color]) {
+            f.colorImages[color].splice(idx, 1);
+            renderColorSkus();
+          }
+        });
+      });
+      // 绑定图片URL添加
+      colorSkuBox.querySelectorAll('.color-img-add').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.color-sku-item');
+          const color = item.dataset.color;
+          const urlInput = item.querySelector('.color-img-url');
+          const u = urlInput.value.trim();
+          if (u && f.colorImages[color]) {
+            f.colorImages[color].push(u);
+            urlInput.value = '';
+            renderColorSkus();
+          }
+        });
+      });
+      // 绑定图片上传
+      colorSkuBox.querySelectorAll('.color-img-upload').forEach(inp => {
+        inp.addEventListener('change', async (e) => {
+          const item = inp.closest('.color-sku-item');
+          const color = item.dataset.color;
+          try {
+            const paths = await uploadFiles(inp);
+            if (paths && paths.length && f.colorImages[color]) {
+              paths.forEach(p => f.colorImages[color].push(p));
+              renderColorSkus();
+            }
+          } catch (e) {} finally { inp.value = ''; }
+        });
+      });
+    }
+    $('#colorAddBtn').addEventListener('click', () => {
+      const name = $('#colorNameInput').value.trim();
+      const price = $('#colorPriceInput').value.trim();
+      const colorVal = $('#colorValueInput').value;
+      if (!name) { toast('请输入颜色名称', 'warn'); return; }
+      if (!f.colorImages[name]) f.colorImages[name] = [];
+      if (price) f.colorPrices[name] = price;
+      f.colorValues[name] = colorVal;
+      $('#colorNameInput').value = '';
+      $('#colorPriceInput').value = '';
+      $('#colorValueInput').value = '#cccccc';
+      renderColorSkus();
+    });
+    renderColorSkus();
+
+    // --- 长图相册 (longGallery) 管理 ---
+    const longGalBox = $('#longGalBox');
+    function renderLongGal() {
+      if (!f.longGallery.length) {
+        longGalBox.innerHTML = '<p class="text-xs text-slate-400">暂无非长图，点击右上角新增</p>';
+        return;
+      }
+      longGalBox.innerHTML = f.longGallery.map((item, i) =>
+        '<div class="long-gal-item flex flex-wrap items-start gap-2 bg-slate-50 border border-slate-200 p-2.5 rounded-lg" data-idx="' + i + '">' +
+          '<div class="flex flex-col gap-1">' +
+            '<div class="w-16 h-16 rounded border border-slate-200 bg-white overflow-hidden"><img src="' + esc(item.src || '') + '" onerror="this.style.display=\'none\'" class="w-full h-full object-cover" /></div>' +
+            '<label class="inline-flex items-center justify-center w-16 text-[10px] text-slate-500 hover:text-primary cursor-pointer">' + ic('upload', 'w-3 h-3') + '<input type="file" accept="image/*" class="hidden long-gal-up" data-idx="' + i + '" /></label>' +
+          '</div>' +
+          '<div class="flex-1 min-w-[200px] space-y-1.5">' +
+            '<input type="text" class="long-gal-src w-full px-2 py-1.5 border border-slate-300 rounded text-sm" data-idx="' + i + '" value="' + esc(item.src || '') + '" placeholder="图片路径" />' +
+            '<input type="text" class="long-gal-caption w-full px-2 py-1.5 border border-slate-300 rounded text-sm" data-idx="' + i + '" value="' + esc(item.caption || '') + '" placeholder="说明文字 (caption)" />' +
+            '<input type="text" class="long-gal-aspect w-full px-2 py-1.5 border border-slate-300 rounded text-sm" data-idx="' + i + '" value="' + esc(item.aspect || '') + '" placeholder="宽高比 (如 aspect-[4/3] 或留空)" />' +
+          '</div>' +
+          '<div class="flex flex-col gap-1">' +
+            upDownDeleteButtons(i, f.longGallery.length) +
+          '</div>' +
+        '</div>'
+      ).join('');
+
+      // 绑定输入
+      longGalBox.querySelectorAll('.long-gal-src, .long-gal-caption, .long-gal-aspect').forEach(inp => {
+        inp.addEventListener('input', () => {
+          const i = +inp.dataset.idx;
+          const key = inp.classList.contains('long-gal-src') ? 'src' : inp.classList.contains('long-gal-caption') ? 'caption' : 'aspect';
+          if (f.longGallery[i]) f.longGallery[i][key] = inp.value;
+        });
+      });
+      // 绑定上传
+      longGalBox.querySelectorAll('.long-gal-up').forEach(inp => {
+        inp.addEventListener('change', async () => {
+          const i = +inp.dataset.idx;
+          try {
+            const paths = await uploadFiles(inp);
+            if (paths && paths[0] && f.longGallery[i]) {
+              f.longGallery[i].src = paths[0];
+              renderLongGal();
+            }
+          } catch (e) {} finally { inp.value = ''; }
+        });
+      });
+      // 绑定排序/删除按钮
+      const longGalArrRef = {
+        get value() { return f.longGallery; },
+        set value(v) { f.longGallery = v; }
+      };
+      bindArrButtons(longGalBox, longGalArrRef, renderLongGal);
+    }
+    $('#longGalAdd').addEventListener('click', () => {
+      f.longGallery.push({ src: '', caption: '', aspect: '' });
+      renderLongGal();
+    });
+    renderLongGal();
+
+    $('#pBack').addEventListener('click', () => nav('products'));
+
+    $('#pSave').addEventListener('click', async () => {
+      const form = $('#pForm');
+      const fd = new FormData(form);
+      // 清理空的 colorImages 条目
+      const cleanColorImages = {};
+      Object.keys(f.colorImages).forEach(c => {
+        const imgs = (f.colorImages[c] || []).filter(x => x && x.trim());
+        if (imgs.length) cleanColorImages[c] = imgs;
+      });
+      const cleanColorPrices = {};
+      Object.keys(f.colorPrices).forEach(c => {
+        if (cleanColorImages[c] && f.colorPrices[c]) cleanColorPrices[c] = f.colorPrices[c];
+      });
+      const cleanColorValues = {};
+      Object.keys(f.colorValues).forEach(c => {
+        if (cleanColorImages[c] && f.colorValues[c]) cleanColorValues[c] = f.colorValues[c];
+      });
+      const product = Object.assign({}, p, {
+        name: fd.get('name') || '', sku: fd.get('sku') || '', category: fd.get('category') || '',
+        tag: fd.get('tag') || '', price: fd.get('price') || '', daily: fd.get('daily') || '',
+        countries: fd.get('countries') || '', leadt: fd.get('leadt') || '', moq: fd.get('moq') || '',
+        videoUrl: fd.get('videoUrl') || '', status: fd.get('status') || 'published',
+        short: fd.get('short') || '', long: fd.get('long') || '', overview: fd.get('overview') || '', why: fd.get('why') || '',
+        image: (form.querySelector('[data-imgfield="image"] [data-url]') || {}).value || '',
+        gallery: f.gallery.slice(),
+        features: f.features.filter(x => x && x.trim()),
+        certs: f.certs.filter(x => x && x.trim()),
+        highlights: f.highlights.filter(x => x.icon || x.text),
+        media: f.media.filter(x => x.title || x.desc),
+        apps: f.apps.filter(x => x.title || x.desc),
+        install: f.install.filter(x => x.t || x.d),
+        faq: f.faq.filter(x => x.q || x.a),
+        specs: f.specs.reduce((o, x) => { if (x.key) o[x.key] = x.value; return o; }, {}),
+        colorImages: cleanColorImages,
+        colorPrices: cleanColorPrices,
+        colorValues: cleanColorValues,
+        longGallery: f.longGallery.filter(x => x && (x.src || x.caption))
+      });
+      try {
+        const url = isNew ? '/api/admin/products' : '/api/admin/products/' + encodeURIComponent(p.id);
+        const method = isNew ? 'POST' : 'PUT';
+        const d = await api(url, { method: method, body: JSON.stringify({ product: product }) });
+        if (d && d.success) { toast('保存成功'); nav('products'); }
+      } catch (e) {}
+    });
+  }
+
+  // ============ 博客管理 ============
+  async function renderPosts(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    try {
+      const d = await api('/api/admin/posts');
+      state.posts = (d && d.posts) || [];
+    } catch (e) { return; }
+    const rows = state.posts.map(p =>
+      '<tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">' +
+        '<td class="px-4 py-3"><div class="w-12 h-9 rounded border border-slate-200 bg-slate-50 overflow-hidden"><img src="' + esc(p.cover) + '" onerror="this.style.display=\'none\'" class="w-full h-full object-cover" /></div></td>' +
+        '<td class="px-4 py-3"><div class="font-medium text-slate-900 max-w-xs truncate">' + esc(p.title) + '</div><div class="text-xs text-slate-400">/' + esc(p.slug || p.id) + '</div></td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(p.cat || p.category || '—') + '</td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(p.date || '—') + '</td>' +
+        '<td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium ' + (p.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600') + '">' + (p.status === 'published' ? '已发布' : '草稿') + '</span></td>' +
+        '<td class="px-4 py-3 text-right whitespace-nowrap">' +
+          '<button class="po-edit inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-primary/10 hover:text-primary transition-colors mr-0.5" data-id="' + esc(p.id) + '" title="编辑">' + ic('pen', 'w-4 h-4') + '</button>' +
+          '<button class="po-del inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-red-100 hover:text-red-600 transition-colors" data-id="' + esc(p.id) + '" title="删除">' + ic('trash', 'w-4 h-4') + '</button>' +
+        '</td></tr>').join('');
+    c.innerHTML = pageHeader('博客管理', '共 ' + state.posts.length + ' 篇文章',
+      btn('新增文章', 'plus', 'bg-primary text-white hover:bg-primary-dark', 'id="poNew"')) +
+      '<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm">' +
+      '<thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 font-medium">封面</th><th class="px-4 py-3 font-medium">标题</th><th class="px-4 py-3 font-medium">分类</th><th class="px-4 py-3 font-medium">日期</th><th class="px-4 py-3 font-medium">状态</th><th class="px-4 py-3 font-medium text-right">操作</th></tr></thead>' +
+      '<tbody>' + (rows || '<tr><td colspan="6" class="px-4 py-4">' + emptyState('暂无文章') + '</td></tr>') + '</tbody></table></div></div>';
+
+    $('#poNew').addEventListener('click', () => navEdit('post', null));
+    c.querySelectorAll('.po-edit').forEach(b => b.addEventListener('click', async () => {
+      const p = state.posts.find(x => x.id === b.dataset.id);
+      if (p) navEdit('post', Object.assign({}, p));
+    }));
+    c.querySelectorAll('.po-del').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('确认删除该文章？')) return;
+      try { const d = await api('/api/admin/posts/' + encodeURIComponent(b.dataset.id), { method: 'DELETE' }); if (d && d.success) { toast('已删除'); renderPosts(c); } }
+      catch (e) {}
+    }));
+  }
+
+  function renderPostEdit(c) {
+    const p = state.editing || {};
+    const isNew = !p.id;
+    const today = new Date().toISOString().slice(0, 10);
+    c.innerHTML =
+      '<div class="max-w-4xl mx-auto">' +
+      pageHeader(isNew ? '新增文章' : '编辑文章', p.id ? 'ID: ' + p.id : '',
+        btn('返回列表', 'arrow-left', 'border border-slate-300 text-slate-700 hover:bg-slate-50', 'id="poBack"') +
+        btn('保存', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="poSave"')) +
+      '<form id="poForm" class="space-y-6">' +
+        sectionCard('<span>文章信息</span>',
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('标题', 'title', p.title, '文章标题') +
+            input('分类', 'cat', p.cat || p.category, '如：Water Knowledge') +
+            input('发布日期', 'date', p.date || today, '', 'date') +
+            input('作者', 'author', p.author, 'XINPUREAO Team') +
+            selectInput('状态', 'status', [{ value: 'published', label: '已发布' }, { value: 'draft', label: '草稿' }], p.status || 'published') +
+            input('标签 (逗号分隔)', 'tags', (p.tags || []).join(', '), 'tag1, tag2') +
+          '</div>' +
+          textarea('摘要', 'excerpt', p.excerpt, 3) +
+          imageField('封面图', 'cover', p.cover)
+        ) +
+        sectionCard('<span>正文 (富文本)</span>', '<div id="poEditor"></div>') +
+      '</form></div>';
+
+    bindImageField(c, 'cover');
+    const editor = makeRichEditor($('#poEditor'), p.content || '', '在此撰写正文…');
+
+    $('#poBack').addEventListener('click', () => nav('posts'));
+    $('#poSave').addEventListener('click', async () => {
+      const form = $('#poForm');
+      const fd = new FormData(form);
+      const tags = (fd.get('tags') || '').split(',').map(s => s.trim()).filter(Boolean);
+      const post = Object.assign({}, p, {
+        title: fd.get('title') || '', cat: fd.get('cat') || '', category: fd.get('cat') || '',
+        date: fd.get('date') || today, author: fd.get('author') || '',
+        status: fd.get('status') || 'published', tags: tags,
+        excerpt: fd.get('excerpt') || '',
+        cover: (form.querySelector('[data-imgfield="cover"] [data-url]') || {}).value || '',
+        content: editor.getHTML()
+      });
+      if (!post.slug) post.slug = (post.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || ('post-' + Date.now());
+      try {
+        const url = isNew ? '/api/admin/posts' : '/api/admin/posts/' + encodeURIComponent(p.id);
+        const method = isNew ? 'POST' : 'PUT';
+        const d = await api(url, { method: method, body: JSON.stringify({ post: post }) });
+        if (d && d.success) { toast('保存成功'); nav('posts'); }
+      } catch (e) {}
+    });
+  }
+
+  // ============ 分类管理 ============
+  async function renderCategories(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    try {
+      const d = await api('/api/admin/categories');
+      state.categories = (d && d.categories) || [];
+    } catch (e) { return; }
+    const rows = state.categories.map(x =>
+      '<tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">' +
+        '<td class="px-4 py-3"><div class="w-11 h-11 rounded-lg border border-slate-200 bg-slate-50 overflow-hidden"><img src="' + esc(x.image) + '" onerror="this.style.display=\'none\'" class="w-full h-full object-cover" /></div></td>' +
+        '<td class="px-4 py-3"><div class="font-medium text-slate-900">' + esc(x.name) + '</div><div class="text-xs text-slate-400">' + esc(x.id) + '</div></td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(x.nameCn || '—') + '</td>' +
+        '<td class="px-4 py-3 text-sm text-slate-500 max-w-xs truncate">' + esc(x.desc || '') + '</td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(x.count || 0) + '</td>' +
+        '<td class="px-4 py-3 text-right whitespace-nowrap">' +
+          '<button class="c-edit inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-primary/10 hover:text-primary transition-colors mr-0.5" data-id="' + esc(x.id) + '" title="编辑">' + ic('pen', 'w-4 h-4') + '</button>' +
+          '<button class="c-del inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-red-100 hover:text-red-600 transition-colors" data-id="' + esc(x.id) + '" title="删除">' + ic('trash', 'w-4 h-4') + '</button>' +
+        '</td></tr>').join('');
+    c.innerHTML = pageHeader('分类管理', '共 ' + state.categories.length + ' 个分类',
+      btn('新增分类', 'plus', 'bg-primary text-white hover:bg-primary-dark', 'id="cNew"')) +
+      '<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm">' +
+      '<thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 font-medium">图片</th><th class="px-4 py-3 font-medium">名称</th><th class="px-4 py-3 font-medium">中文名</th><th class="px-4 py-3 font-medium">描述</th><th class="px-4 py-3 font-medium">数量</th><th class="px-4 py-3 font-medium text-right">操作</th></tr></thead>' +
+      '<tbody>' + (rows || '<tr><td colspan="6" class="px-4 py-4">' + emptyState('暂无分类') + '</td></tr>') + '</tbody></table></div></div>';
+
+    $('#cNew').addEventListener('click', () => navEdit('category', null));
+    c.querySelectorAll('.c-edit').forEach(b => b.addEventListener('click', () => {
+      const x = state.categories.find(y => y.id === b.dataset.id);
+      if (x) navEdit('category', Object.assign({}, x));
+    }));
+    c.querySelectorAll('.c-del').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('确认删除该分类？')) return;
+      try { const d = await api('/api/admin/categories/' + encodeURIComponent(b.dataset.id), { method: 'DELETE' }); if (d && d.success) { toast('已删除'); renderCategories(c); } }
+      catch (e) {}
+    }));
+  }
+
+  function renderCategoryEdit(c) {
+    const x = state.editing || {};
+    const isNew = !x.id;
+    c.innerHTML =
+      '<div class="max-w-2xl mx-auto">' +
+      pageHeader(isNew ? '新增分类' : '编辑分类', x.id ? 'ID: ' + x.id : '',
+        btn('返回列表', 'arrow-left', 'border border-slate-300 text-slate-700 hover:bg-slate-50', 'id="cBack"') +
+        btn('保存', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="cSave"')) +
+      '<form id="cForm" class="space-y-4">' +
+        input('分类 ID', 'id', x.id, '如：filtered-shower-head') +
+        input('英文名', 'name', x.name, 'Filtered Shower Heads') +
+        input('中文名', 'nameCn', x.nameCn, '沐浴过滤花洒') +
+        textarea('描述', 'desc', x.desc, 2) +
+        input('数量', 'count', x.count, '0', 'number') +
+        imageField('分类图片', 'image', x.image) +
+      '</form></div>';
+
+    bindImageField(c, 'image');
+    $('#cBack').addEventListener('click', () => nav('categories'));
+    $('#cSave').addEventListener('click', async () => {
+      const form = $('#cForm');
+      const fd = new FormData(form);
+      const category = {
+        id: fd.get('id') || '', name: fd.get('name') || '', nameCn: fd.get('nameCn') || '',
+        desc: fd.get('desc') || '', count: fd.get('count') || 0,
+        image: (form.querySelector('[data-imgfield="image"] [data-url]') || {}).value || ''
+      };
+      if (!category.id) { toast('请填写分类 ID', 'warn'); return; }
+      try {
+        const url = isNew ? '/api/admin/categories/' + encodeURIComponent(category.id) : '/api/admin/categories/' + encodeURIComponent(x.id);
+        const method = isNew ? 'POST' : 'PUT';
+        const d = await api(url, { method: method, body: JSON.stringify({ category: category }) });
+        if (d && d.success) { toast('保存成功'); nav('categories'); }
+      } catch (e) {}
+    });
+  }
+
+  // ============ 下载管理 ============
+  async function renderDownloads(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    try {
+      const d = await api('/api/admin/downloads');
+      state.downloads = (d && d.downloads) || [];
+    } catch (e) { return; }
+    const rows = state.downloads.map(x =>
+      '<tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">' +
+        '<td class="px-4 py-3 text-xl text-center">' + esc(x.icon || '📄') + '</td>' +
+        '<td class="px-4 py-3"><div class="font-medium text-slate-900">' + esc(x.title) + '</div><div class="text-xs text-slate-400">' + esc(x.id) + '</div></td>' +
+        '<td class="px-4 py-3 text-sm text-slate-600">' + esc(x.size || '—') + '</td>' +
+        '<td class="px-4 py-3 text-right whitespace-nowrap">' +
+          '<button class="d-edit inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-primary/10 hover:text-primary transition-colors mr-0.5" data-id="' + esc(x.id) + '" title="编辑">' + ic('pen', 'w-4 h-4') + '</button>' +
+          '<button class="d-del inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 hover:bg-red-100 hover:text-red-600 transition-colors" data-id="' + esc(x.id) + '" title="删除">' + ic('trash', 'w-4 h-4') + '</button>' +
+        '</td></tr>').join('');
+    c.innerHTML = pageHeader('下载管理', '共 ' + state.downloads.length + ' 个下载项',
+      btn('新增下载项', 'plus', 'bg-primary text-white hover:bg-primary-dark', 'id="dNew"')) +
+      '<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm">' +
+      '<thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 font-medium">图标</th><th class="px-4 py-3 font-medium">标题</th><th class="px-4 py-3 font-medium">大小</th><th class="px-4 py-3 font-medium text-right">操作</th></tr></thead>' +
+      '<tbody>' + (rows || '<tr><td colspan="4" class="px-4 py-4">' + emptyState('暂无下载项') + '</td></tr>') + '</tbody></table></div></div>';
+
+    $('#dNew').addEventListener('click', () => navEdit('download', null));
+    c.querySelectorAll('.d-edit').forEach(b => b.addEventListener('click', () => {
+      const x = state.downloads.find(y => y.id === b.dataset.id);
+      if (x) navEdit('download', Object.assign({}, x));
+    }));
+    c.querySelectorAll('.d-del').forEach(b => b.addEventListener('click', async () => {
+      if (!confirm('确认删除该下载项？')) return;
+      try { const d = await api('/api/admin/downloads/' + encodeURIComponent(b.dataset.id), { method: 'DELETE' }); if (d && d.success) { toast('已删除'); renderDownloads(c); } }
+      catch (e) {}
+    }));
+  }
+
+  function renderDownloadEdit(c) {
+    const x = state.editing || {};
+    const isNew = !x.id;
+    c.innerHTML =
+      '<div class="max-w-2xl mx-auto">' +
+      pageHeader(isNew ? '新增下载项' : '编辑下载项', x.id ? 'ID: ' + x.id : '',
+        btn('返回列表', 'arrow-left', 'border border-slate-300 text-slate-700 hover:bg-slate-50', 'id="dBack"') +
+        btn('保存', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="dSave"')) +
+      '<form id="dForm" class="space-y-4">' +
+        input('下载项 ID', 'id', x.id, '如：dl-10') +
+        input('标题', 'title', x.title, 'Full Product Catalog 2025') +
+        input('大小 / 格式', 'size', x.size, 'PDF · 12.4 MB') +
+        input('图标 (emoji 或文本)', 'icon', x.icon, '📑') +
+      '</form></div>';
+
+    $('#dBack').addEventListener('click', () => nav('downloads'));
+    $('#dSave').addEventListener('click', async () => {
+      const fd = new FormData($('#dForm'));
+      const download = { id: fd.get('id') || '', title: fd.get('title') || '', size: fd.get('size') || '', icon: fd.get('icon') || '' };
+      if (!download.id) { toast('请填写下载项 ID', 'warn'); return; }
+      try {
+        const url = isNew ? '/api/admin/downloads/' + encodeURIComponent(download.id) : '/api/admin/downloads/' + encodeURIComponent(x.id);
+        const method = isNew ? 'POST' : 'PUT';
+        const d = await api(url, { method: method, body: JSON.stringify({ download: download }) });
+        if (d && d.success) { toast('保存成功'); nav('downloads'); }
+      } catch (e) {}
+    });
+  }
+
+  // ============ 站点设置 ============
+  async function renderSettings(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    try {
+      const d = await api('/api/admin/settings');
+      state.settings = (d && d.settings) || {};
+    } catch (e) { return; }
+    const s = state.settings;
+    const company = s.company || {}, social = s.social || {};
+    c.innerHTML =
+      '<div class="max-w-3xl mx-auto">' +
+      pageHeader('站点设置', '管理公司信息、社交链接与首页文案',
+        btn('保存设置', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="sSave"')) +
+      '<div class="mb-6 bg-gradient-to-r from-primary to-primary-dark rounded-xl border border-primary/20 shadow-sm p-5 text-white">' +
+        '<div class="flex flex-wrap items-center justify-between gap-4">' +
+          '<div class="flex items-center gap-3">' +
+            '<div class="w-11 h-11 rounded-lg bg-white/15 flex items-center justify-center">' + ic('shield', 'w-6 h-6') + '</div>' +
+            '<div>' +
+              '<div class="font-semibold">修改管理员密码</div>' +
+              '<div class="text-white/70 text-xs mt-0.5">定期更换密码，保障后台安全</div>' +
+            '</div>' +
+          '</div>' +
+          '<button type="button" id="sChgPwdBtn" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-white text-primary hover:bg-white/90 transition-colors shadow-sm">' +
+            ic('pen', 'w-4 h-4') + '<span>修改密码</span>' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+      '<form id="sForm" class="space-y-6">' +
+        sectionCard('<span>公司信息</span>',
+          input('公司名称', 'company_name', company.name, '') +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('电话', 'company_phone', company.phone, '+86 ...') +
+            input('邮箱', 'company_email', company.email, '') +
+            input('WhatsApp', 'company_whatsapp', company.whatsapp, '') +
+          '</div>' +
+          textarea('地址', 'company_address', company.address, 2)
+        ) +
+        sectionCard('<span>社交媒体</span>',
+          input('TikTok', 'social_tiktok', social.tiktok, '') +
+          input('Facebook', 'social_facebook', social.facebook, '') +
+          input('Instagram', 'social_instagram', social.instagram, '')
+        ) +
+        sectionCard('<span>首页介绍</span>', textarea('homeIntro', 'homeIntro', s.homeIntro, 3)) +
+        sectionCard('<span>关于我们 (富文本)</span>', '<div id="aboutEditor"></div>') +
+      '</form></div>';
+
+    const editor = makeRichEditor($('#aboutEditor'), s.aboutText || '', '关于我们正文…');
+    $('#sSave').addEventListener('click', async () => {
+      const fd = new FormData($('#sForm'));
+      const settings = {
+        company: { name: fd.get('company_name') || '', phone: fd.get('company_phone') || '', email: fd.get('company_email') || '', address: fd.get('company_address') || '', whatsapp: fd.get('company_whatsapp') || '' },
+        social: { tiktok: fd.get('social_tiktok') || '', facebook: fd.get('social_facebook') || '', instagram: fd.get('social_instagram') || '' },
+        homeIntro: fd.get('homeIntro') || '',
+        aboutText: editor.getHTML()
+      };
+      try {
+        const d = await api('/api/admin/settings', { method: 'PUT', body: JSON.stringify({ settings: settings }) });
+        if (d && d.success) { state.settings = settings; toast('设置已保存'); }
+      } catch (e) {}
+    });
+    const sChg = $('#sChgPwdBtn');
+    if (sChg) sChg.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      state.user = null;
+      showLogin();
+      setTimeout(showChgPwdForm, 80);
+    });
+  }
+
+  // ============ 首页内容 ============
+  async function renderHomeContent(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    let d = {};
+    try {
+      const r = await api('/api/admin/pages/home');
+      d = (r && r.data) || {};
+    } catch (e) { return; }
+
+    // Ensure structure
+    d.hero = d.hero || {};
+    d.about = d.about || {};
+    d.testimonials = d.testimonials || {};
+    d.oemSection = d.oemSection || {};
+    d.factoryShowcase = d.factoryShowcase || {};
+    d.inquirySection = d.inquirySection || {};
+    d.hero.mobileSlides = d.hero.mobileSlides || [{image:'',alt:''},{image:'',alt:''}];
+    d.hero.desktopSlides = d.hero.desktopSlides || [{image:'',alt:''},{image:'',alt:''}];
+    d.about.paragraphs = d.about.paragraphs || ['',''];
+    d.about.stats = d.about.stats || [];
+    d.testimonials.items = d.testimonials.items || [];
+    d.oemSection.cards = d.oemSection.cards || [{image:'',title:''},{image:'',title:''},{image:'',title:''},{image:'',title:''}];
+    d.factoryShowcase.carouselImages = d.factoryShowcase.carouselImages || [];
+    d.factoryShowcase.certificates = d.factoryShowcase.certificates || [];
+
+    const oemCardsHtml = [0,1,2,3].map(i =>
+      imageField('卡片图' + (i+1), 'oem_img' + (i+1), d.oemSection.cards[i]?.image) +
+      input('卡片标题' + (i+1), 'oem_cardTitle' + (i+1), d.oemSection.cards[i]?.title, '')
+    ).join('');
+
+    c.innerHTML = '<div class="max-w-4xl mx-auto">' +
+      pageHeader('首页内容', '编辑首页各区块的文字与图片（保存后前台自动更新）',
+        btn('保存首页', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="hSave"')) +
+      '<form id="hForm" class="space-y-6">' +
+
+        sectionCard(ic('fire','w-4 h-4 text-primary') + '<span>Hero 主视觉</span>',
+          input('上方标签 (Eyebrow)', 'hero_eyebrow', d.hero.eyebrow, 'SHOWER FILTERS') +
+          textarea('标题 (支持HTML换行)', 'hero_title', d.hero.title, 2) +
+          input('副标题', 'hero_subtitle', d.hero.subtitle, '') +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('按钮文字', 'hero_buttonText', d.hero.buttonText, 'Browse Products') +
+            input('按钮链接', 'hero_buttonLink', d.hero.buttonLink, 'products.html') +
+          '</div>' +
+          '<div class="space-y-3 pt-2 border-t border-slate-100"><div class="text-sm font-medium text-slate-700">手机端轮播图 (2张)</div>' +
+            imageField('手机图1', 'hero_mobileImg1', d.hero.mobileSlides[0]?.image) +
+            input('手机图1 Alt', 'hero_mobileAlt1', d.hero.mobileSlides[0]?.alt, '') +
+            imageField('手机图2', 'hero_mobileImg2', d.hero.mobileSlides[1]?.image) +
+            input('手机图2 Alt', 'hero_mobileAlt2', d.hero.mobileSlides[1]?.alt, '') +
+          '</div>' +
+          '<div class="space-y-3 pt-2 border-t border-slate-100"><div class="text-sm font-medium text-slate-700">桌面端轮播图 (2张)</div>' +
+            imageField('桌面图1', 'hero_desktopImg1', d.hero.desktopSlides[0]?.image) +
+            input('桌面图1 Alt', 'hero_desktopAlt1', d.hero.desktopSlides[0]?.alt, '') +
+            imageField('桌面图2', 'hero_desktopImg2', d.hero.desktopSlides[1]?.image) +
+            input('桌面图2 Alt', 'hero_desktopAlt2', d.hero.desktopSlides[1]?.alt, '') +
+          '</div>'
+        ) +
+
+        sectionCard(ic('info','w-4 h-4 text-primary') + '<span>About 关于我们</span>',
+          input('标题', 'about_title', d.about.title, '') +
+          input('副标题', 'about_subtitle', d.about.subtitle, '') +
+          textarea('段落1', 'about_p1', d.about.paragraphs[0], 3) +
+          textarea('段落2', 'about_p2', d.about.paragraphs[1], 3) +
+          '<div class="space-y-2 pt-2 border-t border-slate-100"><div class="flex items-center justify-between"><span class="text-sm font-medium text-slate-700">数据统计 (最多6项)</span>' +
+            '<button type="button" id="statAdd" class="text-xs px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors">+ 新增</button></div>' +
+            '<div id="statList"></div></div>' +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">' +
+            input('按钮文字', 'about_buttonText', d.about.buttonText, '') +
+            input('按钮链接', 'about_buttonLink', d.about.buttonLink, '') +
+          '</div>' +
+          imageField('主图', 'about_imageMain', d.about.imageMain) +
+          input('主图 Alt', 'about_imageMainAlt', d.about.imageMainAlt, '') +
+          imageField('叠加图', 'about_imageOverlay', d.about.imageOverlay) +
+          input('叠加图 Alt', 'about_imageOverlayAlt', d.about.imageOverlayAlt, '')
+        ) +
+
+        sectionCard(ic('star','w-4 h-4 text-primary') + '<span>Testimonials 客户评价</span>',
+          input('区块标题', 'testi_title', d.testimonials.title, '') +
+          '<div class="space-y-2 pt-2 border-t border-slate-100"><div class="flex items-center justify-between"><span class="text-sm font-medium text-slate-700">评价列表 (最多4项)</span>' +
+            '<button type="button" id="testiAdd" class="text-xs px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors">+ 新增</button></div>' +
+            '<div id="testiList"></div></div>'
+        ) +
+
+        sectionCard(ic('box','w-4 h-4 text-primary') + '<span>OEM/ODM 展示</span>',
+          input('上方标签', 'oem_eyebrow', d.oemSection.eyebrow, '') +
+          input('标题', 'oem_title', d.oemSection.title, '') +
+          textarea('副标题', 'oem_subtitle', d.oemSection.subtitle, 2) +
+          '<div class="space-y-3 pt-2 border-t border-slate-100"><div class="text-sm font-medium text-slate-700">卡片 (4张图+标题)</div>' + oemCardsHtml + '</div>' +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">' +
+            input('按钮文字', 'oem_buttonText', d.oemSection.buttonText, '') +
+            input('按钮链接', 'oem_buttonLink', d.oemSection.buttonLink, '') +
+          '</div>'
+        ) +
+
+        sectionCard(ic('factory','w-4 h-4 text-primary') + '<span>工厂展示</span>',
+          textarea('标题', 'factory_title', d.factoryShowcase.title, 3) +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('按钮文字', 'factory_buttonText', d.factoryShowcase.buttonText, '') +
+            input('按钮链接', 'factory_buttonLink', d.factoryShowcase.buttonLink, '') +
+          '</div>' +
+          '<div class="space-y-2 pt-2 border-t border-slate-100"><div class="text-sm font-medium text-slate-700">轮播图片</div><div id="carouselList"></div>' +
+            '<div class="flex items-center gap-2 mt-2">' +
+              '<label class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs cursor-pointer transition-colors">' + ic('upload','w-3.5 h-3.5') + '<span>上传图片</span><input type="file" accept="image/*" multiple class="hidden" id="carouselUpload" /></label>' +
+              '<input type="text" id="carouselUrl" placeholder="或输入图片URL" class="flex-1 px-2 py-1.5 border border-slate-300 rounded-lg text-sm" />' +
+              '<button type="button" id="carouselUrlAdd" class="px-2 py-1.5 bg-primary/10 text-primary rounded-lg text-xs hover:bg-primary/20 transition-colors">添加</button>' +
+            '</div></div>' +
+          input('视频文件路径', 'factory_videoSrc', d.factoryShowcase.videoSrc, 'Pictures/factory-video.mp4') +
+          textarea('视频标题', 'factory_videoTitle', d.factoryShowcase.videoTitle, 2) +
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('视频按钮文字', 'factory_videoButtonText', d.factoryShowcase.videoButtonText, '') +
+            input('视频按钮链接', 'factory_videoButtonLink', d.factoryShowcase.videoButtonLink, '') +
+          '</div>' +
+          '<div class="space-y-2 pt-2 border-t border-slate-100"><div class="text-sm font-medium text-slate-700">证书图片</div><div id="certList"></div>' +
+            '<div class="flex items-center gap-2 mt-2">' +
+              '<label class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs cursor-pointer transition-colors">' + ic('upload','w-3.5 h-3.5') + '<span>上传证书</span><input type="file" accept="image/*" multiple class="hidden" id="certUpload" /></label>' +
+              '<input type="text" id="certUrl" placeholder="或输入图片URL" class="flex-1 px-2 py-1.5 border border-slate-300 rounded-lg text-sm" />' +
+              '<button type="button" id="certUrlAdd" class="px-2 py-1.5 bg-primary/10 text-primary rounded-lg text-xs hover:bg-primary/20 transition-colors">添加</button>' +
+            '</div></div>'
+        ) +
+
+        sectionCard(ic('mail','w-4 h-4 text-primary') + '<span>Inquiry 询盘区</span>',
+          input('上方标签', 'inquiry_eyebrow', d.inquirySection.eyebrow, '') +
+          input('标题', 'inquiry_title', d.inquirySection.title, '') +
+          input('表单标签', 'inquiry_formLabel', d.inquirySection.formLabel, '') +
+          input('表单提示', 'inquiry_formSubtext', d.inquirySection.formSubtext, '')
+        ) +
+
+      '</form></div>';
+
+    // Bind image fields
+    ['hero_mobileImg1','hero_mobileImg2','hero_desktopImg1','hero_desktopImg2',
+     'about_imageMain','about_imageOverlay','oem_img1','oem_img2','oem_img3','oem_img4'
+    ].forEach(n => bindImageField(c, n));
+
+    // Stats dynamic list
+    const statList = makeObjList($('#statList'), d.about.stats, [
+      {key:'value', label:'数值'}, {key:'label', label:'标签'}
+    ]);
+    $('#statAdd').addEventListener('click', () => {
+      if (d.about.stats.length < 6) statList.add(); else toast('最多6项', 'warn');
+    });
+
+    // Testimonials dynamic list
+    const testiList = makeObjList($('#testiList'), d.testimonials.items, [
+      {key:'abbrev', label:'缩写'}, {key:'name', label:'姓名'}, {key:'role', label:'职位'},
+      {key:'title', label:'标题', type:'textarea'}, {key:'text', label:'内容', type:'textarea'}
+    ]);
+    $('#testiAdd').addEventListener('click', () => {
+      if (d.testimonials.items.length < 4) testiList.add(); else toast('最多4项', 'warn');
+    });
+
+    // Carousel images
+    const carouselList = makeGalleryList($('#carouselList'), d.factoryShowcase.carouselImages);
+    $('#carouselUpload').addEventListener('change', async (e) => {
+      try { await carouselList.addUpload(e.target); } catch (err) {} finally { e.target.value = ''; }
+    });
+    $('#carouselUrlAdd').addEventListener('click', () => {
+      const u = $('#carouselUrl'); carouselList.addUrl(u.value); u.value = '';
+    });
+
+    // Certificates
+    const certList = makeGalleryList($('#certList'), d.factoryShowcase.certificates);
+    $('#certUpload').addEventListener('change', async (e) => {
+      try { await certList.addUpload(e.target); } catch (err) {} finally { e.target.value = ''; }
+    });
+    $('#certUrlAdd').addEventListener('click', () => {
+      const u = $('#certUrl'); certList.addUrl(u.value); u.value = '';
+    });
+
+    // Save
+    $('#hSave').addEventListener('click', async () => {
+      const fd = new FormData($('#hForm'));
+      const data = {
+        hero: {
+          eyebrow: fd.get('hero_eyebrow') || '',
+          title: fd.get('hero_title') || '',
+          subtitle: fd.get('hero_subtitle') || '',
+          buttonText: fd.get('hero_buttonText') || '',
+          buttonLink: fd.get('hero_buttonLink') || '',
+          mobileSlides: [
+            {image: fd.get('hero_mobileImg1') || '', alt: fd.get('hero_mobileAlt1') || ''},
+            {image: fd.get('hero_mobileImg2') || '', alt: fd.get('hero_mobileAlt2') || ''}
+          ],
+          desktopSlides: [
+            {image: fd.get('hero_desktopImg1') || '', alt: fd.get('hero_desktopAlt1') || ''},
+            {image: fd.get('hero_desktopImg2') || '', alt: fd.get('hero_desktopAlt2') || ''}
+          ]
+        },
+        about: {
+          title: fd.get('about_title') || '',
+          subtitle: fd.get('about_subtitle') || '',
+          paragraphs: [fd.get('about_p1') || '', fd.get('about_p2') || ''],
+          stats: d.about.stats,
+          buttonText: fd.get('about_buttonText') || '',
+          buttonLink: fd.get('about_buttonLink') || '',
+          imageMain: fd.get('about_imageMain') || '',
+          imageMainAlt: fd.get('about_imageMainAlt') || '',
+          imageOverlay: fd.get('about_imageOverlay') || '',
+          imageOverlayAlt: fd.get('about_imageOverlayAlt') || ''
+        },
+        testimonials: {
+          title: fd.get('testi_title') || '',
+          items: d.testimonials.items
+        },
+        oemSection: {
+          eyebrow: fd.get('oem_eyebrow') || '',
+          title: fd.get('oem_title') || '',
+          subtitle: fd.get('oem_subtitle') || '',
+          cards: [0,1,2,3].map(i => ({
+            image: fd.get('oem_img' + (i+1)) || '',
+            title: fd.get('oem_cardTitle' + (i+1)) || ''
+          })),
+          buttonText: fd.get('oem_buttonText') || '',
+          buttonLink: fd.get('oem_buttonLink') || ''
+        },
+        factoryShowcase: {
+          title: fd.get('factory_title') || '',
+          buttonText: fd.get('factory_buttonText') || '',
+          buttonLink: fd.get('factory_buttonLink') || '',
+          carouselImages: d.factoryShowcase.carouselImages,
+          videoSrc: fd.get('factory_videoSrc') || '',
+          videoTitle: fd.get('factory_videoTitle') || '',
+          videoButtonText: fd.get('factory_videoButtonText') || '',
+          videoButtonLink: fd.get('factory_videoButtonLink') || '',
+          certificates: d.factoryShowcase.certificates
+        },
+        inquirySection: {
+          eyebrow: fd.get('inquiry_eyebrow') || '',
+          title: fd.get('inquiry_title') || '',
+          formLabel: fd.get('inquiry_formLabel') || '',
+          formSubtext: fd.get('inquiry_formSubtext') || ''
+        }
+      };
+      $('#hSave').disabled = true;
+      $('#hSave').innerHTML = ic('spinner','w-4 h-4') + '<span>保存中...</span>';
+      try {
+        const r = await api('/api/admin/pages/home', { method: 'PUT', body: JSON.stringify({ data }) });
+        if (r && r.success) toast('首页内容已保存');
+      } catch (e) {} finally {
+        $('#hSave').disabled = false;
+        $('#hSave').innerHTML = ic('save','w-4 h-4') + '<span>保存首页</span>';
+      }
+    });
+  }
+
+  // ============ 修改密码 ============
+  function showChgPwdForm() {
+    $('#chgPwdForm').classList.remove('hidden');
+    $('#chgPwdError').classList.add('hidden');
+    const f = $('#chgPwdForm');
+    f.cp_username.value = f.cp_username.value || 'admin';
+    f.cp_old.value = '';
+    f.cp_new.value = '';
+    f.cp_new2.value = '';
+  }
+  function hideChgPwdForm() {
+    $('#chgPwdForm').classList.add('hidden');
+    $('#chgPwdError').classList.add('hidden');
+  }
+  async function submitChgPwd(e) {
+    e.preventDefault();
+    const f = e.target;
+    const username = f.cp_username.value.trim();
+    const oldPassword = f.cp_old.value;
+    const newPassword = f.cp_new.value;
+    const newPassword2 = f.cp_new2.value;
+    const errEl = $('#chgPwdError');
+    errEl.classList.add('hidden');
+    if (!username || !oldPassword || !newPassword || !newPassword2) {
+      errEl.textContent = '请填写所有字段'; errEl.classList.remove('hidden'); return;
+    }
+    if (newPassword.length < 8) {
+      errEl.textContent = '新密码长度至少 8 位'; errEl.classList.remove('hidden'); return;
+    }
+    if (newPassword !== newPassword2) {
+      errEl.textContent = '两次输入的新密码不一致'; errEl.classList.remove('hidden'); return;
+    }
+    const btn = $('#chgPwdBtn');
+    const origHtml = btn.innerHTML;
+    btn.disabled = true; btn.innerHTML = spinner('w-4 h-4') + '<span>处理中...</span>';
+    try {
+      // 用 token 调改密接口
+      const chgRes = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.token || '') },
+        body: JSON.stringify({ oldPassword, newPassword })
+      });
+      const chgData = await chgRes.json().catch(() => ({}));
+      if (!chgRes.ok || !chgData.success) {
+        errEl.textContent = (chgData && chgData.message) || '修改失败'; errEl.classList.remove('hidden'); return;
+      }
+      toast('密码已修改，请重新登录');
+      hideChgPwdForm();
+      localStorage.removeItem('token');
+      state.user = null;
+      showLogin();
+    } catch (ex) {
+      errEl.textContent = '修改失败：' + ex.message; errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.innerHTML = origHtml;
+    }
+  }
+
+  // ============ SEO 管理 ============
+  async function renderSEO(c) {
+    c.innerHTML = '<div class="flex items-center gap-3 py-16 justify-center text-slate-400">' + spinner('w-5 h-5') + '<span class="text-sm">加载中...</span></div>';
+    let d;
+    try { d = await api('/api/admin/seo'); } catch (e) { return; }
+    const seo = (d && d.seo) || {};
+    const pages = seo.pages || {};
+    const products = await api('/api/admin/products');
+    const posts = await api('/api/admin/posts');
+
+    const tabs = [
+      { key: 'global', label: '全局设置' },
+      { key: 'pages', label: '页面 SEO' },
+      { key: 'products', label: '产品 SEO' },
+      { key: 'blog', label: '博客 SEO' },
+      { key: 'tools', label: 'Sitemap / Robots' }
+    ];
+
+    c.innerHTML =
+      '<div class="max-w-5xl mx-auto">' +
+      pageHeader('SEO 管理', '搜索引擎优化配置', '') +
+      '<div class="mb-4 flex gap-2 border-b border-slate-200" id="seoTabs">' +
+        tabs.map((t, i) => '<button type="button" data-tab="' + t.key + '" class="seo-tab px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ' + (i === 0 ? 'border-primary text-primary' : 'border-transparent text-slate-500 hover:text-slate-700') + '">' + esc(t.label) + '</button>').join('') +
+      '</div>' +
+      '<div id="seoContent"></div>' +
+      '</div>';
+
+    function renderTab(key) {
+      const sc = $('#seoContent');
+      if (key === 'global') {
+        renderGlobalSEO(sc, seo);
+      } else if (key === 'pages') {
+        renderPagesSEO(sc, seo, pages);
+      } else if (key === 'products') {
+        renderProductsSEO(sc, seo, (products && products.products) || []);
+      } else if (key === 'blog') {
+        renderBlogSEO(sc, seo, (posts && posts.posts) || []);
+      } else if (key === 'tools') {
+        renderToolsSEO(sc, seo);
+      }
+      bindSEOTabs();
+    }
+
+    function bindSEOTabs() {
+      $$('#seoTabs .seo-tab').forEach(tabBtn => {
+        tabBtn.onclick = () => {
+          $$('#seoTabs .seo-tab').forEach(b => {
+            const active = b === tabBtn;
+            b.classList.toggle('border-primary', active);
+            b.classList.toggle('text-primary', active);
+            b.classList.toggle('border-transparent', !active);
+            b.classList.toggle('text-slate-500', !active);
+          });
+          renderTab(tabBtn.dataset.tab);
+        };
+      });
+    }
+
+    // --- Global SEO ---
+    function renderGlobalSEO(sc, seo) {
+      const g = seo.global || {};
+      sc.innerHTML =
+        '<div class="space-y-4">' +
+        sectionCard('基础设置',
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('站点标题 (Site Title)', 'siteTitle', g.siteTitle || '', 'XINPUREAO - Premium Shower Water Filtration') +
+            input('标题分隔符', 'separator', g.separator || '', ' | 或 - 或 ::') +
+            input('站点 URL', 'siteUrl', g.siteUrl || '', 'https://www.xinpaezshower.com') +
+            textarea('首页 Meta Description', 'homeDescription', g.homeDescription || '', 3) +
+            input('默认关键词 (逗号分隔)', 'keywords', (g.keywords || []).join(', '), 'shower filter, water filtration, OEM') +
+          '</div>'
+        ) +
+        sectionCard('Open Graph / Twitter',
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            imageField('OG 默认图片', 'ogImage', g.ogImage || '') +
+            input('Twitter 用户名', 'twitterHandle', g.twitterHandle || '', '@xinpureao') +
+          '</div>'
+        ) +
+        sectionCard('搜索引擎验证',
+          '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+            input('Google 验证码', 'googleVerify', g.googleVerify || '', '') +
+            input('Bing 验证码', 'bingVerify', g.bingVerify || '', '') +
+            input('Baidu 验证码', 'baiduVerify', g.baiduVerify || '', '') +
+          '</div>'
+        ) +
+        '<div class="flex justify-end">' +
+          btn('保存全局设置', 'save', 'bg-primary text-white hover:bg-primary-dark', 'id="seoGlobalSave"') +
+        '</div>';
+
+      bindImageField(sc, 'ogImage');
+      sc.querySelector('#seoGlobalSave').onclick = async () => {
+        const form = sc.querySelector('form') || sc;
+        const inputs = form.querySelectorAll('input, textarea');
+        const data = {};
+        inputs.forEach(inp => { if (inp.name) data[inp.name] = inp.value; });
+        data.keywords = (data.keywords || '').split(',').map(s => s.trim()).filter(Boolean);
+        data.ogImage = (sc.querySelector('[data-imgfield="ogImage"] [data-url]') || {}).value || '';
+        seo.global = Object.assign({}, g, data);
+        try {
+          const r = await api('/api/admin/seo/global', { method: 'PUT', body: JSON.stringify({ global: seo.global }) });
+          if (r && r.success) toast('全局 SEO 设置已保存');
+        } catch (e) {}
+      };
+    }
+
+    // --- Pages SEO ---
+    function renderPagesSEO(sc, seo, pages) {
+      const pageList = [
+        { key: 'home', label: '首页 /' },
+        { key: 'products', label: '产品列表 /products.html' },
+        { key: 'product-detail', label: '产品详情 /product-detail.html' },
+        { key: 'solutions', label: '解决方案 /solutions.html' },
+        { key: 'oem', label: 'OEM / OEM-ODM.html' },
+        { key: 'about', label: '关于 /about.html' },
+        { key: 'support', label: '支持 /support.html' },
+        { key: 'downloads', label: '下载 /downloads.html' },
+        { key: 'news', label: '博客 /news.html' },
+        { key: 'contact', label: '联系 /contact.html' },
+        { key: 'factory', label: '工厂 /factory.html' },
+        { key: 'certifications', label: '认证 /certifications.html' }
+      ];
+
+      sc.innerHTML =
+        '<div class="space-y-4">' +
+        pageList.map(p => {
+          const ps = pages[p.key] || {};
+          return '<div class="page-seo-card bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">' +
+            '<button type="button" class="seo-page-toggle w-full flex items-center justify-between px-5 py-3 hover:bg-slate-50 transition-colors">' +
+              '<span class="font-medium text-slate-800 flex items-center gap-2">' +
+                ic('document-duplicate', 'w-4 h-4 text-primary') +
+                '<span>' + esc(p.label) + '</span>' +
+                (ps.title ? '<span class="text-xs text-emerald-600 font-normal">✓ 已配置</span>' : '<span class="text-xs text-slate-400 font-normal">未配置</span>') +
+              '</span>' +
+              ic('arrow-up', 'w-4 h-4 text-slate-400 transition-transform') +
+            '</button>' +
+            '<div class="seo-page-panel hidden px-5 py-4 border-t border-slate-100 space-y-3">' +
+              '<div>' +
+                '<label class="block text-sm font-medium text-slate-700 mb-1.5">SEO Title <span class="seo-title-count text-xs text-slate-400 ml-2"></span></label>' +
+                '<input type="text" class="seo-title w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm" value="' + esc(ps.title || '') + '" maxlength="70" />' +
+              '</div>' +
+              '<div>' +
+                '<label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Description <span class="seo-desc-count text-xs text-slate-400 ml-2"></span></label>' +
+                '<textarea class="seo-desc w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm" rows="2" maxlength="200">' + esc(ps.description || '') + '</textarea>' +
+              '</div>' +
+              '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">' +
+                '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">Focus Keyword</label><input type="text" class="seo-keyword w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm" value="' + esc(ps.keyword || '') + '" /></div>' +
+                '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">Canonical URL</label><input type="text" class="seo-canonical w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-sm" value="' + esc(ps.canonical || '') + '" /></div>' +
+              '</div>' +
+              '<div class="flex items-center gap-4">' +
+                '<label class="flex items-center gap-2 text-sm"><input type="checkbox" class="seo-index w-4 h-4" ' + (ps.noIndex ? '' : 'checked') + ' /><span>索引 (Index)</span></label>' +
+                '<label class="flex items-center gap-2 text-sm"><input type="checkbox" class="seo-follow w-4 h-4" ' + (ps.noFollow ? '' : 'checked') + ' /><span>跟踪 (Follow)</span></label>' +
+              '</div>' +
+              '<div class="flex justify-end gap-2">' +
+                '<button type="button" class="seo-page-save px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark" data-page="' + esc(p.key) + '">保存</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('') +
+        '</div>';
+
+      // 折叠/展开
+      sc.querySelectorAll('.seo-page-toggle').forEach(btn => {
+        btn.onclick = () => {
+          const panel = btn.nextElementSibling;
+          const arrow = btn.querySelector('svg:last-child');
+          panel.classList.toggle('hidden');
+          if (panel.classList.contains('hidden')) {
+            arrow.style.transform = 'rotate(180deg)';
+          } else {
+            arrow.style.transform = 'rotate(0deg)';
+            updateCount(btn);
+          }
+        };
+      });
+      // 初始化箭头
+      sc.querySelectorAll('.page-seo-card').forEach(card => {
+        const arrow = card.querySelector('.seo-page-toggle svg:last-child');
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+      });
+
+      function updateCount(btn) {
+        const card = btn.closest('.page-seo-card');
+        const title = card.querySelector('.seo-title');
+        const desc = card.querySelector('.seo-desc');
+        const titleCount = card.querySelector('.seo-title-count');
+        const descCount = card.querySelector('.seo-desc-count');
+        if (title && titleCount) {
+          const len = title.value.length;
+          const color = len > 0 && len < 30 ? 'text-red-500' : len >= 30 && len <= 60 ? 'text-emerald-600' : 'text-amber-500';
+          titleCount.textContent = len + '/70';
+          titleCount.className = 'seo-title-count text-xs ml-2 ' + color;
+        }
+        if (desc && descCount) {
+          const len = desc.value.length;
+          const color = len > 0 && len < 120 ? 'text-red-500' : len >= 120 && len <= 160 ? 'text-emerald-600' : 'text-amber-500';
+          descCount.textContent = len + '/200';
+          descCount.className = 'seo-desc-count text-xs ml-2 ' + color;
+        }
+      }
+
+      sc.querySelectorAll('.seo-title, .seo-desc').forEach(inp => {
+        inp.addEventListener('input', () => {
+          const btn = inp.closest('.page-seo-card').querySelector('.seo-page-toggle');
+          updateCount(btn);
+        });
+      });
+
+      sc.querySelectorAll('.seo-page-save').forEach(btn => {
+        btn.onclick = async () => {
+          const pageKey = btn.dataset.page;
+          const card = btn.closest('.page-seo-card');
+          const data = {
+            title: card.querySelector('.seo-title').value,
+            description: card.querySelector('.seo-desc').value,
+            keyword: card.querySelector('.seo-keyword').value,
+            canonical: card.querySelector('.seo-canonical').value,
+            noIndex: !card.querySelector('.seo-index').checked,
+            noFollow: !card.querySelector('.seo-follow').checked
+          };
+          pages[pageKey] = Object.assign({}, pages[pageKey] || {}, data);
+          try {
+            const r = await api('/api/admin/seo/pages/' + encodeURIComponent(pageKey), { method: 'PUT', body: JSON.stringify({ page: data }) });
+            if (r && r.success) toast('已保存：' + pageKey);
+          } catch (e) {}
+        };
+      });
+    }
+
+    // --- Products SEO ---
+    function renderProductsSEO(sc, seo, products) {
+      const productSEO = seo.products || {};
+      sc.innerHTML =
+        '<div class="space-y-4">' +
+        '<p class="text-sm text-slate-500">为每个产品单独设置 SEO 信息。未设置时自动使用产品名称和描述。</p>' +
+        '<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm">' +
+        '<thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 font-medium">产品</th><th class="px-4 py-3 font-medium">SEO Title</th><th class="px-4 py-3 font-medium">Description</th><th class="px-4 py-3 font-medium">状态</th><th class="px-4 py-3 font-medium text-right">操作</th></tr></thead>' +
+        '<tbody>' + products.map(p => {
+          const ps = productSEO[p.id] || {};
+          const effectiveTitle = ps.title || p.name || '';
+          const effectiveDesc = ps.description || (p.short || '').substring(0, 160);
+          return '<tr class="border-b border-slate-100 hover:bg-slate-50">' +
+            '<td class="px-4 py-3"><div class="flex items-center gap-2"><img src="' + esc(p.image || '') + '" onerror="this.style.display=\'none\'" class="w-10 h-8 object-cover rounded" /><div><div class="font-medium text-slate-900 max-w-[180px] truncate">' + esc(p.name) + '</div><div class="text-xs text-slate-400">' + esc(p.id) + '</div></div></div></td>' +
+            '<td class="px-4 py-3 max-w-[200px]"><div class="truncate text-xs text-slate-600">' + esc(effectiveTitle) + '</div></td>' +
+            '<td class="px-4 py-3 max-w-[220px]"><div class="truncate text-xs text-slate-600">' + esc(effectiveDesc) + '</div></td>' +
+            '<td class="px-4 py-3">' + (ps.title ? '<span class="text-emerald-600 text-xs">✓ 已设</span>' : '<span class="text-slate-400 text-xs">自动</span>') + '</td>' +
+            '<td class="px-4 py-3 text-right"><button class="prod-seo-edit px-2 py-1 text-primary hover:bg-primary/10 rounded text-xs" data-id="' + esc(p.id) + '">编辑</button></td>' +
+          '</tr>';
+        }).join('') + '</tbody></table></div></div>' +
+        '<div id="prodSEODetail" class="hidden"></div>' +
+        '</div>';
+
+      sc.querySelectorAll('.prod-seo-edit').forEach(btn => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          const p = products.find(x => x.id === id);
+          if (!p) return;
+          const ps = productSEO[id] || {};
+          const detail = sc.querySelector('#prodSEODetail');
+          detail.classList.remove('hidden');
+          detail.scrollIntoView({ behavior: 'smooth' });
+
+          detail.innerHTML =
+            '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mt-4">' +
+            '<h4 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">' + ic('box', 'w-4 h-4') + '<span>' + esc(p.name) + ' - SEO 设置</span></h4>' +
+            '<div class="space-y-3">' +
+              '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">SEO Title (留空则使用产品名)</label><input type="text" class="prod-seo-title w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" data-id="' + esc(id) + '" value="' + esc(ps.title || '') + '" placeholder="' + esc(p.name || '') + '" /></div>' +
+              '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Description (留空则使用 short)</label><textarea class="prod-seo-desc w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" rows="2" data-id="' + esc(id) + '" placeholder="' + esc((p.short || '').substring(0, 160)) + '">' + esc(ps.description || '') + '</textarea></div>' +
+              '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">Focus Keyword</label><input type="text" class="prod-seo-kw w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" data-id="' + esc(id) + '" value="' + esc(ps.keyword || '') + '" /></div>' +
+              '<div class="flex justify-end gap-2">' +
+                '<button type="button" class="prod-seo-cancel px-3 py-1.5 border border-slate-300 rounded-lg text-sm hover:bg-slate-50">取消</button>' +
+                '<button type="button" class="prod-seo-save px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark" data-id="' + esc(id) + '">保存</button>' +
+              '</div>' +
+            '</div></div>';
+
+          detail.querySelector('.prod-seo-cancel').onclick = () => {
+            detail.classList.add('hidden');
+            detail.innerHTML = '';
+          };
+          detail.querySelector('.prod-seo-save').onclick = async () => {
+            const pid = btn.dataset.id;
+            const card = detail.querySelector('.bg-white');
+            const data = {
+              title: card.querySelector('.prod-seo-title').value,
+              description: card.querySelector('.prod-seo-desc').value,
+              keyword: card.querySelector('.prod-seo-kw').value
+            };
+            productSEO[pid] = data;
+            seo.products = productSEO;
+            try {
+              const r = await api('/api/admin/seo/products/' + encodeURIComponent(pid), { method: 'PUT', body: JSON.stringify({ seo: data }) });
+              if (r && r.success) { toast('产品 SEO 已保存'); detail.classList.add('hidden'); detail.innerHTML = ''; }
+            } catch (e) {}
+          };
+        };
+      });
+    }
+
+    // --- Blog SEO ---
+    function renderBlogSEO(sc, seo, posts) {
+      const blogSEO = seo.posts || {};
+      sc.innerHTML =
+        '<div class="space-y-4">' +
+        '<p class="text-sm text-slate-500">为博客文章单独设置 SEO 信息。</p>' +
+        '<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm">' +
+        '<thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 font-medium">文章</th><th class="px-4 py-3 font-medium">SEO Title</th><th class="px-4 py-3 font-medium">状态</th><th class="px-4 py-3 font-medium text-right">操作</th></tr></thead>' +
+        '<tbody>' + posts.map(p => {
+          const ps = blogSEO[p.id] || {};
+          return '<tr class="border-b border-slate-100 hover:bg-slate-50">' +
+            '<td class="px-4 py-3"><div class="font-medium text-slate-900 max-w-[200px] truncate">' + esc(p.title) + '</div><div class="text-xs text-slate-400">/' + esc(p.slug || p.id) + '</div></td>' +
+            '<td class="px-4 py-3 max-w-[250px]"><div class="truncate text-xs text-slate-600">' + esc(ps.title || p.title) + '</div></td>' +
+            '<td class="px-4 py-3">' + (ps.title ? '<span class="text-emerald-600 text-xs">✓ 已设</span>' : '<span class="text-slate-400 text-xs">自动</span>') + '</td>' +
+            '<td class="px-4 py-3 text-right"><button class="post-seo-edit px-2 py-1 text-primary hover:bg-primary/10 rounded text-xs" data-id="' + esc(p.id) + '">编辑</button></td>' +
+          '</tr>';
+        }).join('') + '</tbody></table></div></div>' +
+        '<div id="postSEODetail" class="hidden"></div>' +
+        '</div>';
+
+      sc.querySelectorAll('.post-seo-edit').forEach(btn => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          const p = posts.find(x => x.id === id);
+          if (!p) return;
+          const ps = blogSEO[id] || {};
+          const detail = sc.querySelector('#postSEODetail');
+          detail.classList.remove('hidden');
+          detail.scrollIntoView({ behavior: 'smooth' });
+          detail.innerHTML =
+            '<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mt-4">' +
+            '<h4 class="font-semibold text-slate-800 mb-4">博客 SEO：' + esc(p.title) + '</h4>' +
+            '<div class="space-y-3">' +
+              '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">SEO Title</label><input type="text" class="post-seo-title w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" value="' + esc(ps.title || '') + '" placeholder="' + esc(p.title) + '" /></div>' +
+              '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Description</label><textarea class="post-seo-desc w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" rows="2" placeholder="' + esc(p.excerpt || '') + '">' + esc(ps.description || '') + '</textarea></div>' +
+              '<div><label class="block text-sm font-medium text-slate-700 mb-1.5">Focus Keyword</label><input type="text" class="post-seo-kw w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" value="' + esc(ps.keyword || '') + '" /></div>' +
+              '<div class="flex justify-end gap-2">' +
+                '<button type="button" class="post-seo-cancel px-3 py-1.5 border border-slate-300 rounded-lg text-sm hover:bg-slate-50">取消</button>' +
+                '<button type="button" class="post-seo-save px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark" data-id="' + esc(id) + '">保存</button>' +
+              '</div>' +
+            '</div></div>';
+          detail.querySelector('.post-seo-cancel').onclick = () => { detail.classList.add('hidden'); detail.innerHTML = ''; };
+          detail.querySelector('.post-seo-save').onclick = async () => {
+            const pid = btn.dataset.id;
+            const card = detail.querySelector('.bg-white');
+            const data = {
+              title: card.querySelector('.post-seo-title').value,
+              description: card.querySelector('.post-seo-desc').value,
+              keyword: card.querySelector('.post-seo-kw').value
+            };
+            blogSEO[pid] = data;
+            seo.posts = blogSEO;
+            try {
+              const r = await api('/api/admin/seo/posts/' + encodeURIComponent(pid), { method: 'PUT', body: JSON.stringify({ seo: data }) });
+              if (r && r.success) { toast('博客 SEO 已保存'); detail.classList.add('hidden'); detail.innerHTML = ''; }
+            } catch (e) {}
+          };
+        };
+      });
+    }
+
+    // --- Tools: Sitemap / Robots ---
+    function renderToolsSEO(sc, seo) {
+      const g = seo.global || {};
+      sc.innerHTML =
+        '<div class="space-y-4">' +
+        sectionCard('XML Sitemap',
+          '<div class="space-y-3">' +
+            '<p class="text-sm text-slate-500">自动生成站点地图，帮助搜索引擎发现和索引页面。</p>' +
+            '<div class="flex items-center gap-2">' +
+              '<code class="px-2 py-1 bg-slate-100 rounded text-xs">' + esc((g.siteUrl || 'https://www.xinpaezshower.com').replace(/\/$/, '')) + '/sitemap.xml</code>' +
+              '<a href="/sitemap.xml" target="_blank" class="text-primary text-xs hover:underline">查看当前</a>' +
+            '</div>' +
+            '<button type="button" id="genSitemap" class="px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark inline-flex items-center gap-1.5">' + ic('refresh', 'w-4 h-4') + '<span>重新生成 Sitemap</span></button>' +
+          '</div>'
+        ) +
+        sectionCard('Robots.txt',
+          '<div class="space-y-3">' +
+            '<p class="text-sm text-slate-500">控制搜索引擎爬虫行为。</p>' +
+            '<div class="flex items-center gap-2">' +
+              '<code class="px-2 py-1 bg-slate-100 rounded text-xs">/robots.txt</code>' +
+              '<a href="/robots.txt" target="_blank" class="text-primary text-xs hover:underline">查看当前</a>' +
+            '</div>' +
+            '<textarea id="robotsContent" class="w-full h-40 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none font-mono text-xs" placeholder="User-agent: *\nAllow: /\nSitemap: ' + esc((g.siteUrl || 'https://www.xinpaezshower.com')) + '/sitemap.xml">' + esc(seo.robots || '') + '</textarea>' +
+            '<div class="flex justify-end"><button type="button" id="saveRobots" class="px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary-dark">保存 Robots.txt</button></div>' +
+          '</div>'
+        ) +
+        sectionCard('快速检测',
+          '<div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="seoCheckList">' +
+            '<div class="text-center p-3 rounded-lg bg-slate-50"><div class="text-2xl font-bold text-slate-800" id="checkPages">0</div><div class="text-xs text-slate-500">已配置页面</div></div>' +
+            '<div class="text-center p-3 rounded-lg bg-slate-50"><div class="text-2xl font-bold text-slate-800" id="checkProducts">0</div><div class="text-xs text-slate-500">已配置产品SEO</div></div>' +
+            '<div class="text-center p-3 rounded-lg bg-slate-50"><div class="text-2xl font-bold text-slate-800" id="checkMissing">0</div><div class="text-xs text-slate-500">待配置页面</div></div>' +
+            '<div class="text-center p-3 rounded-lg bg-slate-50"><div class="text-2xl font-bold text-slate-800" id="checkTotal">0</div><div class="text-xs text-slate-500">产品总数</div></div>' +
+          '</div>'
+        );
+
+      // 统计
+      const pageKeys = ['home', 'products', 'product-detail', 'solutions', 'oem', 'about', 'support', 'downloads', 'news', 'contact', 'factory', 'certifications'];
+      const configuredCount = pageKeys.filter(k => pages[k] && pages[k].title).length;
+      const productSEOCount = Object.keys(productSEO).filter(k => productSEO[k].title).length;
+      $('#checkPages').textContent = configuredCount;
+      $('#checkProducts').textContent = productSEOCount;
+      $('#checkMissing').textContent = pageKeys.length - configuredCount;
+      $('#checkTotal').textContent = (products || []).length;
+
+      sc.querySelector('#genSitemap').onclick = async () => {
+        try {
+          const r = await api('/api/admin/seo/regenerate-sitemap', { method: 'POST' });
+          if (r && r.success) toast('Sitemap 已重新生成');
+        } catch (e) {}
+      };
+      sc.querySelector('#saveRobots').onclick = async () => {
+        const content = sc.querySelector('#robotsContent').value;
+        seo.robots = content;
+        try {
+          const r = await api('/api/admin/seo/robots', { method: 'PUT', body: JSON.stringify({ content: content }) });
+          if (r && r.success) toast('Robots.txt 已保存');
+        } catch (e) {}
+      };
+    }
+
+    // 初始渲染
+    renderTab('global');
+  }
+
+  // ============ 初始化 ============
+  initStaticUI();
+  $$('.nav-item').forEach(n => n.addEventListener('click', () => nav(n.dataset.view)));
+  $('#showChgPwdLoginBtn').addEventListener('click', showChgPwdForm);
+  $('#cancelChgPwdBtn').addEventListener('click', hideChgPwdForm);
+  $('#chgPwdForm').addEventListener('submit', submitChgPwd);
+
+  // 启动：先校验登录态
+  boot();
+})();
+</script>
+</body>
+</html>

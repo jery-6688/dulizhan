@@ -1,0 +1,66 @@
+{
+  "hero": {
+    "eyebrow": "Support",
+    "title": "Support Center",
+    "subtitle": "FAQ, installation and cartridge replacement, warranty information, technical support."
+  },
+  "faqs": {
+    "eyebrow": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {"question": "How do I install my shower filter?", "answer": "Unscrew your existing shower head, wrap the Teflon tape clockwise around the shower arm threads, screw on the filter housing, then screw on your shower head. Open the water for 30 seconds to flush.", "open": true},
+      {"question": "How often should I replace the cartridge?", "answer": "For a standard 4-person household we recommend replacing the cartridge every 6 months or 10,000 gallons (38,000 L), whichever comes first. Replace sooner if you notice a change in water flow, pressure, or odor.", "open": false},
+      {"question": "Does it reduce hard water / limescale?", "answer": "Our hard-water cartridges use a food-grade polyphosphate media and mineral ceramic balls to prevent scale formation on shower walls, glass and heaters. Chlorine is also removed.", "open": false},
+      {"question": "Will it reduce water pressure?", "answer": "No. Our filter housing is engineered with high-flow design (up to 2.5 GPM / 9.5 L/min). Some customers report a pressure increase because old clogged shower head.", "open": false},
+      {"question": "Is it compatible with my shower?", "answer": "Yes. Standard G1/2 thread fitting. Compatible with most standard shower arms, handheld, and rainfall shower heads. Please see our installation manual for details.", "open": false},
+      {"question": "What is the warranty on the housing?", "answer": "Housing carries a 2-year warranty against manufacturing defects. Cartridges are consumables and guaranteed for life / gallon rated.", "open": false},
+      {"question": "Can I get technical data sheets?", "answer": "Yes. Full technical data sheets, test reports and manuals are available on our Downloads page. Simply leave your email and we'll send the documents.", "open": false},
+      {"question": "Do you ship worldwide?", "answer": "We ship globally via ocean, air and DDP to 60+ countries including EU, US, UK, AU, JP, and all Amazon FBA locations.", "open": false},
+      {"question": "How long for OEM orders?", "answer": "For stocked SKUs we typically reply within 12 business hours and deliver within 25-35 days.", "open": false}
+    ]
+  },
+  "installGuides": {
+    "eyebrow": "Installation",
+    "title": "Installation & cartridge replacement",
+    "subtitle": "Installing and replacing your filter is simple and tool-free.",
+    "items": [
+      {
+        "icon": "🛠",
+        "title": "Installation (5 minutes)",
+        "steps": [
+          "Unscrew the existing shower head.",
+          "Wrap Teflon tape clockwise.",
+          "Screw on filter hand-tight.",
+          "Screw shower head back on.",
+          "Run water 30 seconds to flush."
+        ]
+      },
+      {
+        "icon": "🔄",
+        "title": "Cartridge replacement",
+        "steps": [
+          "Twist the two halves counter-clockwise to separate.",
+          "Remove the used cartridge and recycle.",
+          "Insert new cartridge with text facing up.",
+          "Screw the two halves back together and hand-tighten.",
+          "Run water for 30 seconds before use."
+        ]
+      },
+      {
+        "icon": "📖",
+        "title": "Printed manual",
+        "text": "Full printed manuals are available in our Downloads page.",
+        "ctaText": "Visit Downloads",
+        "ctaLink": "downloads.html"
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Contact",
+    "title": "Need technical support?",
+    "subtitle": "Our technical team can help with technical questions, installation issues, bulk orders and replacement cartridges.",
+    "formLabel": "Contact support",
+    "formSubtext": "Typically within 24h.",
+    "buttonText": "Send to support"
+  }
+}

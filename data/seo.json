@@ -1,0 +1,115 @@
+{
+  "global": {
+    "siteTitle": "XINPUREAO",
+    "separator": " | ",
+    "siteUrl": "https://www.xinpaezshower.com",
+    "homeDescription": "XINPUREAO specializes in premium shower water filtration systems, offering OEM/ODM services for global brands.",
+    "keywords": ["shower filter", "water filtration", "OEM", "bathroom", "water purification"],
+    "ogImage": "/images/og-image.webp",
+    "twitterHandle": "@xinpureao",
+    "googleVerify": "",
+    "bingVerify": "",
+    "baiduVerify": ""
+  },
+  "pages": {
+    "home": {
+      "title": "XINPUREAO - Premium Shower Water Filtration Systems",
+      "description": "Discover XINPUREAO's premium shower water filtration systems. OEM/ODM solutions for global brands with factory-direct pricing.",
+      "keyword": "shower water filter, OEM shower filter",
+      "canonical": "https://www.xinpaezshower.com/",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "products": {
+      "title": "Products - XINPUREAO Shower Filtration",
+      "description": "Browse our complete range of shower water filtration products. Premium quality, factory-direct prices, OEM/ODM available.",
+      "keyword": "shower filter products, water filtration wholesale",
+      "canonical": "https://www.xinpaezshower.com/products.html",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "product-detail": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "solutions": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "oem": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "about": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "support": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "downloads": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "news": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "contact": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "factory": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    },
+    "certifications": {
+      "title": "",
+      "description": "",
+      "keyword": "",
+      "canonical": "",
+      "noIndex": false,
+      "noFollow": false
+    }
+  },
+  "products": {},
+  "posts": {},
+  "robots": "User-agent: *\nAllow: /\nSitemap: https://www.xinpaezshower.com/sitemap.xml"
+}

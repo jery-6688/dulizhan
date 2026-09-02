@@ -1,0 +1,17 @@
+{
+  "name": "XIPAEZ-website",
+  "version": "1.0.0",
+  "description": "XIPAEZ B2B Shower Filter Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^2.2.0",
+    "nodemailer": "^6.9.7"
+  }
+}

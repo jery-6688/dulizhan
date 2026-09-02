@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "mobileSlides": [
+      {"image": "Pictures/shou3.webp", "alt": "Shower Filter"},
+      {"image": "Pictures/shou4.webp", "alt": "Scalp Care"}
+    ],
+    "desktopSlides": [
+      {"image": "Pictures/shou1.webp", "alt": "Shower Filter"},
+      {"image": "Pictures/shou2.webp", "alt": "Scalp Care"}
+    ],
+    "eyebrow": "SHOWER FILTERS",
+    "title": "Pure, Healthy Water<br>For Every Shower",
+    "subtitle": "High-performance shower filters for global brands.",
+    "buttonText": "Browse Products",
+    "buttonLink": "products.html"
+  },
+  "about": {
+    "eyebrow": "",
+    "title": "About XINPUREAO",
+    "subtitle": "Where water purity meets engineering.",
+    "paragraphs": [
+      "XINPUREAO is the filtration division of a leading water purification manufacturer, headquartered in China's renowned \"Capital of Water Filters\". Our integrated facility spans R&D, precision molding, and automated assembly — delivering shower filters, faucet purifiers, and replacement cartridges to 60+ countries.",
+      "Every filter is engineered with medical-grade materials, finished with proprietary multi-stage filtration technology, and certified to ISO 9001:2015. Built for global OEM/ODM partners who demand consistency."
+    ],
+    "stats": [
+      {"value": "15+", "label": "Years Experience"},
+      {"value": "60+", "label": "Countries"},
+      {"value": "1200K+", "label": "Units / Year"},
+      {"value": "4000 m²", "label": "Factory Area"},
+      {"value": "38+", "label": "Patents"},
+      {"value": "500+", "label": "Brand Clients"}
+    ],
+    "buttonText": "LEARN MORE ABOUT US",
+    "buttonLink": "about.html",
+    "imageMain": "Pictures/wm1.webp",
+    "imageMainAlt": "Factory",
+    "imageOverlay": "Pictures/wm2.webp",
+    "imageOverlayAlt": "Production Line"
+  },
+  "testimonials": {
+    "eyebrow": "",
+    "title": "What Our Clients Say",
+    "items": [
+      {
+        "abbrev": "JM",
+        "title": "Best supplier we've worked with",
+        "text": "\"Quality is consistent, lead times are reliable, and their team is responsive. We've been ordering for 3 years and never had an issue.\"",
+        "name": "James M.",
+        "role": "Amazon Seller, USA"
+      },
+      {
+        "abbrev": "SL",
+        "title": "Our private label sales doubled",
+        "text": "\"The OEM packaging and custom branding options helped us stand out. Customers love the design and quality. Highly recommend.\"",
+        "name": "Sophie L.",
+        "role": "Brand Owner, UK"
+      },
+      {
+        "abbrev": "MK",
+        "title": "Factory tour was impressive",
+        "text": "\"Visited their facility last year — clean, organized, and fully automated. SGS reports check out. This is a real manufacturer, not a trader.\"",
+        "name": "Marco K.",
+        "role": "Distributor, Germany"
+      },
+      {
+        "abbrev": "TW",
+        "title": "Fast shipping, great support",
+        "text": "\"Ordered 500 units for our retail chain. Delivered on time with perfect packaging. The filtration quality exceeds our expectations.\"",
+        "name": "Thomas W.",
+        "role": "Retail Chain Owner, Canada"
+      }
+    ]
+  },
+  "oemSection": {
+    "eyebrow": "OEM / ODM Solutions",
+    "title": "Your Factory Partner for Custom Shower Filters",
+    "subtitle": "From product design to private label packaging — we handle every step so you can focus on your brand.",
+    "cards": [
+      {"image": "Pictures/sjs.webp", "title": "Custom Product Design"},
+      {"image": "Pictures/ds.webp", "title": "Custom Packaging"},
+      {"image": "Pictures/uv.webp", "title": "Private Label Logo"},
+      {"image": "Pictures/bzsjs.webp", "title": "Custom Imagery"}
+    ],
+    "buttonText": "Explore OEM/ODM Services",
+    "buttonLink": "oem-odm.html"
+  },
+  "factoryShowcase": {
+    "eyebrow": "",
+    "title": "We have served numerous clients at home and overseas. We always cherish every trust, communicate openly and professionally, and build reliable partnerships to create value together.",
+    "subtitle": "",
+    "buttonText": "About Us",
+    "buttonLink": "about.html",
+    "carouselImages": ["Pictures/wm1.webp", "Pictures/wm4.png", "Pictures/wm1.webp", "Pictures/wm.webp"],
+    "videoSrc": "Pictures/factory-video.mp4",
+    "videoPoster": "",
+    "videoTitle": "Most routines treat surface symptoms. We start with water: tackling dryness, dullness, and buildup at their source.",
+    "videoSubtitle": "",
+    "videoButtonText": "About Us",
+    "videoButtonLink": "about.html",
+    "certificates": ["Pictures/zs1.webp", "Pictures/zs2.webp", "Pictures/zs3.webp", "Pictures/zs4.webp", "Pictures/zs5.webp", "Pictures/zs6.webp", "Pictures/zs7.webp", "Pictures/zs8.webp", "Pictures/zs9.webp"]
+  },
+  "inquirySection": {
+    "eyebrow": "Talk to our team",
+    "title": "Ready to launch your shower filter product line?",
+    "subtitle": "",
+    "formLabel": "Get a quotation",
+    "formSubtext": "Reply within 12 hours on business days."
+  }
+}

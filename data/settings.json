@@ -1,0 +1,41 @@
+{
+  "company": {
+    "name": "XINPUREAO Water Purification Equipment Co., Ltd.",
+    "phone": "+86 18452930159",
+    "email": "848835870@qq.com",
+    "address": "江苏省徐州市铜山区安全谷B5-101室内",
+    "whatsapp": "8618452930159"
+  },
+  "social": {
+    "tiktok": "https://www.tiktok.com/@jjjie977?is_from_webapp=1&sender_device=pc",
+    "facebook": "https://www.facebook.com/share/1SxjmyvB1M/",
+    "instagram": "https://www.instagram.com/jj848835870/"
+  },
+  "homeIntro": "Premium shower water filtration manufacturer. OEM / private label partner for brands and distributors in 60+ countries.",
+  "aboutText": "<p>XINPUREAO is a premium shower water filtration manufacturer based in Xuzhou, China.</p>",
+  "headerLogo": "/Pictures/xinpureao.svg",
+  "footer": {
+    "companyIntro": "Premium shower water filtration manufacturer. OEM / private label partner for brands and distributors in 60+ countries.",
+    "productLinks": [
+      {"label": "Filtered Shower Heads", "href": "products.html?cat=filtered-shower-head"},
+      {"label": "Shower Filters", "href": "products.html?cat=shower-filter"},
+      {"label": "Kitchen Faucet Filters", "href": "products.html?cat=kitchen-faucet-filter"},
+      {"label": "Replacement Cartridges", "href": "products.html?cat=replacement-cartridge"}
+    ],
+    "companyLinks": [
+      {"label": "About", "href": "about.html"},
+      {"label": "Contact", "href": "contact.html"}
+    ],
+    "contactItems": [
+      {"icon": "📍", "text": "江苏省徐州市铜山区安全谷B5-101室内"},
+      {"icon": "🏢", "text": "XINPAEZ Water Purification Equipment Co., Ltd."},
+      {"icon": "✉", "text": "848835870@qq.com", "href": "mailto:848835870@qq.com"},
+      {"icon": "📞", "text": "+86 18452930159", "href": "tel:+8618452930159"},
+      {"icon": "💬", "text": "WhatsApp Support", "href": "https://wa.me/8618452930159"}
+    ],
+    "bottomText": "© 2025 XINPUREAO Water Purification Equipment Co., Ltd. · 徐州欣派斯净水 All rights reserved.",
+    "bottomLinksText": "Privacy · Terms · Cookies · Sitemap",
+    "alibabaLink": "https://xinpaisi.en.alibaba.com/",
+    "alibabaText": "1688 National Station"
+  }
+}
