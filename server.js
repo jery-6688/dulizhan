@@ -343,7 +343,7 @@ async function sendNotificationEmail(formData) {
   
   // 构建邮件内容
   const mailOptions = {
-    from: `"XINPUREAO Website`" <info@xinpaezshower.com>>',
+    from: `"XINPUREAO Website" <info@xinpaezshower.com>`,
     to: ['848835870@qq.com'],
     subject: `【新询盘】${productName ? '[' + productName + '] ' : ''}来自 ${name} - ${company || '未填写公司'}`,
     html: `
@@ -448,7 +448,7 @@ ${COMPANY_INFO.name}
 // 订阅邮件通知函数
 async function sendSubscribeEmail(email) {
   const mailOptions = {
-    from: `"XINPUREAO Website`" <info@xinpaezshower.com>>',
+    from: `"XINPUREAO Website" <info@xinpaezshower.com>`,
     to: ['848835870@qq.com'],
     subject: `【新订阅】${email} 订阅了 XINPUREAO 邮件通知`,
     html: `
@@ -575,7 +575,7 @@ app.post('/api/download-request', async (req, res) => {
     });
 
     const mailOptions = {
-      from: `"XINPUREAO Website`" <info@xinpaezshower.com>>',
+      from: `"XINPUREAO Website" <info@xinpaezshower.com>`,
       to: ['848835870@qq.com'],
       subject: `【下载请求】${formData.name} 请求下载 ${formData.document}`,
       html: `
@@ -835,7 +835,7 @@ app.post('/api/admin/login/send-code', (req, res) => {
   });
   // 异步发邮件（不阻塞响应）
   const mailOptions = {
-    from: `"XINPUREAO Admin`" <info@xinpaezshower.com>>',
+    from: `"XINPUREAO Admin" <info@xinpaezshower.com>`,
     to: ['848835870@qq.com'],
     subject: '【XINPUREAO 管理后台】登录验证码',
     html: `
@@ -1493,6 +1493,7 @@ app.listen(PORT, '0.0.0.0', () => {
 ╚═══════════════════════════════════════════════════════════╝
   `);
 });
+
 
 
 
