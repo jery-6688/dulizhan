@@ -334,7 +334,7 @@ const COMPANY_INFO = {
   name: 'XINPUREAO Water Purification Equipment Co., Ltd.',
   phone: '+86 18452930159',
   address: '江苏省徐州市铜山区安全谷B5-101室内',
-  email: '848835870@qq.com'
+  email: 'xinpureao@outlook.com'
 };
 
 // 邮件发送函数
@@ -343,8 +343,8 @@ async function sendNotificationEmail(formData) {
   
   // 构建邮件内容
   const mailOptions = {
-    from: '"XINPUREAO Website" <onboarding@resend.dev>',
-    to: '848835870@qq.com',
+    from: `"XINPUREAO Website`" <info@xinpaezshower.com>>',
+    to: ['848835870@qq.com'],
     subject: `【新询盘】${productName ? '[' + productName + '] ' : ''}来自 ${name} - ${company || '未填写公司'}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -430,8 +430,14 @@ ${COMPANY_INFO.name}
   };
 
   try {
-    await getResend()?.emails.send(mailOptions);
-    console.log('✅ 邮件发送成功 - 收件人:', mailOptions.to);
+    const client = getResend();
+    console.log('📧 getResend() 结果:', client ? '有客户端' : 'NULL - API key 未读到!');
+    if (!client) {
+      console.log('❌ RESEND_API_KEY 未设置，跳过发送');
+      return { success: false, message: '邮件服务未配置' };
+    }
+    const result = await client.emails.send(mailOptions);
+    console.log('✅ Resend 发送结果:', JSON.stringify(result));
     return { success: true, message: '邮件发送成功' };
   } catch (error) {
     console.error('❌ 邮件发送失败:', error);
@@ -442,8 +448,8 @@ ${COMPANY_INFO.name}
 // 订阅邮件通知函数
 async function sendSubscribeEmail(email) {
   const mailOptions = {
-    from: '"XINPUREAO Website" <onboarding@resend.dev>',
-    to: '848835870@qq.com',
+    from: `"XINPUREAO Website`" <info@xinpaezshower.com>>',
+    to: ['848835870@qq.com'],
     subject: `【新订阅】${email} 订阅了 XINPUREAO 邮件通知`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -569,8 +575,8 @@ app.post('/api/download-request', async (req, res) => {
     });
 
     const mailOptions = {
-      from: '"XINPUREAO Website" <onboarding@resend.dev>',
-      to: '848835870@qq.com',
+      from: `"XINPUREAO Website`" <info@xinpaezshower.com>>',
+      to: ['848835870@qq.com'],
       subject: `【下载请求】${formData.name} 请求下载 ${formData.document}`,
       html: `
         <h2>下载请求通知</h2>
@@ -709,7 +715,7 @@ function initializeDataIfMissing() {
   const categories = AQUA.categories || [];
 
   const settings = {
-    company: { name: 'XINPUREAO Water Purification Equipment Co., Ltd.', phone: '+86 18452930159', email: '848835870@qq.com', address: '江苏省徐州市铜山区安全谷B5-101室内', whatsapp: '8618452930159' },
+    company: { name: 'XINPUREAO Water Purification Equipment Co., Ltd.', phone: '+86 18452930159', email: 'xinpureao@outlook.com', address: '江苏省徐州市铜山区安全谷B5-101室内', whatsapp: '8618452930159' },
     social: { tiktok: 'https://www.tiktok.com/@jjjie977?is_from_webapp=1&sender_device=pc', facebook: 'https://www.facebook.com/share/1SxjmyvB1M/', instagram: 'https://www.instagram.com/jj848835870/' },
     homeIntro: 'Premium shower water filtration manufacturer. OEM / private label partner for brands and distributors in 60+ countries.',
     aboutText: '<p>XINPUREAO is a premium shower water filtration manufacturer based in Xuzhou, China.</p>'
@@ -829,8 +835,8 @@ app.post('/api/admin/login/send-code', (req, res) => {
   });
   // 异步发邮件（不阻塞响应）
   const mailOptions = {
-    from: '"XINPUREAO 后台" <onboarding@resend.dev>',
-    to: '848835870@qq.com',
+    from: `"XINPUREAO Admin`" <info@xinpaezshower.com>>',
+    to: ['848835870@qq.com'],
     subject: '【XINPUREAO 管理后台】登录验证码',
     html: `
       <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:24px;background:#f8fafc;border-radius:12px;">
@@ -1487,3 +1493,6 @@ app.listen(PORT, '0.0.0.0', () => {
 ╚═══════════════════════════════════════════════════════════╝
   `);
 });
+
+
+
