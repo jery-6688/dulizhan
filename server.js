@@ -323,7 +323,7 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: 'resend',
-    pass: 're_hYXKZ3K7_P2UPSUgiSVuVxRockqBRxHBi'
+    pass: process.env.RESEND_API_KEY
   }
 });
 
