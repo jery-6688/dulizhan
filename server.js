@@ -316,16 +316,19 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname)));
 
-// 邮件配置 - 使用QQ邮箱SMTP
+// 邮件配置 - 使用QQ邮箱SMTP（增加超时防止卡死）
 const transporter = nodemailer.createTransport({
   service: 'qq',
   host: 'smtp.qq.com',
   port: 587,
   secure: false,
   auth: {
-    user: '848835870@qq.com', // 您的QQ邮箱
-    pass: 'omqrapuhjljbbcfh'  // 邮箱授权码
-  }
+    user: '848835870@qq.com',
+    pass: 'omqrapuhjljbbcfh'
+  },
+  connectionTimeout: 5000,  // 连接超时 5 秒
+  greetingTimeout: 5000,    // 握手超时 5 秒
+  socketTimeout: 10000      // 数据传输超时 10 秒
 });
 
 // 公司信息
@@ -505,26 +508,14 @@ app.post('/api/subscribe', async (req, res) => {
       time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
     });
 
-    // 发送邮件通知
-    const result = await sendSubscribeEmail(email);
-
-    if (result.success) {
-      res.json({ 
-        success: true, 
-        message: '订阅成功！感谢您的关注。' 
-      });
-    } else {
-      res.json({ 
-        success: true, 
-        message: '订阅成功！感谢您的关注。' 
-      });
-    }
+    // 立刻返回成功 + 后台异步发邮件
+    res.json({ success: true, message: '订阅成功！感谢您的关注。' });
+    sendSubscribeEmail(email).catch(err => {
+      console.log('⚠️ 订阅邮件发送失败（后台）:', err.message);
+    });
   } catch (error) {
     console.error('处理订阅失败:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: '服务器错误，请稍后重试。' 
-    });
+    res.status(500).json({ success: false, message: '服务器错误，请稍后重试。' });
   }
 });
 
@@ -540,26 +531,17 @@ app.post('/api/contact', async (req, res) => {
       time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
     });
 
-    // 发送邮件通知
-    const result = await sendNotificationEmail(formData);
+    // 先保存统计 + 立刻返回成功给用户
+    incrementInquiry();
+    res.json({ 
+      success: true, 
+      message: '感谢您的询盘！我们将在12小时内回复您。'
+    });
 
-    if (result.success) {
-      incrementInquiry();
-      res.json({ 
-        success: true, 
-        message: '感谢您的询盘！我们将在12小时内回复您。',
-        emailSent: true
-      });
-    } else {
-      // 即使邮件发送失败，也保存询盘数据
-      console.log('⚠️ 邮件发送失败，但返回成功给用户');
-      incrementInquiry();
-      res.json({ 
-        success: true, 
-        message: '感谢您的询盘！我们将在12小时内回复您。',
-        emailSent: false
-      });
-    }
+    // 后台异步发邮件（不阻塞响应）
+    sendNotificationEmail(formData).catch(err => {
+      console.log('⚠️ 邮件发送失败（后台）:', err.message);
+    });
   } catch (error) {
     console.error('处理询盘失败:', error);
     res.status(500).json({ 
@@ -581,7 +563,13 @@ app.post('/api/download-request', async (req, res) => {
       time: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
     });
 
-    // 发送邮件通知
+    // 立刻返回成功 + 后台异步发邮件
+    incrementDownload();
+    res.json({ 
+      success: true, 
+      message: '请求已收到，我们将在12小时内发送文档到您的邮箱。' 
+    });
+
     const mailOptions = {
       from: '"XINPUREAO Website" <848835870@qq.com>',
       to: '848835870@qq.com',
@@ -597,12 +585,8 @@ app.post('/api/download-request', async (req, res) => {
       `
     };
 
-    await transporter.sendMail(mailOptions);
-    incrementDownload();
-    
-    res.json({ 
-      success: true, 
-      message: '请求已收到，我们将在12小时内发送文档到您的邮箱。' 
+    transporter.sendMail(mailOptions).catch(err => {
+      console.log('⚠️ 下载请求邮件发送失败（后台）:', err.message);
     });
   } catch (error) {
     console.error('处理下载请求失败:', error);
