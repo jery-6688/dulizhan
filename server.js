@@ -17,6 +17,10 @@ function getResend() {
   if (!resendClient && process.env.RESEND_API_KEY) {
     const { Resend } = require('resend');
     resendClient = new Resend(process.env.RESEND_API_KEY);
+    console.log('✅ Resend 已初始化');
+  }
+  if (!process.env.RESEND_API_KEY) {
+    console.log('⚠️ RESEND_API_KEY 环境变量未设置！');
   }
   return resendClient;
 }
