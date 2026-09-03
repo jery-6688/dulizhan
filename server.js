@@ -316,19 +316,15 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname)));
 
-// 邮件配置 - 使用QQ邮箱SMTP（增加超时防止卡死）
+// 邮件配置 - 使用 Resend SMTP（海外服务器稳定）
 const transporter = nodemailer.createTransport({
-  service: 'qq',
-  host: 'smtp.qq.com',
-  port: 587,
-  secure: false,
+  host: 'smtp.resend.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: '848835870@qq.com',
-    pass: 'omqrapuhjljbbcfh'
-  },
-  connectionTimeout: 5000,  // 连接超时 5 秒
-  greetingTimeout: 5000,    // 握手超时 5 秒
-  socketTimeout: 10000      // 数据传输超时 10 秒
+    user: 'resend',
+    pass: 're_hYXKZ3K7_P2UPSUgiSVuVxRockqBRxHBi'
+  }
 });
 
 // 公司信息
@@ -345,7 +341,7 @@ async function sendNotificationEmail(formData) {
   
   // 构建邮件内容
   const mailOptions = {
-    from: '"XINPUREAO Website" <848835870@qq.com>',
+    from: '"XINPUREAO Website" <onboarding@resend.dev>',
     to: '848835870@qq.com',
     subject: `【新询盘】${productName ? '[' + productName + '] ' : ''}来自 ${name} - ${company || '未填写公司'}`,
     html: `
@@ -444,7 +440,7 @@ ${COMPANY_INFO.name}
 // 订阅邮件通知函数
 async function sendSubscribeEmail(email) {
   const mailOptions = {
-    from: '"XINPUREAO Website" <848835870@qq.com>',
+    from: '"XINPUREAO Website" <onboarding@resend.dev>',
     to: '848835870@qq.com',
     subject: `【新订阅】${email} 订阅了 XINPUREAO 邮件通知`,
     html: `
@@ -571,7 +567,7 @@ app.post('/api/download-request', async (req, res) => {
     });
 
     const mailOptions = {
-      from: '"XINPUREAO Website" <848835870@qq.com>',
+      from: '"XINPUREAO Website" <onboarding@resend.dev>',
       to: '848835870@qq.com',
       subject: `【下载请求】${formData.name} 请求下载 ${formData.document}`,
       html: `
@@ -831,7 +827,7 @@ app.post('/api/admin/login/send-code', (req, res) => {
   });
   // 异步发邮件（不阻塞响应）
   const mailOptions = {
-    from: '"XINPUREAO 后台" <848835870@qq.com>',
+    from: '"XINPUREAO 后台" <onboarding@resend.dev>',
     to: '848835870@qq.com',
     subject: '【XINPUREAO 管理后台】登录验证码',
     html: `
