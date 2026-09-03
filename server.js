@@ -3,14 +3,17 @@
  */
 
 const express = require('express');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 80;
-const SITE_DOMAIN = process.env.SITE_DOMAIN || 'www.xinpaezshower.com';
+const SITE_DOMAIN = process.env.SITE_DOMAIN || 'xinpaezshower.com';
+
+// Resend 邮件客户端
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // 中间件
 app.use((req,res,next)=>{
@@ -316,17 +319,6 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname)));
 
-// 邮件配置 - 使用 Resend SMTP（海外服务器稳定）
-const transporter = nodemailer.createTransport({
-  host: 'smtp.resend.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: 'resend',
-    pass: process.env.RESEND_API_KEY
-  }
-});
-
 // 公司信息
 const COMPANY_INFO = {
   name: 'XINPUREAO Water Purification Equipment Co., Ltd.',
@@ -428,7 +420,7 @@ ${COMPANY_INFO.name}
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    await resend.emails.send(mailOptions);
     console.log('✅ 邮件发送成功 - 收件人:', mailOptions.to);
     return { success: true, message: '邮件发送成功' };
   } catch (error) {
@@ -478,7 +470,7 @@ async function sendSubscribeEmail(email) {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    await resend.emails.send(mailOptions);
     console.log('✅ 订阅邮件发送成功 - 收件人:', mailOptions.to);
     return { success: true, message: '邮件发送成功' };
   } catch (error) {
@@ -581,7 +573,7 @@ app.post('/api/download-request', async (req, res) => {
       `
     };
 
-    transporter.sendMail(mailOptions).catch(err => {
+    resend.emails.send(mailOptions).catch(err => {
       console.log('⚠️ 下载请求邮件发送失败（后台）:', err.message);
     });
   } catch (error) {
@@ -844,7 +836,7 @@ app.post('/api/admin/login/send-code', (req, res) => {
         <p style="text-align:center;color:#94a3b8;font-size:12px;margin-top:16px;">XINPUREAO Water Purification Equipment Co., Ltd.</p>
       </div>`
   };
-  transporter.sendMail(mailOptions).then(() => {
+  resend.emails.send(mailOptions).then(() => {
     console.log('[登录验证码] 已发送至 848835870@qq.com，code=' + code);
   }).catch(err => {
     console.error('[登录验证码] 发送失败:', err.message);
