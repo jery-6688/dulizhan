@@ -329,6 +329,17 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname)));
 
+// 确保 sitemap.xml 和 robots.txt 返回正确的 Content-Type
+app.get('/sitemap.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  res.sendFile(path.join(__dirname, 'sitemap.xml'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.header('Content-Type', 'text/plain');
+  res.sendFile(path.join(__dirname, 'robots.txt'));
+});
+
 // 公司信息
 const COMPANY_INFO = {
   name: 'XINPUREAO Water Purification Equipment Co., Ltd.',
