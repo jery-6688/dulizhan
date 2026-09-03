@@ -3,7 +3,6 @@
  */
 
 const express = require('express');
-const { Resend } = require('resend');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
@@ -12,8 +11,15 @@ const app = express();
 const PORT = process.env.PORT || 80;
 const SITE_DOMAIN = process.env.SITE_DOMAIN || 'xinpaezshower.com';
 
-// Resend 邮件客户端
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Resend 邮件客户端（延迟初始化，启动不崩）
+let resendClient = null;
+function getResend() {
+  if (!resendClient && process.env.RESEND_API_KEY) {
+    const { Resend } = require('resend');
+    resendClient = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resendClient;
+}
 
 // 中间件
 app.use((req,res,next)=>{
@@ -420,7 +426,7 @@ ${COMPANY_INFO.name}
   };
 
   try {
-    await resend.emails.send(mailOptions);
+    await getResend()?.emails.send(mailOptions);
     console.log('✅ 邮件发送成功 - 收件人:', mailOptions.to);
     return { success: true, message: '邮件发送成功' };
   } catch (error) {
@@ -470,7 +476,7 @@ async function sendSubscribeEmail(email) {
   };
 
   try {
-    await resend.emails.send(mailOptions);
+    await getResend()?.emails.send(mailOptions);
     console.log('✅ 订阅邮件发送成功 - 收件人:', mailOptions.to);
     return { success: true, message: '邮件发送成功' };
   } catch (error) {
@@ -573,7 +579,7 @@ app.post('/api/download-request', async (req, res) => {
       `
     };
 
-    resend.emails.send(mailOptions).catch(err => {
+    getResend()?.emails.send(mailOptions).catch(err => {
       console.log('⚠️ 下载请求邮件发送失败（后台）:', err.message);
     });
   } catch (error) {
@@ -836,7 +842,7 @@ app.post('/api/admin/login/send-code', (req, res) => {
         <p style="text-align:center;color:#94a3b8;font-size:12px;margin-top:16px;">XINPUREAO Water Purification Equipment Co., Ltd.</p>
       </div>`
   };
-  resend.emails.send(mailOptions).then(() => {
+  getResend()?.emails.send(mailOptions).then(() => {
     console.log('[登录验证码] 已发送至 848835870@qq.com，code=' + code);
   }).catch(err => {
     console.error('[登录验证码] 发送失败:', err.message);
