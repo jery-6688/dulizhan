@@ -327,6 +327,32 @@ app.use((req, res, next) => {
   res.type('html').send(html);
 });
 
+// 旧 URL 301 重定向（之前删掉的分类页面）
+const OLD_URLS = [
+  '/anti-hair-fall-shower-filter/products.html',
+  '/anti-hair-fall-shower-filter/products.html?cat=filtered-shower-head',
+  '/anti-hair-fall-shower-filter/news.html',
+  '/high-pressure-shower-hose/',
+  '/mineral-water-filter/',
+  '/alkaline-shower-head/',
+  '/best-hand-shower/',
+  '/detachable-shower-head/',
+  '/led-light-shower-head/',
+  '/hand-held-shower-head-high-pressure/',
+  '/carbon-filter-for-water/',
+  '/mineral-filter-shower-head/',
+  '/black-shower-head-set/',
+  '/5-stages-water-filter/',
+];
+app.use((req, res, next) => {
+  const pathOnly = req.originalUrl.split('?')[0];
+  if (OLD_URLS.includes(pathOnly) || OLD_URLS.some(u => pathOnly === u)) {
+    console.log(`🔄 301 重定向: ${req.originalUrl} → /`);
+    return res.redirect(301, '/');
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname)));
 
 // 确保 sitemap.xml 和 robots.txt 返回正确的 Content-Type
