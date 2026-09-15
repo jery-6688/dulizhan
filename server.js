@@ -1111,12 +1111,27 @@ app.get('/api/admin/settings', (req, res) => {
   res.json({ success: true, settings: readJSON('settings.json') || {} });
 });
 
+// 深合并对象
+function deepMerge(target, source) {
+  const result = Array.isArray(target) ? [...target] : { ...target };
+  for (const key of Object.keys(source)) {
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      result[key] = deepMerge(result[key] || {}, source[key]);
+    } else {
+      result[key] = source[key];
+    }
+  }
+  return result;
+}
+
 app.put('/api/admin/settings', (req, res) => {
-  const settings = (req.body && req.body.settings) ? req.body.settings : (req.body || {});
+  const incoming = (req.body && req.body.settings) ? req.body.settings : (req.body || {});
+  // 读取现有 settings，与新数据深合并（避免覆盖未传的字段如 footer）
+  const existing = readJSON('settings.json') || {};
+  const settings = deepMerge(existing, incoming);
   writeJSON('settings.json', settings);
   regenerateDataJs();
   regeneratePageDataJs();
-  // 清 partials 缓存让占位符替换读到新 settings
   Object.keys(partialsCache).forEach(k => delete partialsCache[k]);
   res.json({ success: true, settings, message: '设置已保存' });
 });
